@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BNI Premiere SJ &mdash; Member Directory</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #CC0000;
+    --red-dark: #990000;
+    --black: #0f0f0f;
+    --white: #ffffff;
+    --gray: #f4f4f4;
+    --mid-gray: #e0e0e0;
+    --text: #222222;
+    --text-light: #666666;
+    --gold: #B8870B;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--black);
+    color: var(--white);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    min-height: 340px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 50%, rgba(204,0,0,0.35) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 80% at 10% 80%, rgba(204,0,0,0.15) 0%, transparent 60%);
+  }
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 48px 40px 40px;
+    max-width: 900px;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--red);
+    color: var(--white);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+  }
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--white);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 8vw, 80px);
+    letter-spacing: 2px;
+    line-height: 0.95;
+    margin-bottom: 16px;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--red);
+  }
+  .hero-sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.65);
+    font-weight: 400;
+    max-width: 480px;
+    line-height: 1.5;
+  }
+  .hero-stats {
+    position: absolute;
+    right: 40px;
+    bottom: 40px;
+    z-index: 2;
+    display: flex;
+    gap: 32px;
+  }
+  .stat {
+    text-align: right;
+  }
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 40px;
+    color: var(--white);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* ── CONTROLS ── */
+  .controls {
+    background: var(--white);
+    border-bottom: 2px solid var(--mid-gray);
+    padding: 20px 40px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+  }
+  .controls-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .search-wrap {
+    position: relative;
+    flex: 1;
+    min-width: 200px;
+  }
+  .search-wrap svg {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-light);
+    pointer-events: none;
+  }
+  #search {
+    width: 100%;
+    padding: 11px 16px 11px 42px;
+    border: 2px solid var(--mid-gray);
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    background: var(--gray);
+    transition: border-color 0.2s;
+    outline: none;
+  }
+  #search:focus { border-color: var(--red); background: var(--white); }
+  #search::placeholder { color: var(--text-light); }
+
+  .filter-wrap { display: flex; gap: 8px; flex-wrap: wrap; }
+  .filter-btn {
+    padding: 8px 14px;
+    border: 2px solid var(--mid-gray);
+    border-radius: 6px;
+    background: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-light);
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .filter-btn:hover { border-color: var(--red); color: var(--red); }
+  .filter-btn.active {
+    background: var(--red);
+    border-color: var(--red);
+    color: var(--white);
+  }
+  .count-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--text-light);
+    margin-left: auto;
+    white-space: nowrap;
+  }
+  .count-badge strong { color: var(--red); font-weight: 700; }
+
+  /* ── GRID ── */
+  .directory {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 36px 40px 60px;
+  }
+  .members-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  /* ── CARD ── */
+  .member-card {
+    background: var(--white);
+    border: 2px solid var(--mid-gray);
+    border-radius: 12px;
+    padding: 24px;
+    position: relative;
+    transition: all 0.22s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    animation: fadeUp 0.4s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .member-card:hover {
+    border-color: var(--red);
+    box-shadow: 0 8px 32px rgba(204,0,0,0.12);
+    transform: translateY(-2px);
+  }
+  .card-sphere {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 10px;
+  }
+  .card-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 0.5px;
+    color: var(--black);
+    line-height: 1.1;
+    margin-bottom: 4px;
+  }
+  .card-classification {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
+  .card-company {
+    font-size: 12px;
+    color: var(--text-light);
+    margin-bottom: 16px;
+    font-style: italic;
+  }
+  .card-divider {
+    height: 1px;
+    background: var(--mid-gray);
+    margin-bottom: 14px;
+  }
+  .card-contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-bottom: 16px;
+    flex: 1;
+  }
+  .contact-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--text-light);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .contact-row:hover { color: var(--red); }
+  .contact-row svg { flex-shrink: 0; color: var(--text-light); }
+  .contact-row:hover svg { color: var(--red); }
+  .contact-row span { word-break: break-all; }
+
+  .card-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: auto;
+  }
+  .btn-save {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 10px 14px;
+    background: var(--red);
+    color: var(--white);
+    border: none;
+    border-radius: 7px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s;
+    text-decoration: none;
+  }
+  .btn-save:hover { background: var(--red-dark); }
+  .btn-website {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 12px;
+    background: var(--gray);
+    color: var(--text);
+    border: 2px solid var(--mid-gray);
+    border-radius: 7px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+  .btn-website:hover { border-color: var(--red); color: var(--red); }
+  .btn-save.saved {
+    background: #2a7a2a;
+  }
+
+  /* ── EMPTY STATE ── */
+  .empty-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 80px 20px;
+    color: var(--text-light);
+  }
+  .empty-state svg { margin-bottom: 16px; color: var(--mid-gray); }
+  .empty-state h3 { font-size: 20px; color: var(--text); margin-bottom: 8px; }
+  .empty-state p { font-size: 14px; }
+
+  /* ── FORM SECTION ── */
+  .form-section {
+    background: var(--black);
+    color: var(--white);
+    padding: 64px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .form-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 90% 50%, rgba(204,0,0,0.2) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .form-inner {
+    max-width: 680px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .form-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 12px;
+  }
+  .form-section h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(32px, 5vw, 52px);
+    letter-spacing: 1px;
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+  .form-section p {
+    color: rgba(255,255,255,0.6);
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 36px;
+  }
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .form-group.full { grid-column: 1 / -1; }
+  .form-group label {
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 0.5px;
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 12px 14px;
+    background: rgba(255,255,255,0.07);
+    border: 1.5px solid rgba(255,255,255,0.15);
+    border-radius: 8px;
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .form-group input::placeholder,
+  .form-group textarea::placeholder { color: rgba(255,255,255,0.3); }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { border-color: var(--red); background: rgba(255,255,255,0.1); }
+  .form-group select option { background: #1a1a1a; color: var(--white); }
+  .form-group textarea { resize: vertical; min-height: 100px; }
+  .btn-submit {
+    margin-top: 20px;
+    width: 100%;
+    padding: 16px;
+    background: var(--red);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s;
+    letter-spacing: 0.5px;
+  }
+  .btn-submit:hover { background: var(--red-dark); }
+  .form-success {
+    display: none;
+    text-align: center;
+    padding: 40px 20px;
+  }
+  .form-success svg { color: #4caf50; margin-bottom: 16px; }
+  .form-success h3 { font-size: 24px; margin-bottom: 8px; }
+  .form-success p { color: rgba(255,255,255,0.6); font-size: 14px; }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: #0a0a0a;
+    color: rgba(255,255,255,0.4);
+    text-align: center;
+    padding: 24px 40px;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+  }
+  .footer strong { color: rgba(255,255,255,0.7); }
+
+  /* ── LOADING ── */
+  .loading {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 20px;
+    gap: 16px;
+    color: var(--text-light);
+    font-size: 14px;
+  }
+  .spinner {
+    width: 36px; height: 36px;
+    border: 3px solid var(--mid-gray);
+    border-top-color: var(--red);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .hero-content { padding: 36px 20px 80px; }
+    .hero-stats { right: 20px; bottom: 20px; gap: 20px; }
+    .stat-num { font-size: 28px; }
+    .controls { padding: 16px 20px; }
+    .directory { padding: 24px 20px 48px; }
+    .form-section { padding: 48px 20px; }
+    .form-grid { grid-template-columns: 1fr; }
+    .members-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge">BNI Premiere &middot; San Jose</div>
+    <h1>Member<br><em>Directory</em></h1>
+    <p class="hero-sub">Connect with our chapter's professionals. Save a contact, make a referral, grow together.</p>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num" id="total-count">&mdash;</div>
+      <div class="stat-label">Members</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num" id="sphere-count">&mdash;</div>
+      <div class="stat-label">Spheres</div>
+    </div>
+  </div>
+</header>
+
+<!-- STICKY CONTROLS -->
+<div class="controls">
+  <div class="controls-inner">
+    <div class="search-wrap">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" id="search" placeholder="Search by name, classification, company&hellip;" autocomplete="off">
+    </div>
+    <div class="filter-wrap" id="filter-wrap">
+      <button class="filter-btn active" data-sphere="all">All</button>
+    </div>
+    <div class="count-badge">Showing <strong id="showing-count">0</strong> members</div>
+  </div>
+</div>
+
+<!-- DIRECTORY -->
+<main class="directory">
+  <div class="members-grid" id="members-grid">
+    <div class="loading">
+      <div class="spinner"></div>
+      Loading member directory&hellip;
+    </div>
+  </div>
+</main>
+
+<!-- CONTACT FORM -->
+<section class="form-section" id="contact">
+  <div class="form-inner">
+    <div class="form-label">Get Connected</div>
+    <h2>Reach Out to Our Chapter</h2>
+    <p>Interested in visiting a meeting, getting a referral, or learning more about BNI Premiere SJ? Fill out the form and we'll be in touch.</p>
+
+    <div id="contact-form">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Your Name *</label>
+          <input type="text" id="f-name" placeholder="Jane Smith" required>
+        </div>
+        <div class="form-group">
+          <label>Your Email *</label>
+          <input type="email" id="f-email" placeholder="jane@example.com" required>
+        </div>
+        <div class="form-group">
+          <label>Your Phone</label>
+          <input type="tel" id="f-phone" placeholder="(408) 555-0100">
+        </div>
+        <div class="form-group">
+          <label>Your Profession / Business</label>
+          <input type="text" id="f-biz" placeholder="e.g. Interior Designer">
+        </div>
+        <div class="form-group full">
+          <label>How can we help?</label>
+          <select id="f-reason">
+            <option value="">Select a reason&hellip;</option>
+            <option>I'd like to visit a meeting</option>
+            <option>I'm interested in joining BNI</option>
+            <option>I'd like a referral to a member</option>
+            <option>I want to learn more about the chapter</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group full">
+          <label>Message</label>
+          <textarea id="f-message" placeholder="Tell us a bit more&hellip;"></textarea>
+        </div>
+      </div>
+      <button class="btn-submit" onclick="submitForm()">Send Message &rarr;</button>
+    </div>
+
+    <div class="form-success" id="form-success">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      <h3>Message Sent!</h3>
+      <p>Thanks for reaching out. A chapter member will be in touch with you soon.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <strong>BNI Premiere &mdash; San Jose</strong> &nbsp;&middot;&nbsp; BNI SFBay Region &nbsp;&middot;&nbsp; Meeting every Thursday
+</footer>
+
+<script>
+  const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTCbof_c3jWqEIoLVK75arEtnRl6Fy1KPxDs4eOZ8zu5hqa55rox434805bFVGBiAHvRZiQAoSuOTmd/pub?gid=1292362710&single=true&output=csv';
+
+  let allMembers = [];
+  let activeFilter = 'all';
+
+  // Parse CSV
+  function parseCSV(text) {
+    const lines = text.trim().split('\n');
+    const headers = lines[0].split(',').map(h => h.replace(/"/g, '').trim());
+    return lines.slice(1).map(line => {
+      const vals = [];
+      let cur = '', inQ = false;
+      for (let i = 0; i < line.length; i++) {
+        if (line[i] === '"') { inQ = !inQ; }
+        else if (line[i] === ',' && !inQ) { vals.push(cur.trim()); cur = ''; }
+        else { cur += line[i]; }
+      }
+      vals.push(cur.trim());
+      const obj = {};
+      headers.forEach((h, i) => obj[h] = (vals[i] || '').replace(/^"|"$/g, '').trim());
+      return obj;
+    }).filter(m => m.Name && m.Name.length > 1);
+  }
+
+  // Build vCard
+  function buildVCard(m) {
+    const phone = (m.Phone || '').replace(/\D/g, '');
+    return [
+      'BEGIN:VCARD',
+      'VERSION:3.0',
+      `FN:${m.Name}`,
+      `ORG:${m.Company || ''}`,
+      `TITLE:${m.Classification || ''}`,
+      phone ? `TEL;TYPE=WORK,VOICE:${phone}` : '',
+      m.Email ? `EMAIL:${m.Email}` : '',
+      m.Website ? `URL:https://${m.Website.replace(/^https?:\/\//,'')}` : '',
+      'END:VCARD'
+    ].filter(Boolean).join('\r\n');
+  }
+
+  function saveContact(btn, m) {
+    const vcf = buildVCard(m);
+    const blob = new Blob([vcf], { type: 'text/vcard' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${m.Name.replace(/\s+/g, '_')}.vcf`;
+    a.click();
+    URL.revokeObjectURL(url);
+    btn.textContent = 'Saved!';
+    btn.classList.add('saved');
+    setTimeout(() => {
+      btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg> Save Contact`;
+      btn.classList.remove('saved');
+    }, 2500);
+  }
+
+  function escHtml(s) {
+    return (s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function renderCard(m, idx) {
+    const phone = (m.Phone || '').replace(/\D/g,'');
+    const fmtPhone = m.Phone ? m.Phone.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3') : '';
+    const hasWebsite = m.Website && m.Website.trim();
+    const hasEmail = m.Email && m.Email.trim();
+    const hasPhone = m.Phone && m.Phone.trim();
+
+    return `
+    <div class="member-card" style="animation-delay:${Math.min(idx * 40, 400)}ms">
+      <div class="card-sphere">${escHtml(m['Contact Sphere'] || '')}</div>
+      <div class="card-name">${escHtml(m.Name)}</div>
+      <div class="card-classification">${escHtml(m.Classification || '')}</div>
+      <div class="card-company">${escHtml(m.Company || '')}</div>
+      <div class="card-divider"></div>
+      <div class="card-contacts">
+        ${hasPhone ? `<a class="contact-row" href="tel:${phone}">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.38 2 2 0 0 1 3.57 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.54a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span>${escHtml(m.Phone)}</span>
+        </a>` : ''}
+        ${hasEmail ? `<a class="contact-row" href="mailto:${escHtml(m.Email)}">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <span>${escHtml(m.Email)}</span>
+        </a>` : ''}
+        ${hasWebsite ? `<a class="contact-row" href="https://${m.Website.replace(/^https?:\/\//,'')}" target="_blank" rel="noopener">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          <span>${escHtml(m.Website)}</span>
+        </a>` : ''}
+      </div>
+      <div class="card-actions">
+        <button class="btn-save" onclick="saveContact(this, ${JSON.stringify(JSON.stringify(m)).slice(1,-1).replace(/'/g,"\\'")} )">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 0-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+          Save Contact
+        </button>
+        ${hasWebsite ? `<a class="btn-website" href="https://${m.Website.replace(/^https?:\/\//,'')}" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>` : ''}
+      </div>
+    </div>`;
+  }
+
+  function render() {
+    const q = document.getElementById('search').value.toLowerCase().trim();
+    const filtered = allMembers.filter(m => {
+      const matchSphere = activeFilter === 'all' || (m['Contact Sphere'] || '') === activeFilter;
+      const matchSearch = !q ||
+        (m.Name || '').toLowerCase().includes(q) ||
+        (m.Classification || '').toLowerCase().includes(q) ||
+        (m.Company || '').toLowerCase().includes(q) ||
+        (m['Contact Sphere'] || '').toLowerCase().includes(q);
+      return matchSphere && matchSearch;
+    });
+
+    document.getElementById('showing-count').textContent = filtered.length;
+
+    const grid = document.getElementById('members-grid');
+    if (filtered.length === 0) {
+      grid.innerHTML = `<div class="empty-state">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <h3>No members found</h3>
+        <p>Try a different search or filter.</p>
+      </div>`;
+    } else {
+      grid.innerHTML = filtered.map((m, i) => {
+        // Pass member data safely
+        const safeM = encodeURIComponent(JSON.stringify(m));
+        return renderCardSafe(m, i, safeM);
+      }).join('');
+    }
+  }
+
+  function renderCardSafe(m, idx, safeM) {
+    const phone = (m.Phone || '').replace(/\D/g,'');
+    const hasWebsite = m.Website && m.Website.trim();
+    const hasEmail = m.Email && m.Email.trim();
+    const hasPhone = m.Phone && m.Phone.trim();
+
+    return `
+    <div class="member-card" style="animation-delay:${Math.min(idx * 40, 400)}ms">
+      <div class="card-sphere">${escHtml(m['Contact Sphere'] || '')}</div>
+      <div class="card-name">${escHtml(m.Name)}</div>
+      <div class="card-classification">${escHtml(m.Classification || '')}</div>
+      <div class="card-company">${escHtml(m.Company || '')}</div>
+      <div class="card-divider"></div>
+      <div class="card-contacts">
+        ${hasPhone ? `<a class="contact-row" href="tel:${phone}">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.38 2 2 0 0 1 3.57 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.54a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span>${escHtml(m.Phone)}</span>
+        </a>` : ''}
+        ${hasEmail ? `<a class="contact-row" href="mailto:${escHtml(m.Email)}">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <span>${escHtml(m.Email)}</span>
+        </a>` : ''}
+        ${hasWebsite ? `<a class="contact-row" href="https://${m.Website.replace(/^https?:\/\//,'')}" target="_blank" rel="noopener">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          <span>${escHtml(m.Website)}</span>
+        </a>` : ''}
+      </div>
+      <div class="card-actions">
+        <button class="btn-save" onclick="saveMember('${safeM}', this)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+          Save Contact
+        </button>
+        ${hasWebsite ? `<a class="btn-website" href="https://${m.Website.replace(/^https?:\/\//,'')}" target="_blank" rel="noopener" title="Visit website">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>` : ''}
+      </div>
+    </div>`;
+  }
+
+  function saveMember(safeM, btn) {
+    const m = JSON.parse(decodeURIComponent(safeM));
+    saveContact(btn, m);
+  }
+
+  function buildFilters(members) {
+    const spheres = [...new Set(members.map(m => m['Contact Sphere'] || '').filter(Boolean))].sort();
+    document.getElementById('sphere-count').textContent = spheres.length;
+
+    const wrap = document.getElementById('filter-wrap');
+    spheres.forEach(s => {
+      const btn = document.createElement('button');
+      btn.className = 'filter-btn';
+      btn.dataset.sphere = s;
+      btn.textContent = s;
+      btn.onclick = () => {
+        activeFilter = s;
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        render();
+      };
+      wrap.appendChild(btn);
+    });
+
+    document.querySelector('[data-sphere="all"]').onclick = () => {
+      activeFilter = 'all';
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector('[data-sphere="all"]').classList.add('active');
+      render();
+    };
+  }
+
+  async function loadMembers() {
+    try {
+      const res = await fetch(CSV_URL);
+      if (!res.ok) throw new Error('Failed to fetch');
+      const text = await res.text();
+      allMembers = parseCSV(text).sort((a, b) => (a.Name || '').localeCompare(b.Name || ''));
+      document.getElementById('total-count').textContent = allMembers.length;
+      buildFilters(allMembers);
+      render();
+    } catch (e) {
+      document.getElementById('members-grid').innerHTML = `<div class="empty-state">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <h3>Could not load members</h3>
+        <p>Please check back shortly. If this persists, contact your chapter admin.</p>
+      </div>`;
+    }
+  }
+
+  function submitForm() {
+    const name = document.getElementById('f-name').value.trim();
+    const email = document.getElementById('f-email').value.trim();
+    if (!name || !email) { alert('Please fill in your name and email.'); return; }
+    document.getElementById('contact-form').style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+  }
+
+  document.getElementById('search').addEventListener('input', render);
+
+  loadMembers();
+</script>
+</body>
+</html>
