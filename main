@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BNIgo &mdash; BNI Premiere SJ</title>
+<script src="https://unpkg.com/@phosphor-icons/web@2.1.1/src/index.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap');
+
+  :root {
+    --red: #CC0000;
+    --black: #111111;
+    --white: #FFFFFF;
+    --gold: #B8870B;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #ebebeb;
+    color: var(--black);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+  }
+
+  /* HERO */
+  .hero {
+    background: var(--red);
+    padding: 40px 24px 32px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.15);
+  }
+  .hero-tag {
+    display: inline-block;
+    background: var(--black);
+    color: var(--white);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 72px;
+    letter-spacing: 4px;
+    line-height: 1;
+    color: var(--white);
+  }
+  .hero h1 span { color: var(--black); }
+  .hero-sub {
+    margin-top: 8px;
+    font-size: 14px;
+    color: rgba(255,255,255,0.9);
+    letter-spacing: 1px;
+  }
+  .dates-pill {
+    display: inline-block;
+    margin-top: 16px;
+    background: rgba(0,0,0,0.3);
+    color: var(--white);
+    padding: 6px 18px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+
+  /* NORTHSTAR */
+  .northstar {
+    background: #F5C518;
+    color: var(--black);
+    padding: 18px 24px;
+    text-align: center;
+  }
+  .northstar .eyebrow {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #5a3e00;
+  }
+  .northstar .goal {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    letter-spacing: 2px;
+    line-height: 1.1;
+    color: var(--black);
+  }
+  .northstar .sub {
+    margin-top: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #5a3e00;
+  }
+
+  /* SECTION */
+  section {
+    padding: 28px 20px;
+    background: var(--white);
+    border-bottom: 3px solid #ebebeb;
+  }
+  .section-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 10px;
+  }
+  h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 30px;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+    line-height: 1.1;
+    color: var(--black);
+  }
+  h2 i { vertical-align: middle; margin-right: 6px; }
+  p { font-size: 14px; line-height: 1.6; color: #444; }
+
+  /* PRIZES */
+  .prizes {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 4px;
+  }
+  .prize-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: #f7f7f7;
+    border-radius: 10px;
+    padding: 14px 16px;
+    border-left: 4px solid var(--red);
+  }
+  .prize-row.gold-row { border-left-color: var(--gold); background: #fffbf0; }
+  .prize-badge {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    color: var(--red);
+    min-width: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .prize-badge i { font-size: 22px; }
+  .prize-row.gold-row .prize-badge { color: var(--gold); }
+  .prize-info { flex: 1; }
+  .prize-info strong {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 2px;
+  }
+  .prize-info span { font-size: 12px; color: #777; }
+  .prize-amount {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    color: var(--black);
+  }
+
+  /* BINGO BOARD */
+  .board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-top: 4px;
+  }
+  .cell {
+    background: #f0f0f0;
+    border-radius: 10px;
+    padding: 14px 8px;
+    text-align: center;
+    position: relative;
+    border: 2px solid #ddd;
+  }
+  .cell .num {
+    position: absolute;
+    top: 6px; left: 8px;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--red);
+    display: flex;
+    align-items: center;
+  }
+  .cell .num i { font-size: 12px; }
+  .cell .label {
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--black);
+    padding-top: 8px;
+  }
+  .cell.special { background: #fffbf0; border: 2px solid var(--gold); }
+  .cell.special .label { color: var(--gold); }
+  .cell.special .num { color: var(--gold); }
+  .cell.unicorn { background: #f8f0ff; border: 2px solid #9945cc; }
+  .cell.unicorn .label { color: #7b22cc; }
+  .cell.unicorn .num { color: #9945cc; }
+  .cell.any { background: #fffbf0; border: 2px solid var(--gold); }
+  .cell.any .label { color: var(--gold); font-style: italic; }
+  .cell.any .num { color: var(--gold); }
+
+  /* STEPS */
+  .step-list { margin-top: 4px; display: flex; flex-direction: column; gap: 10px; }
+  .step {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: #f7f7f7;
+    border-radius: 10px;
+    padding: 14px;
+    border-left: 3px solid var(--red);
+  }
+  .step-icon {
+    min-width: 32px;
+    width: 32px;
+    height: 32px;
+    background: var(--red);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .step-icon i { color: var(--white); font-size: 18px; }
+  .step-text { font-size: 13px; color: #444; line-height: 1.5; }
+  .step-text strong { color: var(--black); display: block; margin-bottom: 2px; font-size: 14px; }
+
+  /* UNICORN GRID */
+  .unicorn-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    margin-top: 8px;
+  }
+  .unicorn-item {
+    background: #f8f0ff;
+    border: 1px solid #d4aaff;
+    border-radius: 8px;
+    padding: 9px 12px;
+    font-size: 12px;
+    color: #6a00cc;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .unicorn-item i { font-size: 14px; color: #9945cc; flex-shrink: 0; }
+
+  /* INELIGIBLE */
+  .ineligible {
+    background: #fff5f5;
+    border: 1px solid #ffbbbb;
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-top: 12px;
+    font-size: 12px;
+    color: #990000;
+    line-height: 1.6;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .ineligible i { font-size: 18px; color: var(--red); flex-shrink: 0; margin-top: 1px; }
+  .ineligible div strong { display: block; margin-bottom: 4px; color: var(--red); font-size: 13px; }
+
+  /* SPHERE REMINDER BOX */
+  .reminder-box {
+    background: #f0f7ff;
+    border: 1px solid #aaccff;
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-top: 16px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .reminder-box i { font-size: 18px; color: #0055cc; flex-shrink: 0; margin-top: 2px; }
+  .reminder-box-text { flex: 1; }
+  .reminder-box-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #0055cc;
+    margin-bottom: 5px;
+  }
+  .reminder-box p { color: #003399; font-size: 13px; line-height: 1.6; }
+
+  /* CTA */
+  .cta {
+    background: var(--red);
+    padding: 28px 24px;
+    text-align: center;
+  }
+  .cta h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 34px;
+    margin-bottom: 8px;
+    color: var(--white);
+  }
+  .cta p { color: rgba(255,255,255,0.9); font-size: 13px; line-height: 1.6; }
+  .cta .highlight {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 14px;
+    background: var(--black);
+    color: var(--white);
+    padding: 10px 24px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 1px;
+  }
+  .cta .highlight i { font-size: 16px; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">BNI Premiere SJ &middot; Regional Game</div>
+  <h1>BNI<span>N</span>GO</h1>
+  <div class="hero-sub">BNI SFBay Region &middot; Chapter vs. Chapter</div>
+  <div class="dates-pill">April 1 &ndash; June 30, 2026</div>
+</div>
+
+<div class="northstar">
+  <div class="eyebrow">Our Chapter Northstar</div>
+  <div class="goal">$6 Million in Closed Business by October 1</div>
+  <div class="sub">This game keeps us sharp, engaged, and growing together.</div>
+</div>
+
+<section>
+  <div class="section-label">The Game</div>
+  <h2><i class="ph ph-game-controller"></i> What is BNIngo?</h2>
+  <p>BNIngo is a region-wide sponsorship competition. Each chapter has a 3&#x2715;3 bingo board filled with specific professional classifications. The goal: sponsor new members in those categories before any other chapter does.</p>
+  <p style="margin-top:10px;">Every new member we bring in who fits our board squares brings us closer to a prize &mdash; and bragging rights across the whole SFBay region.</p>
+</section>
+
+<section>
+  <div class="section-label">Prize Structure</div>
+  <h2><i class="ph ph-trophy"></i> What We Win</h2>
+  <div class="prizes">
+    <div class="prize-row">
+      <div class="prize-badge"><i class="ph ph-medal"></i></div>
+      <div class="prize-info">
+        <strong>First BNIngo in Region</strong>
+        <span>3 sponsoring members rewarded</span>
+      </div>
+      <div class="prize-amount">$300</div>
+    </div>
+    <div class="prize-row">
+      <div class="prize-badge"><i class="ph ph-medal"></i></div>
+      <div class="prize-info">
+        <strong>Second BNIngo in Region</strong>
+        <span>6 sponsoring members rewarded</span>
+      </div>
+      <div class="prize-amount">$600</div>
+    </div>
+    <div class="prize-row">
+      <div class="prize-badge"><i class="ph ph-medal"></i></div>
+      <div class="prize-info">
+        <strong>Third BNIngo in Region</strong>
+        <span>9 sponsoring members rewarded</span>
+      </div>
+      <div class="prize-amount">$900</div>
+    </div>
+    <div class="prize-row gold-row">
+      <div class="prize-badge"><i class="ph ph-trophy"></i></div>
+      <div class="prize-info">
+        <strong>First Chapter to Fill the Board</strong>
+        <span>9 sponsoring members rewarded</span>
+      </div>
+      <div class="prize-amount">$900</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-label">Our Board</div>
+  <h2><i class="ph ph-grid-nine"></i> The Squares We're Filling</h2>
+  <p style="margin-bottom:14px;">We chose these 6 categories because they're the most sought-after in our power partner and contact sphere connections.</p>
+  <div class="board">
+    <div class="cell"><span class="num">1</span><div class="label">Massage Therapist</div></div>
+    <div class="cell special"><span class="num"><i class="ph ph-star"></i></span><div class="label">Sponsorship</div></div>
+    <div class="cell"><span class="num">2</span><div class="label">Landscape Services</div></div>
+    <div class="cell"><span class="num">3</span><div class="label">Event Planner</div></div>
+    <div class="cell any"><span class="num"><i class="ph ph-star-four"></i></span><div class="label">ANY Classification</div></div>
+    <div class="cell"><span class="num">4</span><div class="label">Graphic Designer</div></div>
+    <div class="cell"><span class="num">5</span><div class="label">Home Staging</div></div>
+    <div class="cell unicorn"><span class="num"><i class="ph ph-sparkle"></i></span><div class="label">Unicorn</div></div>
+    <div class="cell"><span class="num">6</span><div class="label">Property Manager</div></div>
+  </div>
+  <div class="ineligible">
+    <i class="ph ph-warning"></i>
+    <div>
+      <strong>Ineligible Classifications</strong>
+      Realtor &middot; Financial Advisor &middot; P&amp;C Insurance &middot; Mortgage Broker<br>
+      <em>Only applications dated after 4/1/26 count.</em>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-label">How To Contribute</div>
+  <h2><i class="ph ph-check-circle"></i> Your 3 Actions</h2>
+  <div class="step-list">
+    <div class="step">
+      <div class="step-icon"><i class="ph ph-users"></i></div>
+      <div class="step-text">
+        <strong>Invite Targeted Visitors</strong>
+        Know someone in Massage, Landscaping, Event Planning, Graphic Design, Home Staging, or Property Mgmt? Invite them to a meeting. That's how we fill squares.
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-icon"><i class="ph ph-currency-dollar"></i></div>
+      <div class="step-text">
+        <strong>Log Your Closed Business</strong>
+        Every thank-you for closed business entered in the app counts toward our $6M goal. Keep it up &mdash; this is the main event.
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-icon"><i class="ph ph-paper-plane-right"></i></div>
+      <div class="step-text">
+        <strong>Pass Referral Slips</strong>
+        Internal referrals keep our chapter strong and our numbers growing. Even in a 60-person chapter, we stay connected through referrals.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-label">Bonus Square</div>
+  <h2><i class="ph ph-sparkle"></i> What's a Unicorn?</h2>
+  <p style="margin-bottom:12px;">A Unicorn is a classification that's <em>rarely found</em> in BNI chapters &mdash; highly valuable, often missing. Our board has one Unicorn square. Top Unicorn professions in BNI SFBay include:</p>
+  <div class="unicorn-grid">
+    <div class="unicorn-item"><i class="ph ph-diamond"></i>Architect</div>
+    <div class="unicorn-item"><i class="ph ph-diamond"></i>Caterer</div>
+    <div class="unicorn-item"><i class="ph ph-diamond"></i>Copywriter</div>
+    <div class="unicorn-item"><i class="ph ph-diamond"></i>DJ / Entertainment</div>
+    <div class="unicorn-item"><i class="ph ph-diamond"></i>Dog Trainer</div>
+    <div class="unicorn-item"><i class="ph ph-diamond"></i>Fine Jewelry</div>
+    <div class="unicorn-item"><i class="ph ph-diamond"></i>Florist</div>
+    <div class="unicorn-item"><i class="ph ph-diamond"></i>Garage Doors</div>
+    <div class="unicorn-item"><i class="ph ph-diamond"></i>Hair Stylist</div>
+    <div class="unicorn-item"><i class="ph ph-diamond"></i>Home Inspection</div>
+    <div class="unicorn-item"><i class="ph ph-diamond"></i>Locksmith</div>
+    <div class="unicorn-item"><i class="ph ph-diamond"></i>Martial Arts</div>
+    <div class="unicorn-item"><i class="ph ph-diamond"></i>Security Systems</div>
+    <div class="unicorn-item"><i class="ph ph-diamond"></i>Travel Agent</div>
+    <div class="unicorn-item"><i class="ph ph-diamond"></i>Virtual Assistant</div>
+    <div class="unicorn-item"><i class="ph ph-plus-circle"></i>10 more...</div>
+  </div>
+</section>
+
+<section>
+  <div class="section-label">Your Next Move</div>
+  <h2><i class="ph ph-handshake"></i> Connect With Your Contact Sphere</h2>
+  <p>We have 60 members &mdash; that means some of you naturally fall into two contact spheres. For this game, pick your primary one and lean in.</p>
+  <div class="step-list" style="margin-top:16px;">
+    <div class="step">
+      <div class="step-icon"><i class="ph ph-calendar-plus"></i></div>
+      <div class="step-text">
+        <strong>Schedule a Sphere Meetup</strong>
+        Get your contact sphere together for a casual 1-to-1 or small group catch-up. The goal is simple: know who your power partners actually are, and make sure they know you.
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-icon"><i class="ph ph-puzzle-piece"></i></div>
+      <div class="step-text">
+        <strong>Identify Your Missing Category</strong>
+        Within your sphere, think about what classification would make your group stronger. Even if they never join the chapter &mdash; knowing that connection exists is valuable. That event planner you know? They belong in someone's referral stream.
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-icon"><i class="ph ph-arrows-left-right"></i></div>
+      <div class="step-text">
+        <strong>Make the Introduction Anyway</strong>
+        When you see these board categories, ask yourself: do I know someone who fits? You don't have to be their sponsor to make a warm intro. Someone else in the chapter might bring them in &mdash; your connection still moves the needle.
+      </div>
+    </div>
+  </div>
+  <div class="reminder-box">
+    <i class="ph ph-lightbulb"></i>
+    <div class="reminder-box-text">
+      <div class="reminder-box-label">Reminder</div>
+      <p>If you're in two contact spheres, just pick one to focus on for this game. Depth beats breadth &mdash; a tight sphere that refers each other wins more than a loose network that doesn't talk.</p>
+    </div>
+  </div>
+</section>
+
+<div class="cta">
+  <h2>Let's Win This Thing</h2>
+  <p>We have 60 members. All it takes is one right connection from each of us. Think of who you know in these categories &mdash; and make the invite.</p>
+  <div class="highlight"><i class="ph ph-target"></i> Game runs April 1 &ndash; June 30</div>
+</div>
+
+</body>
+</html>
