@@ -604,238 +604,120 @@
 </footer>
 
 <script>
-  const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTCbof_c3jWqEIoLVK75arEtnRl6Fy1KPxDs4eOZ8zu5hqa55rox434805bFVGBiAHvRZiQAoSuOTmd/pub?gid=1292362710&single=true&output=csv';
-  const CSV_URL = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(SHEET_URL);
+  const MEMBER_DATA = [{"Name": "Alex Qin", "Classification": "Funding", "Contact Sphere": "Finance & Insurance", "Company": "New Leaf Funding", "Phone": "4082176689", "Email": "hello@newleaffunding.org", "Website": ""}, {"Name": "Aman Thakral", "Classification": "ERP Software", "Contact Sphere": "Technology", "Company": "Target Integration", "Phone": "+1 628 219 4856", "Email": "aman.thakral@targetintegration.com", "Website": ""}, {"Name": "Angela Cearns", "Classification": "IT Consultants", "Contact Sphere": "Technology", "Company": "AsKevin Inc.", "Phone": "650-733-9898", "Email": "angela@askevin.com", "Website": ""}, {"Name": "Angelo DeSando", "Classification": "Commercial Insurance", "Contact Sphere": "Finance & Insurance", "Company": "DeSando Insurance Services, LLC", "Phone": "408-268-3333", "Email": "angelo@desandoins.com", "Website": ""}, {"Name": "Bethany Black", "Classification": "Group Benefits", "Contact Sphere": "Finance & Insurance", "Company": "JD Van Nest Insurance Services", "Phone": "408-725-8777", "Email": "bethany@jdvannest.com", "Website": ""}, {"Name": "Bryan Russell", "Classification": "Residential Mortgages", "Contact Sphere": "Finance & Insurance", "Company": "Flagstar Bank", "Phone": "408-655-5835", "Email": "brussell@fontisgroup.com", "Website": ""}, {"Name": "Casey Li", "Classification": "Bookkeeping", "Contact Sphere": "Legal & Accounting", "Company": "AAA American CPA Inc", "Phone": "4084239600", "Email": "casey.li@aaaamericancpa.com", "Website": ""}, {"Name": "Claudia Cortes", "Classification": "Cleaning Service", "Contact Sphere": "Real Estate Services", "Company": "Group Services B2B Cleaning", "Phone": "408-512-6444", "Email": "groupbtb520@gmail.com", "Website": ""}, {"Name": "Clifford Shaw", "Classification": "In-Home Care", "Contact Sphere": "Health & Wellness", "Company": "ComForCare Home Care Central San Jose", "Phone": "669-333-3141", "Email": "cshaw@comforcare.com", "Website": ""}, {"Name": "Colin Clancy", "Classification": "Residential Real Estate Agent", "Contact Sphere": "Real Estate Services", "Company": "Colin Clancy Realtor", "Phone": "408-590-0471", "Email": "colinclancy@kw.com", "Website": ""}, {"Name": "Daisy Pineda", "Classification": "Search Engine Optimization", "Contact Sphere": "Advertising & Marketing", "Company": "Kaizen Agency", "Phone": "4087106718", "Email": "daisy@kaizenagency.org", "Website": "kaizenagency.com"}, {"Name": "David Nasseri", "Classification": "Auto/Car Repair", "Contact Sphere": "Trades & Automotive", "Company": "Nasseri Auto Tech Auto Service", "Phone": "408-244-4777", "Email": "nasseriautotech@yahoo.com", "Website": ""}, {"Name": "Denis Killen", "Classification": "Power Washing", "Contact Sphere": "Construction", "Company": "KBD Services", "Phone": "+14084617588", "Email": "denis@kbdservices.com", "Website": ""}, {"Name": "Denise Artache", "Classification": "Painter & Decorator", "Contact Sphere": "Construction", "Company": "Sunwest Painting", "Phone": "408-623-1603", "Email": "denise@sunwestpainting.net", "Website": ""}, {"Name": "Edward Ciccarelli", "Classification": "Builder/General Contractor", "Contact Sphere": "Construction", "Company": "Apogee Construction, Inc", "Phone": "650-761-4661", "Email": "edward@apogeec.com", "Website": ""}, {"Name": "Elizabeth Popova", "Classification": "Social Media", "Contact Sphere": "Advertising & Marketing", "Company": "Plush Communications LLC", "Phone": "4243434281", "Email": "lizzapopova@gmail.com", "Website": ""}, {"Name": "Elliot Foad", "Classification": "Chiropractor", "Contact Sphere": "Health & Wellness", "Company": "Positive Motion Chiropractic", "Phone": "4083585086", "Email": "dr.foad@positivemotionhealth.com", "Website": ""}, {"Name": "Enrique Ruiz de Luzuriaga", "Classification": "Sign Company", "Contact Sphere": "Advertising & Marketing", "Company": "Signarama Sunnyvale", "Phone": "8314197217", "Email": "Enrique.ruiz@signarama.com", "Website": ""}, {"Name": "Felipe Miguel Mejia", "Classification": "Plumbing", "Contact Sphere": "Construction", "Company": "Silicon Pro Service Plumbing", "Phone": "4085458808", "Email": "fmiguelmejia@icloud.com", "Website": ""}, {"Name": "Francie Schildhauer", "Classification": "Legal Service Plan", "Contact Sphere": "Legal & Accounting", "Company": "LegalShield", "Phone": "408-849-7386", "Email": "lifeshealingjourney@hotmail.com", "Website": ""}, {"Name": "Giti Majdy", "Classification": "Business Broker", "Contact Sphere": "Consulting", "Company": "Transworld Business Advisors", "Phone": "4086661387", "Email": "g.majdy@tworld.com", "Website": ""}, {"Name": "Hubert Gotuaco", "Classification": "Credit Card/Merchant Services", "Contact Sphere": "Finance & Insurance", "Company": "CC Merchant Processing", "Phone": "408-687-2518", "Email": "hubert@goassoc.com", "Website": ""}, {"Name": "Jason Smith", "Classification": "Estate Sales", "Contact Sphere": "Real Estate Services", "Company": "Blue Moon Estate Sales", "Phone": "6502745003", "Email": "jsmith@bluemoonestatesales.com", "Website": ""}, {"Name": "Jay Shergill", "Classification": "Virtual Assistant", "Contact Sphere": "Professional Services", "Company": "Virtual Admins", "Phone": "4087974284", "Email": "jay@virtualadmins.org", "Website": ""}, {"Name": "Jeannette Marsala", "Classification": "Estate Planning Law", "Contact Sphere": "Legal & Accounting", "Company": "Marsala Law Firm, APC", "Phone": "669-800-0810", "Email": "jmarsala@marsalalawfirm.com", "Website": ""}, {"Name": "Jennifer Isensee", "Classification": "Family Law", "Contact Sphere": "Legal & Accounting", "Company": "Law Offices of Jennifer A. Isensee", "Phone": "408-247-7112", "Email": "jiffylaw@yahoo.com", "Website": ""}, {"Name": "John Jorgensen", "Classification": "Window Treatments", "Contact Sphere": "Construction", "Company": "Johnny Windows", "Phone": "209-914-5039", "Email": "johnnywindowssj@gmail.com", "Website": ""}, {"Name": "John Jussen", "Classification": "Marketing Consultant", "Contact Sphere": "Advertising & Marketing", "Company": "ITEX", "Phone": "408-504-8405", "Email": "john.jussen1@itex.net", "Website": ""}, {"Name": "John Wheeler", "Classification": "Property & Casualty Insurance", "Contact Sphere": "Finance & Insurance", "Company": "John Wheeler State Farm Agency", "Phone": "408-378-3403", "Email": "john@wheelergrp.net", "Website": ""}, {"Name": "Joseph Barghouthi", "Classification": "Solar", "Contact Sphere": "Construction", "Company": "HEX Construction dba HOMEX", "Phone": "5106731395", "Email": "joseph@hexconstruction.io", "Website": ""}, {"Name": "Ken Wong", "Classification": "Business Consultant", "Contact Sphere": "Consulting", "Company": "sFoundation Inc.", "Phone": "4083948566", "Email": "ken.wong@sfoundation.io", "Website": ""}, {"Name": "Linda Tang", "Classification": "Pet Shop", "Contact Sphere": "Retail & Animals", "Company": "Contingenci by Good Human LLC", "Phone": "6502185676", "Email": "linda.t@contingenci.com", "Website": ""}, {"Name": "Lino Martire", "Classification": "Real Estate Law", "Contact Sphere": "Legal & Accounting", "Company": "Law Offices of Lino V. Martire", "Phone": "408-280-6898", "Email": "lino.martire@martirelaw.com", "Website": ""}, {"Name": "Marcus Araiza", "Classification": "Photographer - Commercial", "Contact Sphere": "Advertising & Marketing", "Company": "Atlas Studios Bay Area", "Phone": "4089665482", "Email": "marcus@atlasstudiosbayarea.com", "Website": ""}, {"Name": "Maria Nunez", "Classification": "Cleaning - Carpet and Upholstery", "Contact Sphere": "Real Estate Services", "Company": "Home Pros", "Phone": "6504008468", "Email": "info@homepros.casa", "Website": ""}, {"Name": "Marie Zandian", "Classification": "Restoration", "Contact Sphere": "Construction", "Company": "Rainbow Restoration of San Jose", "Phone": "408-217-5500", "Email": "m.zandian@rainbowsanjose.com", "Website": ""}, {"Name": "Mario Renteria", "Classification": "Roofing & Gutters", "Contact Sphere": "Construction", "Company": "Falcon Roofing & Repair 24/7", "Phone": "408-813-6830", "Email": "mario@falcon-roofing.com", "Website": ""}, {"Name": "Matthew Nathan", "Classification": "Event Rentals", "Contact Sphere": "Events & Business", "Company": "Oxygenbar360", "Phone": "4084447070", "Email": "support@oxygenbar360.com", "Website": ""}, {"Name": "Melissa Buendia", "Classification": "Banking Services", "Contact Sphere": "Finance & Insurance", "Company": "Meriwest Credit Union", "Phone": "4086745214", "Email": "mbuendia@meriwest.com", "Website": ""}, {"Name": "Michael Balistreri", "Classification": "Payroll Service", "Contact Sphere": "Legal & Accounting", "Company": "Insperity", "Phone": "4088028743", "Email": "michael.balistreri@insperity.com", "Website": ""}, {"Name": "Michael McIlrath", "Classification": "Reverse Mortgages", "Contact Sphere": "Finance & Insurance", "Company": "iServe Residential Lending, LLC", "Phone": "415-717-9989", "Email": "mmcilrath@iservelending.com", "Website": ""}, {"Name": "Mike Caulkins", "Classification": "Financial Advisor", "Contact Sphere": "Finance & Insurance", "Company": "LPL Financial", "Phone": "408-622-4798", "Email": "michael.caulkins@lpl.com", "Website": ""}, {"Name": "Orlando Nevarez", "Classification": "Moving Company", "Contact Sphere": "Transport & Shipping", "Company": "Nevarez Moving Company", "Phone": "408-859-1106", "Email": "info@nevarezmovingco.com", "Website": ""}, {"Name": "Phil Lonardo", "Classification": "Professional Organizer", "Contact Sphere": "Consulting", "Company": "Organizing Pros", "Phone": "408-893-7289", "Email": "phil.lonardo@gmail.com", "Website": ""}, {"Name": "Pradeep Subbarayan", "Classification": "Computer Software", "Contact Sphere": "Technology", "Company": "Global AI Reps", "Phone": "6507961764", "Email": "pradeep@voiceyai.com", "Website": ""}, {"Name": "Ralph Gomez", "Classification": "Garage Doors", "Contact Sphere": "Construction", "Company": "America's Garage Doors", "Phone": "6504409903", "Email": "americasgds@gmail.com", "Website": ""}, {"Name": "Ramji Digumarthi", "Classification": "Wills/Trusts", "Contact Sphere": "Legal & Accounting", "Company": "White Plume Of Freedom Fiduciary Services", "Phone": "650-796-1039", "Email": "rdigumarthi@gmail.com", "Website": ""}, {"Name": "Rashmi Kashyap", "Classification": "Alternative Wellness", "Contact Sphere": "Health & Wellness", "Company": "QC Kinetix", "Phone": "408-256-1008", "Email": "rkashyap@qckinetix.com", "Website": ""}, {"Name": "Rene Martinez", "Classification": "HVAC - Heating & Air", "Contact Sphere": "Construction", "Company": "Rocket Air Heating & Cooling", "Phone": "4088388350", "Email": "renem@rocketairhvac.com", "Website": ""}, {"Name": "Robert Min", "Classification": "Pensions", "Contact Sphere": "Finance & Insurance", "Company": "Solutions Wealth Management", "Phone": "4083682773", "Email": "bob.min@lpl.com", "Website": ""}, {"Name": "Roxanne Salazar", "Classification": "Senior Living Placement Advisor", "Contact Sphere": "Health & Wellness", "Company": "HandnHand Senior Placement", "Phone": "408-368-0334", "Email": "roxanne@handnhandsp.com", "Website": ""}, {"Name": "Sailosi Taunaholo", "Classification": "Electrician", "Contact Sphere": "Construction", "Company": "MMT Electric", "Phone": "5108252513", "Email": "mmtelectric676@outlook.com", "Website": ""}, {"Name": "Sean McCarthy", "Classification": "Handyman", "Contact Sphere": "Construction", "Company": "Maintenance Pro, LLC", "Phone": "408-753-3677", "Email": "Info@maintenanceprotech.com", "Website": ""}, {"Name": "Shannon Sevor", "Classification": "Personal Trainer - Fitness", "Contact Sphere": "Health & Wellness", "Company": "GYMGUYZ Silicon Valley", "Phone": "4087405565", "Email": "shannon.sevor@gymguyz.com", "Website": ""}, {"Name": "Shawna Rodriguez", "Classification": "Aging Life Care Professional", "Contact Sphere": "Health & Wellness", "Company": "Bay Area Care Management, LLC", "Phone": "408-826-1894", "Email": "shawna@bacmgt.com", "Website": ""}, {"Name": "Sonia Shah", "Classification": "Baker", "Contact Sphere": "Food & Beverage", "Company": "CocoaCumin LLC", "Phone": "4086677411", "Email": "cocoacumin@gmail.com", "Website": ""}, {"Name": "Stephen Hartman", "Classification": "Sales Training/Coach", "Contact Sphere": "Training & Coaching", "Company": "Hartman Enterprises", "Phone": "408-209-7562", "Email": "sjhartman@mail.com", "Website": ""}, {"Name": "Tom Pavicic", "Classification": "Life and Disability Insurance", "Contact Sphere": "Finance & Insurance", "Company": "New York Life Insurance Company", "Phone": "669-300-8161", "Email": "tmpavicic@ft.newyorklife.com", "Website": ""}, {"Name": "Vijay Ubhayaker", "Classification": "Printer", "Contact Sphere": "Advertising & Marketing", "Company": "Minuteman Press San Jose", "Phone": "+14088289110", "Email": "vijay@minutemansanjose.com", "Website": ""}];
 
-  let allMembers = [];
-  let activeFilter = 'all';
+  var allMembers = MEMBER_DATA.slice().sort(function(a,b){return a.Name.localeCompare(b.Name);});
+  var activeFilter = 'all';
 
-  // Parse CSV
-  function parseCSV(text) {
-    const lines = text.trim().split('\n');
-    const headers = lines[0].split(',').map(h => h.replace(/"/g, '').trim());
-    return lines.slice(1).map(line => {
-      const vals = [];
-      let cur = '', inQ = false;
-      for (let i = 0; i < line.length; i++) {
-        if (line[i] === '"') { inQ = !inQ; }
-        else if (line[i] === ',' && !inQ) { vals.push(cur.trim()); cur = ''; }
-        else { cur += line[i]; }
-      }
-      vals.push(cur.trim());
-      const obj = {};
-      headers.forEach((h, i) => obj[h] = (vals[i] || '').replace(/^"|"$/g, '').trim());
-      return obj;
-    }).filter(m => m.Name && m.Name.length > 1);
-  }
-
-  // Build vCard
   function buildVCard(m) {
-    const phone = (m.Phone || '').replace(/\D/g, '');
-    return [
-      'BEGIN:VCARD',
-      'VERSION:3.0',
-      `FN:${m.Name}`,
-      `ORG:${m.Company || ''}`,
-      `TITLE:${m.Classification || ''}`,
-      phone ? `TEL;TYPE=WORK,VOICE:${phone}` : '',
-      m.Email ? `EMAIL:${m.Email}` : '',
-      m.Website ? `URL:https://${m.Website.replace(/^https?:\/\//,'')}` : '',
-      'END:VCARD'
-    ].filter(Boolean).join('\r\n');
+    var phone = (m.Phone || '').replace(/[^0-9+]/g, '');
+    var lines = ['BEGIN:VCARD','VERSION:3.0','FN:'+m.Name,'ORG:'+(m.Company||''),'TITLE:'+(m.Classification||'')];
+    if (phone) lines.push('TEL;TYPE=WORK,VOICE:'+phone);
+    if (m.Email) lines.push('EMAIL:'+m.Email);
+    if (m.Website) lines.push('URL:https://'+m.Website.replace(/^https?:\/\//, ''));
+    lines.push('END:VCARD');
+    return lines.join('\r\n');
   }
 
   function saveContact(btn, m) {
-    const vcf = buildVCard(m);
-    const blob = new Blob([vcf], { type: 'text/vcard' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `${m.Name.replace(/\s+/g, '_')}.vcf`;
-    a.click();
+    var vcf = buildVCard(m);
+    var blob = new Blob([vcf], {type:'text/vcard'});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url; a.download = m.Name.replace(/\s+/g,'_')+'.vcf'; a.click();
     URL.revokeObjectURL(url);
-    btn.textContent = 'Saved!';
-    btn.classList.add('saved');
-    setTimeout(() => {
-      btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg> Save Contact`;
+    btn.textContent = 'Saved!'; btn.classList.add('saved');
+    setTimeout(function(){
+      btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg> Save Contact';
       btn.classList.remove('saved');
     }, 2500);
   }
 
-  function escHtml(s) {
-    return (s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-  }
-
-  function renderCard(m, idx) {
-    const phone = (m.Phone || '').replace(/\D/g,'');
-    const fmtPhone = m.Phone ? m.Phone.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3') : '';
-    const hasWebsite = m.Website && m.Website.trim();
-    const hasEmail = m.Email && m.Email.trim();
-    const hasPhone = m.Phone && m.Phone.trim();
-
-    return `
-    <div class="member-card" style="animation-delay:${Math.min(idx * 40, 400)}ms">
-      <div class="card-sphere">${escHtml(m['Contact Sphere'] || '')}</div>
-      <div class="card-name">${escHtml(m.Name)}</div>
-      <div class="card-classification">${escHtml(m.Classification || '')}</div>
-      <div class="card-company">${escHtml(m.Company || '')}</div>
-      <div class="card-divider"></div>
-      <div class="card-contacts">
-        ${hasPhone ? `<a class="contact-row" href="tel:${phone}">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.38 2 2 0 0 1 3.57 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.54a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          <span>${escHtml(m.Phone)}</span>
-        </a>` : ''}
-        ${hasEmail ? `<a class="contact-row" href="mailto:${escHtml(m.Email)}">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          <span>${escHtml(m.Email)}</span>
-        </a>` : ''}
-        ${hasWebsite ? `<a class="contact-row" href="https://${m.Website.replace(/^https?:\/\//,'')}" target="_blank" rel="noopener">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-          <span>${escHtml(m.Website)}</span>
-        </a>` : ''}
-      </div>
-      <div class="card-actions">
-        <button class="btn-save" onclick="saveContact(this, ${JSON.stringify(JSON.stringify(m)).slice(1,-1).replace(/'/g,"\\'")} )">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 0-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
-          Save Contact
-        </button>
-        ${hasWebsite ? `<a class="btn-website" href="https://${m.Website.replace(/^https?:\/\//,'')}" target="_blank" rel="noopener">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-        </a>` : ''}
-      </div>
-    </div>`;
-  }
-
-  function render() {
-    const q = document.getElementById('search').value.toLowerCase().trim();
-    const filtered = allMembers.filter(m => {
-      const matchSphere = activeFilter === 'all' || (m['Contact Sphere'] || '') === activeFilter;
-      const matchSearch = !q ||
-        (m.Name || '').toLowerCase().includes(q) ||
-        (m.Classification || '').toLowerCase().includes(q) ||
-        (m.Company || '').toLowerCase().includes(q) ||
-        (m['Contact Sphere'] || '').toLowerCase().includes(q);
-      return matchSphere && matchSearch;
-    });
-
-    document.getElementById('showing-count').textContent = filtered.length;
-
-    const grid = document.getElementById('members-grid');
-    if (filtered.length === 0) {
-      grid.innerHTML = `<div class="empty-state">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-        <h3>No members found</h3>
-        <p>Try a different search or filter.</p>
-      </div>`;
-    } else {
-      grid.innerHTML = filtered.map((m, i) => {
-        // Pass member data safely
-        const safeM = encodeURIComponent(JSON.stringify(m));
-        return renderCardSafe(m, i, safeM);
-      }).join('');
-    }
-  }
-
-  function renderCardSafe(m, idx, safeM) {
-    const phone = (m.Phone || '').replace(/\D/g,'');
-    const hasWebsite = m.Website && m.Website.trim();
-    const hasEmail = m.Email && m.Email.trim();
-    const hasPhone = m.Phone && m.Phone.trim();
-
-    return `
-    <div class="member-card" style="animation-delay:${Math.min(idx * 40, 400)}ms">
-      <div class="card-sphere">${escHtml(m['Contact Sphere'] || '')}</div>
-      <div class="card-name">${escHtml(m.Name)}</div>
-      <div class="card-classification">${escHtml(m.Classification || '')}</div>
-      <div class="card-company">${escHtml(m.Company || '')}</div>
-      <div class="card-divider"></div>
-      <div class="card-contacts">
-        ${hasPhone ? `<a class="contact-row" href="tel:${phone}">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.38 2 2 0 0 1 3.57 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.54a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          <span>${escHtml(m.Phone)}</span>
-        </a>` : ''}
-        ${hasEmail ? `<a class="contact-row" href="mailto:${escHtml(m.Email)}">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          <span>${escHtml(m.Email)}</span>
-        </a>` : ''}
-        ${hasWebsite ? `<a class="contact-row" href="https://${m.Website.replace(/^https?:\/\//,'')}" target="_blank" rel="noopener">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-          <span>${escHtml(m.Website)}</span>
-        </a>` : ''}
-      </div>
-      <div class="card-actions">
-        <button class="btn-save" onclick="saveMember('${safeM}', this)">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
-          Save Contact
-        </button>
-        ${hasWebsite ? `<a class="btn-website" href="https://${m.Website.replace(/^https?:\/\//,'')}" target="_blank" rel="noopener" title="Visit website">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-        </a>` : ''}
-      </div>
-    </div>`;
-  }
-
   function saveMember(safeM, btn) {
-    const m = JSON.parse(decodeURIComponent(safeM));
+    var m = JSON.parse(decodeURIComponent(safeM));
     saveContact(btn, m);
   }
 
-  function buildFilters(members) {
-    const spheres = [...new Set(members.map(m => m['Contact Sphere'] || '').filter(Boolean))].sort();
-    document.getElementById('sphere-count').textContent = spheres.length;
-
-    const wrap = document.getElementById('filter-wrap');
-    spheres.forEach(s => {
-      const btn = document.createElement('button');
-      btn.className = 'filter-btn';
-      btn.dataset.sphere = s;
-      btn.textContent = s;
-      btn.onclick = () => {
-        activeFilter = s;
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        render();
-      };
-      wrap.appendChild(btn);
-    });
-
-    document.querySelector('[data-sphere="all"]').onclick = () => {
-      activeFilter = 'all';
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      document.querySelector('[data-sphere="all"]').classList.add('active');
-      render();
-    };
+  function esc(s) {
+    return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
-  async function loadMembers() {
-    try {
-      const res = await fetch(CSV_URL);
-      if (!res.ok) throw new Error('Failed to fetch');
-      const text = await res.text();
-      allMembers = parseCSV(text).sort((a, b) => (a.Name || '').localeCompare(b.Name || ''));
-      document.getElementById('total-count').textContent = allMembers.length;
-      buildFilters(allMembers);
-      render();
-    } catch (e) {
-      document.getElementById('members-grid').innerHTML = `<div class="empty-state">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-        <h3>Could not load members</h3>
-        <p>Please check back shortly. If this persists, contact your chapter admin.</p>
-      </div>`;
+  function card(m, idx) {
+    var phone = (m.Phone||'').replace(/[^0-9+]/g,'');
+    var safeM = encodeURIComponent(JSON.stringify(m));
+    var hp = m.Phone && m.Phone.trim();
+    var he = m.Email && m.Email.trim();
+    var hw = m.Website && m.Website.trim();
+    var ws = hw ? m.Website.replace(/^https?:\/\//,'') : '';
+    var delay = Math.min(idx*40,400);
+    var html = '<div class="member-card" style="animation-delay:'+delay+'ms">';
+    html += '<div class="card-sphere">'+esc(m['Contact Sphere']||'')+'</div>';
+    html += '<div class="card-name">'+esc(m.Name)+'</div>';
+    html += '<div class="card-classification">'+esc(m.Classification||'')+'</div>';
+    html += '<div class="card-company">'+esc(m.Company||'')+'</div>';
+    html += '<div class="card-divider"></div><div class="card-contacts">';
+    if (hp) html += '<a class="contact-row" href="tel:'+phone+'"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.38 2 2 0 0 1 3.57 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.54a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>'+esc(m.Phone)+'</span></a>';
+    if (he) html += '<a class="contact-row" href="mailto:'+esc(m.Email)+'"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span>'+esc(m.Email)+'</span></a>';
+    if (hw) html += '<a class="contact-row" href="https://'+ws+'" target="_blank" rel="noopener"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><span>'+esc(m.Website)+'</span></a>';
+    html += '</div><div class="card-actions">';
+    html += '<button class="btn-save" onclick="saveMember(''+safeM+'',this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg> Save Contact</button>';
+    if (hw) html += '<a class="btn-website" href="https://'+ws+'" target="_blank" rel="noopener" title="Visit website"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>';
+    html += '</div></div>';
+    return html;
+  }
+
+  function render() {
+    var q = document.getElementById('search').value.toLowerCase().trim();
+    var filtered = allMembers.filter(function(m){
+      var ms = activeFilter === 'all' || (m['Contact Sphere']||'') === activeFilter;
+      var mq = !q || (m.Name||'').toLowerCase().indexOf(q)>-1 || (m.Classification||'').toLowerCase().indexOf(q)>-1 || (m.Company||'').toLowerCase().indexOf(q)>-1 || (m['Contact Sphere']||'').toLowerCase().indexOf(q)>-1;
+      return ms && mq;
+    });
+    document.getElementById('showing-count').textContent = filtered.length;
+    var grid = document.getElementById('members-grid');
+    if (filtered.length === 0) {
+      grid.innerHTML = '<div class="empty-state"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><h3>No members found</h3><p>Try a different search or filter.</p></div>';
+    } else {
+      grid.innerHTML = filtered.map(function(m,i){return card(m,i);}).join('');
     }
   }
 
+  function buildFilters() {
+    var spheres = [];
+    allMembers.forEach(function(m){ var s=m['Contact Sphere']||''; if(s && spheres.indexOf(s)===-1) spheres.push(s); });
+    spheres.sort();
+    document.getElementById('total-count').textContent = allMembers.length;
+    document.getElementById('sphere-count').textContent = spheres.length;
+    var wrap = document.getElementById('filter-wrap');
+    spheres.forEach(function(s){
+      var btn = document.createElement('button');
+      btn.className = 'filter-btn'; btn.dataset.sphere = s; btn.textContent = s;
+      btn.onclick = function(){
+        activeFilter = s;
+        document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active');});
+        btn.classList.add('active'); render();
+      };
+      wrap.appendChild(btn);
+    });
+    document.querySelector('[data-sphere="all"]').onclick = function(){
+      activeFilter = 'all';
+      document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active');});
+      document.querySelector('[data-sphere="all"]').classList.add('active'); render();
+    };
+  }
+
   function submitForm() {
-    const name = document.getElementById('f-name').value.trim();
-    const email = document.getElementById('f-email').value.trim();
+    var name = document.getElementById('f-name').value.trim();
+    var email = document.getElementById('f-email').value.trim();
     if (!name || !email) { alert('Please fill in your name and email.'); return; }
     document.getElementById('contact-form').style.display = 'none';
     document.getElementById('form-success').style.display = 'block';
   }
 
   document.getElementById('search').addEventListener('input', render);
+  buildFilters();
+  render();
 
-  loadMembers();
 </script>
 </body>
 </html>
