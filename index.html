@@ -1,203 +1,831 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>BNI Power Spheres — Game Scoreboard</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home Pros | Professional Carpet, Upholstery & House Cleaning | Bay Area</title>
+<meta name="description" content="Home Pros delivers professional carpet cleaning, upholstery cleaning, house cleaning, tile & grout restoration in the Bay Area. Free assessments. (650) 400-8468.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
 <style>
-:root{--red:#C8102E;--red2:#9E0C23;--gold:#F2B705;--ink:#141414;--paper:#fff;--mut:#6b7280;--line:#e7e7ea;--bg:#f4f5f7}
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);color:var(--ink);font-family:'Archivo','Helvetica Neue',Arial,sans-serif;-webkit-font-smoothing:antialiased}
-.disp{font-family:'Anton';font-weight:400;letter-spacing:.01em;text-transform:uppercase}
-.hero{background:var(--red);color:#fff;text-align:center;padding:34px 20px 30px;position:relative;overflow:hidden}
-.hero::after{content:"";position:absolute;right:-120px;top:-120px;width:360px;height:360px;border-radius:50%;background:rgba(255,255,255,.06)}
-.badge{display:inline-block;background:#000;color:#fff;font-weight:700;font-size:11px;letter-spacing:.22em;padding:7px 16px;border-radius:30px;text-transform:uppercase}
-.hero h1{font-family:'Anton';font-size:clamp(46px,10vw,104px);line-height:.86;margin:14px 0 6px;text-transform:uppercase}
-.hero .sub{font-weight:600;letter-spacing:.04em;opacity:.95;font-size:clamp(14px,2.4vw,20px)}
-.daterange{display:inline-block;margin-top:16px;background:var(--red2);padding:7px 18px;border-radius:30px;font-weight:700;letter-spacing:.04em}
-.northstar{background:var(--gold);color:#241c00;text-align:center;padding:22px 20px}
-.northstar .lab{font-weight:800;letter-spacing:.2em;font-size:12px;text-transform:uppercase;opacity:.7}
-.northstar .big{font-family:'Anton';font-size:clamp(26px,5vw,52px);text-transform:uppercase;margin-top:2px;line-height:1}
-.northstar .stakes{margin-top:10px;font-weight:600;font-size:14px}
-.wrap{max-width:1060px;margin:0 auto;padding:40px 20px 80px}
-.sec{margin-bottom:46px}
-.sec-lab{color:var(--red);font-weight:800;letter-spacing:.22em;font-size:12px;text-transform:uppercase}
-.sec-h{display:flex;align-items:center;gap:12px;border-bottom:3px solid var(--ink);padding-bottom:10px;margin:4px 0 22px}
-.sec-h h2{font-family:'Anton';font-size:30px;text-transform:uppercase}
-.sec-h .note{margin-left:auto;color:var(--mut);font-size:13px;font-weight:600}
-.team{background:var(--paper);border:1px solid var(--line);border-left:8px solid var(--c);border-radius:14px;padding:18px 22px;margin-bottom:14px;display:grid;grid-template-columns:64px 1fr auto;gap:18px;align-items:center;box-shadow:0 1px 0 rgba(0,0,0,.03);opacity:0;transform:translateY(12px);animation:rise .5s forwards}
-.place{font-family:'Anton';font-size:40px;text-align:center;color:var(--c)}
-.tn{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
-.tn .nm{font-family:'Anton';font-size:30px;text-transform:uppercase;line-height:1}
-.tn .tag{color:var(--mut);font-weight:600;font-size:13px}
-.cap{color:var(--mut);font-size:13px;font-weight:600;margin-top:6px}.cap b{color:var(--ink)}
-.bar{height:9px;border-radius:6px;background:#eef0f3;margin-top:12px;overflow:hidden}
-.bar i{display:block;height:100%;width:0;background:var(--c);border-radius:6px;transition:width 1.1s cubic-bezier(.2,.8,.2,1)}
-.pts{text-align:right}.pts .big{font-family:'Anton';font-size:46px;line-height:.85}
-.pts .sp{color:var(--mut);font-size:12px;font-weight:600;margin-top:4px}
-.lead .place{color:var(--gold)}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
-.card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px 18px;border-top:4px solid var(--ink);opacity:0;transform:translateY(12px);animation:rise .5s forwards}
-.card .ic{font-size:22px}.card .ct{font-weight:800;font-size:14px;margin-top:8px;letter-spacing:.01em}
-.card .ld{font-family:'Anton';font-size:24px;margin-top:8px}.card .tm{color:var(--mut);font-size:12.5px;font-weight:600;min-height:17px}
-.card .w{margin-top:11px;font-size:11px;font-weight:800;letter-spacing:.08em;color:var(--red);text-transform:uppercase}
-.rosters{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
-.ros{background:var(--paper);border:1px solid var(--line);border-radius:12px;overflow:hidden}
-.ros h3{font-family:'Anton';font-size:20px;text-transform:uppercase;padding:12px 16px;color:#fff;display:flex;justify-content:space-between;align-items:baseline}
-.ros h3 span{font-size:11px;font-weight:600;opacity:.85;font-family:'Archivo'}
-.ros ul{list-style:none}.ros li{display:flex;justify-content:space-between;gap:10px;padding:7px 16px;font-size:13.5px;border-top:1px solid #f0f1f3}
-.ros li .pr{color:var(--mut);font-size:11.5px;text-align:right}.ros li.cap{background:#fafafa}.ros li .nm b{font-weight:800}
-.foot{margin-top:46px;color:var(--mut);font-size:12.5px;text-align:center;line-height:1.8;border-top:1px solid var(--line);padding-top:22px}
-@keyframes rise{to{opacity:1;transform:none}}
-@media(max-width:560px){.team{grid-template-columns:46px 1fr}.pts{grid-column:1/-1;text-align:left;display:flex;gap:18px;align-items:baseline}}
-.score-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));gap:10px}
-.score{background:var(--paper);border:1px solid var(--line);border-left:5px solid var(--gold);border-radius:12px;padding:13px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px}
-.score.neg{border-left-color:var(--red)}
-.score .a{font-weight:700;font-size:13.5px;line-height:1.2}
-.score .a small{display:block;color:var(--mut);font-weight:600;font-size:11px;margin-top:3px}
-.score .v{font-family:'Anton';font-size:30px;color:var(--ink);white-space:nowrap}
-.score.neg .v{color:var(--red)}
-.bonusband{margin-top:16px;background:var(--ink);color:#fff;border-radius:14px;padding:22px 24px}
-.bonusband .bt{font-family:'Anton';font-size:23px;text-transform:uppercase}
-.bonusband p{color:#dadada;font-size:14px;margin-top:7px;font-weight:500;line-height:1.5}
-.bonusband b{color:var(--gold)}
-.bonusband .cats{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-.bonusband .cats span{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);padding:6px 13px;border-radius:30px;font-size:12.5px;font-weight:600}
-.stand-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.stand-card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
-.stand-card.up{border-top:4px solid var(--gold)}.stand-card.down{border-top:4px solid var(--red)}
-.stand-card h4{font-family:'Anton';font-size:20px;text-transform:uppercase;margin-bottom:8px}
-.stand-card ul{list-style:none}
-.stand-card li{display:flex;align-items:center;gap:11px;padding:9px 0;border-top:1px solid #f0f1f3;font-size:14px}
-.stand-card li:first-child{border-top:none}
-.stand-card .chip{width:11px;height:11px;border-radius:50%;flex:none}
-.stand-card .nm{font-weight:800}.stand-card .why{color:var(--mut);font-size:12px}
-.stand-card .pv{margin-left:auto;font-family:'Anton';font-size:21px}
-.stand-card.up .pv{color:#1a7a1a}.stand-card.down .pv{color:var(--red)}
-@media(max-width:560px){.stand-grid{grid-template-columns:1fr}}
-.bon-card{background:var(--paper);border:1px solid var(--line);border-radius:14px;overflow:hidden}
-.bon-note{padding:14px 18px;color:var(--mut);font-size:13px;border-bottom:1px solid var(--line)}
-.bon-row{display:flex;align-items:center;gap:12px;padding:12px 18px;border-top:1px solid #f0f1f3;font-size:14px}
-.bon-row:first-child{border-top:none}
-.bon-row .chip{width:11px;height:11px;border-radius:50%;flex:none}
-.bon-row .cat{font-weight:800;min-width:132px}
-.bon-row .win{font-weight:700}
-.bon-row .det{color:var(--mut);font-size:12px}
-.bon-row .pv{margin-left:auto;font-family:'Anton';font-size:20px;color:#1a7a1a}
-.bon-row .pv.zero{color:var(--mut)}
-@media(max-width:560px){.bon-row{flex-wrap:wrap}.bon-row .cat{min-width:0}}
-.rosterbtn{display:inline-flex;align-items:center;gap:9px;margin-top:16px;background:#fff;color:var(--red);
-font-weight:800;font-size:15px;text-decoration:none;padding:12px 22px;border-radius:999px;box-shadow:0 4px 14px rgba(0,0,0,.18);
-transition:transform .12s ease,box-shadow .12s ease}
-.rosterbtn:hover{transform:translateY(-1px);box-shadow:0 7px 20px rgba(0,0,0,.25)}
-.rosterbtn .arw{font-family:'Anton';font-size:17px}
-.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.stat-card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
-.stat-card h4{font-family:'Anton';font-size:17px;text-transform:uppercase;margin-bottom:10px;letter-spacing:.02em}
-.stat-card ol{list-style:none;counter-reset:s}
-.stat-card li{display:flex;align-items:center;gap:10px;padding:7px 0;border-top:1px solid #f0f1f3;font-size:14px;counter-increment:s}
-.stat-card li:first-child{border-top:none}
-.stat-card li::before{content:counter(s);font-family:'Anton';font-size:13px;color:var(--mut);width:16px}
-.stat-card .chip{width:10px;height:10px;border-radius:50%;flex:none}
-.stat-card .nm{font-weight:700}
-.stat-card .val{margin-left:auto;font-family:'Anton';font-size:18px}
-@media(max-width:640px){.stats-grid{grid-template-columns:1fr}}
-</style></head><body>
-<div class="hero">
-<span class="badge">BNI Premiere · In-Person · CA Santa Clara</span>
-<h1>Power Spheres<br>Summer Game</h1>
-<div class="sub">4 Teams · Chapter Showdown</div>
-<div class="daterange" id="dr">—</div>
-<a class="rosterbtn" id="rosterBtn" href="#" target="_blank" rel="noopener">📇 Looking for our full roster members <span class="arw">→</span></a>
-</div>
-<div class="northstar">
-<div class="lab">The Stakes</div>
-<div class="big">Winner takes the prize · Loser buys breakfast</div>
-<div class="stakes">Show up, make connections, close business — bonuses can flip the game around.</div>
-</div>
-<div class="wrap">
-<section class="sec"><div class="sec-lab">Live</div><div class="sec-h"><h2>Team Standings</h2><span class="note" id="ln"></span></div><div id="standings"></div></section>
-<section class="sec"><div class="sec-lab">The Race · September Open</div><div class="sec-h"><h2>Leaderboard</h2><span class="note">September is open — this month's points are still up for grabs</span></div><div class="grid" id="leaders"></div></section>
-<section class="sec"><div class="sec-lab">The Rules</div><div class="sec-h"><h2>How Scoring Works</h2><span class="note">Every point comes from the PALMS report or the event sign-in sheet</span></div>
-<div class="score-grid">
-<div class="score neg"><div class="a">Absence, no sub<small>the only penalty</small></div><div class="v">&minus;15</div></div>
-<div class="score"><div class="a">Referral given<small>RGI + RGO</small></div><div class="v">+10</div></div>
-<div class="score"><div class="a">Visitor brought<small>app-registered</small></div><div class="v">+10</div></div>
-<div class="score"><div class="a">TYFCB<small>any close that week</small></div><div class="v">+10</div></div>
-<div class="score"><div class="a">BNI event attended<small>sign-in sheet</small></div><div class="v">+10</div></div>
-<div class="score"><div class="a">Guest to an event<small>sign-in sheet</small></div><div class="v">+15</div></div>
-<div class="score"><div class="a">Sponsored a member<small>biggest single play</small></div><div class="v">+20</div></div>
-</div>
-<div class="bonusband"><div class="bt">Bonus Points &mdash; where it gets won</div>
-<p>The standout in each category earns a bonus for their <b>whole team</b>: <b>+20 every month</b> plus a <b>+50 grand bonus</b> at the finish. Bonuses are bigger than any single act, so a consistent leader can flip the board.</p>
-<div class="cats"><span>📅 Best Attendance</span><span>🔥 Most Referrals</span><span>👥 Most Visitors</span><span>💰 Most TYFCB</span><span>🎟️ Most Events</span><span>🌟 Most Sponsors</span></div>
-</div></section>
-<section class="sec"><div class="sec-lab">The Lineups</div><div class="sec-h"><h2>Rosters</h2><span class="note" id="rc"></span></div><div class="rosters" id="rosters"></div></section>
-<section class="sec"><div class="sec-lab">Month-End</div><div class="sec-h"><h2>June Bonuses</h2><span class="note" id="bonNote"></span></div>
-<div class="bon-card"><div class="bon-note" id="bonIntro"></div><div id="bonusRows"></div></div></section>
-<section class="sec"><div class="sec-lab">The Movers</div><div class="sec-h"><h2>Who's Driving It</h2><span class="note">Season to date</span></div>
-<div class="stats-grid">
-<div class="stat-card"><h4>🎟️ Most Events (June)</h4><ol id="stEvents"></ol></div>
-<div class="stat-card"><h4>🔥 Most Referrals</h4><ol id="stRefs"></ol></div>
-<div class="stat-card"><h4>💰 Most Closes</h4><ol id="stClos"></ol></div>
-</div></section>
-<section class="sec"><div class="sec-lab">Week 1</div><div class="sec-h"><h2>Standouts</h2><span class="note">Who moved the needle</span></div>
-<div class="stand-grid">
-<div class="stand-card up"><h4>🔥 Carried Their Team</h4><ul id="topPts"></ul></div>
-<div class="stand-card down"><h4>📉 Absence Watch</h4><ul id="negPts"></ul></div>
-</div></section>
-</div>
-<script>
-const D={"updated": "August 25, 2026", "week": "56 members · teams evened at 14 each · September in play", "endDate": "2026-09-15", "teams": [{"code": "Red", "name": "Red Rocks", "tag": "Builders & Bankers", "color": "#C8102E", "captain": "Colin Clancy", "members": 14, "roster": [{"name": "Colin Clancy", "prof": "Residential Real Estate", "contrib": 0, "cap": true}, {"name": "Joseph Barghouthi", "prof": "Solar", "contrib": 0, "cap": false}, {"name": "Bethany Black", "prof": "Group Benefits", "contrib": 0, "cap": false}, {"name": "Mike Caulkins", "prof": "Financial Advisor", "contrib": 0, "cap": false}, {"name": "Edward Ciccarelli", "prof": "General Contractor", "contrib": 0, "cap": false}, {"name": "Hubert Gotuaco", "prof": "Merchant Services", "contrib": 0, "cap": false}, {"name": "Felipe Miguel Mejia", "prof": "Plumbing", "contrib": 0, "cap": false}, {"name": "David Nasseri", "prof": "Auto Repair", "contrib": 0, "cap": false}, {"name": "Tom Pavicic", "prof": "Life & Disability Insurance", "contrib": 0, "cap": false}, {"name": "Luis Ramos", "prof": "Insulation", "contrib": 0, "cap": false}, {"name": "Mario Renteria", "prof": "Residential Roofing", "contrib": 0, "cap": false}, {"name": "Bryan Russell", "prof": "Residential Mortgages", "contrib": 0, "cap": false}, {"name": "Sailosi Taunaholo", "prof": "Electrician", "contrib": 0, "cap": false}, {"name": "John Wheeler", "prof": "Property & Casualty", "contrib": 0, "cap": false}], "activity": 1040, "bonus": 120}, {"code": "Gold", "name": "Gold Medal", "tag": "Home & Senior Pros", "color": "#C8961E", "captain": "Maria Nunez", "members": 14, "roster": [{"name": "Maria Nunez", "prof": "Carpet & Upholstery Cleaning", "contrib": 0, "cap": true}, {"name": "Denise Artache", "prof": "Painter & Decorator", "contrib": 0, "cap": false}, {"name": "Ralph Gomez", "prof": "Garage Doors", "contrib": 0, "cap": false}, {"name": "John Jorgensen", "prof": "Window Treatments", "contrib": 0, "cap": false}, {"name": "Phil Lonardo", "prof": "Professional Organizer", "contrib": 0, "cap": false}, {"name": "Rene Martinez", "prof": "HVAC", "contrib": 0, "cap": false}, {"name": "Sean McCarthy", "prof": "Handyman", "contrib": 0, "cap": false}, {"name": "Orlando Nevarez", "prof": "Moving Company", "contrib": 0, "cap": false}, {"name": "Shawna Rodriguez", "prof": "Aging Life Care", "contrib": 0, "cap": false}, {"name": "Roxanne Salazar", "prof": "Senior Living Placement", "contrib": 0, "cap": false}, {"name": "Shannon Sevor", "prof": "Personal Trainer", "contrib": 0, "cap": false}, {"name": "Clifford Shaw", "prof": "In-Home Care", "contrib": 0, "cap": false}, {"name": "Jason Smith", "prof": "Estate Sales", "contrib": 0, "cap": false}, {"name": "Marie Zandian", "prof": "Restoration", "contrib": 0, "cap": false}], "activity": 1560, "bonus": 160}, {"code": "Green", "name": "Green Goddess", "tag": "Marketing, Media & Growth", "color": "#2E7D32", "captain": "Elliot Foad", "members": 14, "roster": [{"name": "Elliot Foad", "prof": "Chiropractor", "contrib": 0, "cap": true}, {"name": "Marcus Araiza", "prof": "Commercial Photographer", "contrib": 0, "cap": false}, {"name": "Angela Cearns", "prof": "IT Consultants", "contrib": 0, "cap": false}, {"name": "Stephen Hartman", "prof": "Sales Training / Coach", "contrib": 0, "cap": false}, {"name": "John Jussen", "prof": "Marketing Consultant", "contrib": 0, "cap": false}, {"name": "Thi Kelley", "prof": "Funeral Planning", "contrib": 0, "cap": false}, {"name": "Enrique Ruiz de Luzuriaga", "prof": "Sign Company", "contrib": 0, "cap": false}, {"name": "Keith Nisby", "prof": "IT Consultants", "contrib": 0, "cap": false}, {"name": "Daisy Pineda", "prof": "Web Development", "contrib": 0, "cap": false}, {"name": "Elizabeth Popova", "prof": "Digital Marketing", "contrib": 0, "cap": false}, {"name": "Sonia Shah", "prof": "Baker", "contrib": 0, "cap": false}, {"name": "Jay Shergill", "prof": "Virtual Assistant", "contrib": 0, "cap": false}, {"name": "Aman Thakral", "prof": "CRM & ERP Software", "contrib": 0, "cap": false}, {"name": "Vijay Ubhayaker", "prof": "Printer", "contrib": 0, "cap": false}], "activity": 725, "bonus": 20}, {"code": "Blue", "name": "Blue Bones", "tag": "Law & Professional", "color": "#1F4E79", "captain": "Jeannette Marsala", "members": 14, "roster": [{"name": "Jeannette Marsala", "prof": "Estate Planning Law", "contrib": 0, "cap": true}, {"name": "Michael Balistreri", "prof": "Payroll Service", "contrib": 0, "cap": false}, {"name": "Melissa Buendia", "prof": "Banking Services", "contrib": 0, "cap": false}, {"name": "Angelo DeSando", "prof": "Commercial Insurance", "contrib": 0, "cap": false}, {"name": "Ramji Digumarthi", "prof": "Wills & Trusts", "contrib": 0, "cap": false}, {"name": "Jennifer Isensee", "prof": "Family Law", "contrib": 0, "cap": false}, {"name": "Casey Li", "prof": "Bookkeeping", "contrib": 0, "cap": false}, {"name": "Giti Majdy", "prof": "Business Broker", "contrib": 0, "cap": false}, {"name": "Lino Martire", "prof": "Real Estate Law", "contrib": 0, "cap": false}, {"name": "Michael McIlrath", "prof": "Reverse Mortgages", "contrib": 0, "cap": false}, {"name": "Robert Min", "prof": "Pensions", "contrib": 0, "cap": false}, {"name": "Francie Schildhauer", "prof": "Legal Service Plan", "contrib": 0, "cap": false}, {"name": "Linda Tang", "prof": "Pet Shop", "contrib": 0, "cap": false}, {"name": "Ken Wong", "prof": "Business Consultant", "contrib": 0, "cap": false}], "activity": 605, "bonus": 40}], "leaders": [{"cat": "Most Referrals", "leader": "Gold", "team": "season leader", "icon": "🔥"}, {"cat": "Most TYFCB", "leader": "Gold", "team": "neck and neck", "icon": "💰"}, {"cat": "Most Visitors", "leader": "Gold & Red", "team": "tied in August", "icon": "👥"}, {"cat": "Best Attendance", "leader": "Blue", "team": "steadiest in Aug", "icon": "📅"}, {"cat": "Most Events", "leader": "—", "team": "sheets pending", "icon": "🎟️"}, {"cat": "Most Sponsors", "leader": "—", "team": "pending", "icon": "🌟"}], "standouts": {"top": [{"name": "Maria Nunez", "team": "Gold Medal", "why": "7 referrals · 12 events", "pts": 230, "color": "#C8961E"}, {"name": "Colin Clancy", "team": "Red Rocks", "why": "13 referrals · 1 visitor", "pts": 160, "color": "#C8102E"}, {"name": "Marcus Araiza", "team": "Green Goddess", "why": "1 referral · 4 events · 2 visitors", "pts": 90, "color": "#2E7D32"}, {"name": "Orlando Nevarez", "team": "Gold Medal", "why": "1 referral · 7 events", "pts": 90, "color": "#C8961E"}, {"name": "Phil Lonardo", "team": "Gold Medal", "why": "5 referrals · 2 events", "pts": 90, "color": "#C8961E"}, {"name": "Ramji Digumarthi", "team": "Blue Bones", "why": "1 referral · 6 events", "pts": 90, "color": "#1F4E79"}], "negative": [{"team": "Blue Bones", "color": "#1F4E79", "count": 6, "pts": -90}, {"team": "Green Goddess", "color": "#2E7D32", "count": 5, "pts": -75}, {"team": "Gold Medal", "color": "#C8961E", "count": 3, "pts": -45}, {"team": "Red Rocks", "color": "#C8102E", "count": 2, "pts": -30}]}, "bonuses": {"note": "August is locked. Each category winner earns +20. Most Events and Most Sponsors await the August sign-in sheet.", "rows": [{"cat": "Most Referrals", "winner": "Gold Medal", "detail": "29 given (Green 21 · Red 16 · Blue 6)", "pts": 20, "color": "#C8961E"}, {"cat": "Most TYFCB", "winner": "Red & Green", "detail": "10 closes each — a tie", "pts": 20, "color": "#C8102E"}, {"cat": "Best Attendance", "winner": "Blue Bones", "detail": "1 absence, fewest in the chapter", "pts": 20, "color": "#1F4E79"}, {"cat": "Most Visitors", "winner": "Gold & Red", "detail": "5 brought each — a tie", "pts": 20, "color": "#C8961E"}]}, "stats": {"events": [{"name": "Maria Nunez", "v": 12, "color": "#C8961E"}, {"name": "Orlando Nevarez", "v": 7, "color": "#C8961E"}, {"name": "Ramji Digumarthi", "v": 6, "color": "#1F4E79"}, {"name": "Tom Pavicic", "v": 6, "color": "#C8102E"}, {"name": "Marcus Araiza", "v": 4, "color": "#2E7D32"}], "refs": [{"name": "Colin Clancy", "v": 13, "color": "#C8102E"}, {"name": "Maria Nunez", "v": 7, "color": "#C8961E"}, {"name": "Michael Balistreri", "v": 6, "color": "#1F4E79"}, {"name": "Phil Lonardo", "v": 5, "color": "#C8961E"}, {"name": "David Nasseri", "v": 4, "color": "#C8102E"}], "clos": [{"name": "Maria Nunez", "v": 230, "color": "#C8961E"}, {"name": "Colin Clancy", "v": 160, "color": "#C8102E"}, {"name": "Marcus Araiza", "v": 90, "color": "#2E7D32"}, {"name": "Orlando Nevarez", "v": 90, "color": "#C8961E"}, {"name": "Phil Lonardo", "v": 90, "color": "#C8961E"}]}, "roster_link": "https://bnipremierchapter.com/members", "leaderNote": "AUGUST IS OPEN — this month's points are still up for grabs"};
-const f=n=>n.toLocaleString();
-D.teams.forEach(t=>t.total=t.activity+t.bonus);
-const R=[...D.teams].sort((a,b)=>b.total-a.total);
-const mx=Math.max(1,...R.map(t=>t.total));
-const allzero=R.every(t=>t.total===0);
-const dd=Math.max(0,Math.ceil((new Date(D.endDate+'T09:00')-new Date())/864e5));
-document.getElementById('dr').textContent='Now → mid-September · '+dd+' days left';
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --lime: #C2D841;
+  --lime-deep: #9AB82E;
+  --lime-light: #F4F8E2;
+  --lime-bg: #FAFCF2;
+  --black: #1A1A1A;
+  --dark: #222;
+  --charcoal: #2D2D2D;
+  --off-white: #FDFCFA;
+  --warm: #F8F7F3;
+  --cream: #F3F1EC;
+  --text: #1A1A1A;
+  --text-2: #5A5A5A;
+  --text-3: #999;
+  --border: #E8E5DF;
+  --radius: 14px;
+  --radius-sm: 8px;
+  --font-body: 'DM Sans', sans-serif;
+  --font-display: 'Playfair Display', serif;
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 24px rgba(0,0,0,0.06);
+  --shadow-lg: 0 8px 40px rgba(0,0,0,0.08);
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);color:var(--text);background:var(--off-white);line-height:1.7;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
 
-document.getElementById('ln').textContent=allzero?'Game starts soon':('Leader: '+R[0].name);
-const medals=['🥇','🥈','🥉','4th'];
-const S=document.getElementById('standings');
-R.forEach((t,i)=>{const lead=!allzero&&i===0;const e=document.createElement('div');
- e.className='team'+(lead?' lead':'');e.style.cssText+=`--c:${t.color};animation-delay:${i*80}ms`;
- e.innerHTML=`<div class="place">${medals[i]}</div>
- <div><div class="tn"><span class="nm">${t.name}</span><span class="tag">${t.tag}</span></div>
- <div class="cap">Captain <b>${t.captain}</b> · ${t.members} members</div>
- <div class="bar"><i data-w="${Math.round(t.total/mx*100)}"></i></div></div>
- <div class="pts"><div class="big">${f(t.total)}</div><div class="sp">${f(t.activity)} activity + ${f(t.bonus)} bonus</div></div>`;
- S.appendChild(e);});
-setTimeout(()=>document.querySelectorAll('.bar i').forEach(b=>b.style.width=b.dataset.w+'%'),220);
-const L=document.getElementById('leaders');
-D.leaders.forEach((c,i)=>{const e=document.createElement('div');e.className='card';e.style.animationDelay=(i*70)+'ms';
- e.innerHTML=`<div class="ic">${c.icon}</div><div class="ct">${c.cat}</div><div class="ld">${c.leader}</div>
- <div class="tm">${c.team||'No leader yet'}</div><div class="w">Worth +20 / mo</div>`;L.appendChild(e);});
-const RO=document.getElementById('rosters');let tot=0;
-D.teams.forEach(t=>{tot+=t.members;const rs=t.roster.slice().sort((a,b)=>(b.cap-a.cap)||(b.contrib-a.contrib));
- const e=document.createElement('div');e.className='ros';
- e.innerHTML=`<h3 style="background:${t.color}">${t.name}<span>${t.tag}</span></h3><ul>`+
- rs.map(m=>`<li class="${m.cap?'cap':''}"><span class="nm">${m.cap?'⭐ ':''}<b>${m.name}</b></span><span class="pr">${m.prof}</span></li>`).join('')+`</ul>`;
- RO.appendChild(e);});
-document.getElementById('rc').textContent=tot+' members · 4 teams';
+/* ─── TOP BAR ─── */
+.topbar{background:var(--black);padding:8px 24px;text-align:center}
+.topbar-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.topbar a,.topbar span{color:rgba(255,255,255,0.6);font-size:12px;font-weight:400;letter-spacing:0.3px}
+.topbar a:hover{color:white}
+.topbar .highlight{color:var(--lime);font-weight:500}
 
-const TP=document.getElementById('topPts');
-(D.standouts.top||[]).forEach((p,i)=>{const li=document.createElement('li');
- li.innerHTML=`<span class="chip" style="background:${p.color}"></span><span><span class="nm">${p.name}</span><br><span class="why">${p.team} \u00b7 ${p.why}</span></span><span class="pv">+${p.pts}</span>`;TP.appendChild(li);});
-const NP=document.getElementById('negPts');
-(D.standouts.negative||[]).forEach(p=>{const li=document.createElement('li');
- li.innerHTML=`<span class="chip" style="background:${p.color}"></span><span><span class="nm">${p.team}</span><br><span class="why">${p.count} absence${p.count>1?'s':''} with no sub</span></span><span class="pv">${p.pts}</span>`;NP.appendChild(li);});
+/* ─── NAV ─── */
+.nav{position:sticky;top:0;z-index:100;background:white;border-bottom:1px solid var(--border);box-shadow:var(--shadow-sm)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;height:72px;display:flex;align-items:center;justify-content:space-between}
+.nav-brand{display:flex;align-items:center;gap:12px}
+.nav-logo{display:flex;flex-direction:column;align-items:center}
+.nav-logo-bar{width:48px;height:4px;background:var(--lime);border-radius:2px;margin-bottom:4px}
+.nav-logo-text{font-family:var(--font-body);font-size:20px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--black)}
+.nav-links{display:flex;align-items:center;gap:32px}
+.nav-links a{font-size:14px;color:var(--text-2);font-weight:500;transition:color 0.2s;position:relative}
+.nav-links a:hover{color:var(--black)}
+.nav-links a.active{color:var(--black)}
+.nav-links a.active::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:2px;background:var(--lime);border-radius:1px}
+.nav-cta{background:var(--lime);color:var(--black)!important;padding:10px 24px;border-radius:100px;font-weight:600;transition:all 0.2s;font-size:14px}
+.nav-cta:hover{background:var(--lime-deep);transform:translateY(-1px)}
+.nav-cta::after{display:none!important}
 
-const BR=document.getElementById('bonusRows');
-if(BR&&D.bonuses){document.getElementById('bonNote').textContent="LOCKED \u00b7 +20 per category to the winning team";
- document.getElementById('bonIntro').textContent=D.bonuses.note;
- D.bonuses.rows.forEach(b=>{const d=document.createElement('div');d.className='bon-row';
-  d.innerHTML=`<span class="chip" style="background:${b.color}"></span><span class="cat">${b.cat}</span><span><span class="win">${b.winner}</span><br><span class="det">${b.detail}</span></span><span class="pv ${b.pts?'':'zero'}">${b.pts?'+'+b.pts:'\u2014'}</span>`;
-  BR.appendChild(d);});}
+/* ─── HERO ─── */
+.hero{padding:80px 24px 60px;background:var(--warm);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-200px;right:-200px;width:600px;height:600px;border-radius:50%;background:rgba(194,216,65,0.06)}
+.hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:var(--lime-light);padding:6px 16px;border-radius:100px;margin-bottom:20px}
+.hero-tag span{font-size:12px;font-weight:600;color:var(--lime-deep);letter-spacing:0.5px;text-transform:uppercase}
+.hero h1{font-family:var(--font-display);font-size:clamp(36px,4.5vw,54px);font-weight:500;line-height:1.15;margin-bottom:16px;letter-spacing:-0.5px}
+.hero h1 em{font-style:italic;color:var(--lime-deep)}
+.hero-sub{color:var(--text-2);font-size:17px;line-height:1.8;margin-bottom:32px;max-width:480px;font-weight:300}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:32px}
+.btn{padding:14px 32px;border-radius:100px;font-size:15px;font-weight:600;border:none;cursor:pointer;transition:all 0.2s;display:inline-flex;align-items:center;gap:8px;font-family:var(--font-body)}
+.btn-lime{background:var(--lime);color:var(--black)}
+.btn-lime:hover{background:var(--lime-deep);transform:translateY(-1px)}
+.btn-dark{background:var(--black);color:white}
+.btn-dark:hover{background:var(--charcoal);transform:translateY(-1px)}
+.btn-outline-dark{background:transparent;color:var(--black);border:1.5px solid var(--border)}
+.btn-outline-dark:hover{border-color:var(--black)}
+.hero-trust{display:flex;align-items:center;gap:16px}
+.hero-trust-badge{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--text-2);font-weight:400}
+.hero-trust-badge svg{width:16px;height:16px;color:var(--lime-deep)}
+.hero-visual{position:relative}
+.hero-img{background:var(--cream);border-radius:20px;height:420px;display:flex;align-items:center;justify-content:center;color:var(--text-3);font-size:14px;overflow:hidden;position:relative;border:1px solid var(--border)}
+.hero-img-placeholder{text-align:center;color:var(--text-3)}
+.hero-img-placeholder p{font-size:13px;margin-top:8px}
+.hero-float{position:absolute;background:white;border-radius:var(--radius);border:1px solid var(--border);padding:14px 18px;box-shadow:var(--shadow-md);display:flex;align-items:center;gap:10px}
+.hero-float.top-right{top:-12px;right:-12px}
+.hero-float.bottom-left{bottom:-12px;left:-12px}
+.hero-float-icon{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.hero-float-icon.lime{background:var(--lime-light);color:var(--lime-deep)}
+.hero-float-icon.dark{background:var(--black);color:white}
+.hero-float-num{font-size:18px;font-weight:700;letter-spacing:-0.5px}
+.hero-float-label{font-size:11px;color:var(--text-3);margin-top:1px}
 
-if(D.roster_link){var rb=document.getElementById('rosterBtn'); if(rb) rb.href=D.roster_link;}
-function fillStat(id,rows,unit){var el=document.getElementById(id); if(!el||!rows)return;
- rows.forEach(function(x){var li=document.createElement('li');
-  li.innerHTML='<span class="chip" style="background:'+x.color+'"></span><span class="nm">'+x.name+'</span><span class="val">'+x.v+'</span>';
-  el.appendChild(li);});}
-if(D.stats){fillStat('stEvents',D.stats.events);fillStat('stRefs',D.stats.refs);fillStat('stClos',D.stats.clos);}
-</script></body></html>
+/* ─── SECTION SYSTEM ─── */
+.section{padding:80px 24px}
+.section-inner{max-width:1200px;margin:0 auto}
+.section-tag{font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--lime-deep);margin-bottom:8px}
+.section-title{font-family:var(--font-display);font-size:clamp(28px,3.5vw,40px);font-weight:500;line-height:1.2;margin-bottom:12px;letter-spacing:-0.3px}
+.section-title em{font-style:italic;color:var(--lime-deep)}
+.section-sub{color:var(--text-2);font-size:16px;max-width:560px;margin-bottom:48px;font-weight:300;line-height:1.7}
+.centered{text-align:center}
+.centered .section-sub{margin-left:auto;margin-right:auto}
+
+/* ─── SERVICES ─── */
+.services-section{background:var(--warm)}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.service-card{background:white;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:all 0.3s;position:relative}
+.service-card:hover{border-color:var(--lime);transform:translateY(-3px);box-shadow:var(--shadow-md)}
+.service-img{height:200px;background:var(--cream);display:flex;align-items:center;justify-content:center;color:var(--text-3);font-size:13px;position:relative;overflow:hidden}
+.service-img-tag{position:absolute;top:12px;left:12px;background:var(--lime);color:var(--black);font-size:11px;font-weight:600;padding:4px 12px;border-radius:100px;letter-spacing:0.3px}
+.service-body{padding:22px}
+.service-name{font-family:var(--font-display);font-size:20px;font-weight:600;margin-bottom:6px}
+.service-desc{font-size:14px;color:var(--text-2);line-height:1.6;margin-bottom:16px;font-weight:300}
+.service-price{display:flex;align-items:baseline;gap:4px;margin-bottom:16px}
+.service-price .from{font-size:12px;color:var(--text-3);font-weight:400}
+.service-price .amount{font-size:22px;font-weight:700;color:var(--black)}
+.service-price .unit{font-size:13px;color:var(--text-3);font-weight:400}
+.service-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--lime-deep);transition:gap 0.2s}
+.service-link:hover{gap:10px}
+
+/* ─── PRICING TABLE ─── */
+.pricing-section{background:var(--off-white)}
+.pricing-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.pricing-card{background:white;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.pricing-card.featured{border-color:var(--lime);box-shadow:0 0 0 1px var(--lime)}
+.pricing-header{padding:24px 24px 16px;border-bottom:1px solid var(--border)}
+.pricing-header h3{font-family:var(--font-display);font-size:22px;font-weight:600;margin-bottom:4px}
+.pricing-header p{font-size:13px;color:var(--text-2);font-weight:300}
+.pricing-featured-tag{display:inline-flex;background:var(--lime);color:var(--black);font-size:11px;font-weight:600;padding:3px 10px;border-radius:100px;margin-bottom:8px}
+.pricing-rows{padding:8px 0}
+.pricing-row{display:flex;justify-content:space-between;align-items:flex-start;padding:12px 24px;gap:16px}
+.pricing-row:not(:last-child){border-bottom:1px solid var(--border)}
+.pricing-row-left{flex:1}
+.pricing-row-name{font-size:14px;font-weight:500;margin-bottom:2px}
+.pricing-row-desc{font-size:12px;color:var(--text-3);font-weight:300;line-height:1.5}
+.pricing-row-price{font-size:14px;font-weight:600;color:var(--black);white-space:nowrap;text-align:right}
+.pricing-row-price.free{color:var(--lime-deep)}
+.pricing-promo{background:var(--lime-light);padding:14px 24px;display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:var(--lime-deep)}
+.pricing-promo svg{width:16px;height:16px;flex-shrink:0}
+
+/* ─── ABOUT / MARIA ─── */
+.about-section{background:var(--warm)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.about-img{background:var(--cream);border-radius:20px;height:440px;display:flex;align-items:center;justify-content:center;color:var(--text-3);font-size:13px;border:1px solid var(--border);position:relative;overflow:hidden}
+.about-img-placeholder{text-align:center}
+.about-content .section-tag{margin-bottom:8px}
+.about-content h2{font-family:var(--font-display);font-size:clamp(28px,3.5vw,38px);font-weight:500;line-height:1.2;margin-bottom:20px}
+.about-content h2 em{font-style:italic;color:var(--lime-deep)}
+.about-content p{color:var(--text-2);font-size:15px;line-height:1.8;margin-bottom:16px;font-weight:300}
+.about-values{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
+.about-value{display:flex;align-items:flex-start;gap:10px;padding:12px;background:white;border-radius:var(--radius-sm);border:1px solid var(--border)}
+.about-value-icon{width:28px;height:28px;border-radius:50%;background:var(--lime-light);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.about-value-icon svg{width:14px;height:14px;stroke:var(--lime-deep);fill:none;stroke-width:2.5}
+.about-value span{font-size:13px;font-weight:500;color:var(--text)}
+
+/* ─── WHY CHOOSE ─── */
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.why-card{text-align:center;padding:28px 20px;background:white;border:1px solid var(--border);border-radius:var(--radius);transition:all 0.3s}
+.why-card:hover{border-color:var(--lime);transform:translateY(-2px)}
+.why-icon{width:52px;height:52px;border-radius:14px;background:var(--lime-light);display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+.why-icon svg{width:24px;height:24px;stroke:var(--lime-deep);fill:none;stroke-width:1.8}
+.why-card h3{font-size:15px;font-weight:600;margin-bottom:6px}
+.why-card p{font-size:13px;color:var(--text-2);line-height:1.6;font-weight:300}
+
+/* ─── REFERRAL PARTNERS ─── */
+.partners-section{background:var(--black)}
+.partners-section .section-tag{color:var(--lime)}
+.partners-section .section-title{color:white}
+.partners-section .section-title em{color:var(--lime)}
+.partners-section .section-sub{color:rgba(255,255,255,0.45)}
+.partners-list{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:32px}
+.partner-pill{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);border-radius:100px;padding:10px 20px;display:flex;align-items:center;gap:8px;transition:all 0.3s}
+.partner-pill:hover{border-color:rgba(194,216,65,0.3);background:rgba(194,216,65,0.06)}
+.partner-pill-dot{width:8px;height:8px;border-radius:50%;background:var(--lime);flex-shrink:0}
+.partner-pill span{color:rgba(255,255,255,0.7);font-size:14px;font-weight:400}
+.partner-pill .trade{color:rgba(255,255,255,0.35);font-size:12px;margin-left:4px}
+.partners-note{color:rgba(255,255,255,0.35);font-size:14px;font-weight:300;line-height:1.7;max-width:600px}
+.partners-note a{color:var(--lime);font-weight:500;text-decoration:underline;text-underline-offset:3px}
+
+/* ─── CTA BANNER ─── */
+.cta-banner{background:var(--lime);padding:60px 24px;text-align:center}
+.cta-banner-inner{max-width:700px;margin:0 auto}
+.cta-banner h2{font-family:var(--font-display);font-size:clamp(28px,4vw,40px);font-weight:600;color:var(--black);margin-bottom:12px;line-height:1.2}
+.cta-banner p{font-size:16px;color:rgba(26,26,26,0.6);margin-bottom:28px;font-weight:300}
+.cta-banner .btn-dark{font-size:16px;padding:16px 40px}
+
+/* ─── CONTACT / FORM ─── */
+.contact-section{background:var(--warm)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+.contact-info h3{font-family:var(--font-display);font-size:32px;font-weight:500;margin-bottom:16px;line-height:1.2}
+.contact-info h3 em{font-style:italic;color:var(--lime-deep)}
+.contact-info > p{color:var(--text-2);font-size:15px;line-height:1.7;margin-bottom:28px;font-weight:300}
+.contact-details{display:flex;flex-direction:column;gap:16px}
+.contact-item{display:flex;align-items:flex-start;gap:14px}
+.contact-item-icon{width:40px;height:40px;border-radius:10px;background:var(--lime-light);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.contact-item-icon svg{width:18px;height:18px;stroke:var(--lime-deep);fill:none;stroke-width:2}
+.contact-item-label{font-size:12px;color:var(--text-3);font-weight:400;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:2px}
+.contact-item-value{font-size:15px;font-weight:500}
+.contact-item-value a{color:var(--text);transition:color 0.2s}
+.contact-item-value a:hover{color:var(--lime-deep)}
+.contact-form{background:white;border:1px solid var(--border);border-radius:16px;padding:32px;box-shadow:var(--shadow-sm)}
+.contact-form h3{font-size:20px;font-weight:600;margin-bottom:4px}
+.contact-form .form-sub{font-size:13px;color:var(--text-3);margin-bottom:24px;font-weight:300}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.form-group{display:flex;flex-direction:column;gap:5px}
+.form-group.full{grid-column:1/-1}
+.form-label{font-size:13px;font-weight:500}
+.form-input{padding:11px 16px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:14px;font-family:var(--font-body);color:var(--text);background:var(--warm);transition:all 0.2s;outline:none}
+.form-input:focus{border-color:var(--lime);background:white;box-shadow:0 0 0 3px rgba(194,216,65,0.12)}
+.form-input::placeholder{color:var(--text-3);font-weight:300}
+textarea.form-input{min-height:100px;resize:vertical}
+select.form-input{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:40px}
+.form-submit{width:100%;padding:14px;background:var(--lime);color:var(--black);border:none;border-radius:100px;font-size:15px;font-weight:600;cursor:pointer;transition:all 0.2s;margin-top:8px;font-family:var(--font-body)}
+.form-submit:hover{background:var(--lime-deep)}
+
+/* ─── FOOTER ─── */
+.footer{background:var(--black);padding:48px 24px 32px}
+.footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px}
+.footer-brand .nav-logo-bar{background:var(--lime);width:40px;height:3px;border-radius:2px;margin-bottom:4px}
+.footer-brand .nav-logo-text{color:white;font-size:18px}
+.footer-brand p{color:rgba(255,255,255,0.35);font-size:13px;margin-top:12px;line-height:1.6;font-weight:300;max-width:280px}
+.footer-col h4{color:rgba(255,255,255,0.5);font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:16px}
+.footer-col a{display:block;color:rgba(255,255,255,0.5);font-size:14px;font-weight:400;margin-bottom:10px;transition:color 0.2s}
+.footer-col a:hover{color:var(--lime)}
+.footer-bottom{max-width:1200px;margin:32px auto 0;padding-top:24px;border-top:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.footer-bottom p{color:rgba(255,255,255,0.25);font-size:12px;font-weight:300}
+.footer-bottom a{color:rgba(255,255,255,0.35);font-size:12px;transition:color 0.2s}
+.footer-bottom a:hover{color:var(--lime)}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:1024px){
+  .hero-inner{grid-template-columns:1fr;text-align:center}
+  .hero-sub{margin-left:auto;margin-right:auto}
+  .hero-actions{justify-content:center}
+  .hero-trust{justify-content:center}
+  .hero-visual{display:none}
+  .services-grid{grid-template-columns:1fr 1fr}
+  .about-grid{grid-template-columns:1fr}
+  .about-img{height:300px}
+  .why-grid{grid-template-columns:1fr 1fr}
+  .contact-grid{grid-template-columns:1fr}
+  .footer-inner{grid-template-columns:1fr 1fr}
+  .pricing-grid{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .services-grid{grid-template-columns:1fr}
+  .why-grid{grid-template-columns:1fr}
+  .about-values{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  .footer-inner{grid-template-columns:1fr}
+  .topbar-inner{justify-content:center;text-align:center}
+  .nav-links .hide-m{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <span>Serving the Bay Area, Peninsula, San Jose & Surrounding Cities</span>
+    <div style="display:flex;align-items:center;gap:20px">
+      <a href="tel:6504008468" class="highlight">(650) 400-8468</a>
+      <a href="mailto:info@homepros.casa">info@homepros.casa</a>
+      <span>Mon–Sat 7:00 AM – 4:00 PM</span>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-brand">
+      <div class="nav-logo">
+        <div class="nav-logo-bar"></div>
+        <div class="nav-logo-text">Home Pros</div>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="#services" class="hide-m">Services</a>
+      <a href="#pricing" class="hide-m">Pricing</a>
+      <a href="#about" class="hide-m">About</a>
+      <a href="#partners" class="hide-m">Referrals</a>
+      <a href="#contact" class="nav-cta">Get a Free Quote</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-tag">
+        <span>Free Assessments — No Obligation</span>
+      </div>
+      <h1>Revive your home with <em>professional</em> cleaning.</h1>
+      <p class="hero-sub">Carpet, upholstery, tile, and house cleaning for Bay Area homeowners and businesses. We use eco-friendly products, show up on time, and leave your home feeling brand new.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-lime">Get a Free Quote →</a>
+        <a href="tel:6504008468" class="btn btn-dark">Call (650) 400-8468</a>
+      </div>
+      <div class="hero-trust">
+        <div class="hero-trust-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Licensed & insured
+        </div>
+        <div class="hero-trust-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          Nexus Verified Partner
+        </div>
+        <div class="hero-trust-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          Eco-friendly products
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-img">
+        <div class="hero-img-placeholder">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <p>Hero photo — cleaning in action</p>
+        </div>
+      </div>
+      <div class="hero-float top-right">
+        <div class="hero-float-icon lime">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <div>
+          <div class="hero-float-num">100%</div>
+          <div class="hero-float-label">Satisfaction guaranteed</div>
+        </div>
+      </div>
+      <div class="hero-float bottom-left">
+        <div class="hero-float-icon dark">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+        </div>
+        <div>
+          <div class="hero-float-num">Bay Area</div>
+          <div class="hero-float-label">Locally owned & operated</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section services-section" id="services">
+  <div class="section-inner centered">
+    <div class="section-tag">Our Services</div>
+    <h2 class="section-title">Everything your home <em>needs</em></h2>
+    <p class="section-sub">From deep carpet cleaning to full move-out turnovers, we handle every surface in your home with care and precision.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-img">
+          <div class="hero-img-placeholder">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <p>Carpet cleaning photo</p>
+          </div>
+          <div class="service-img-tag">Most Popular</div>
+        </div>
+        <div class="service-body">
+          <div class="service-name">Carpet Cleaning</div>
+          <div class="service-desc">Residential, commercial, and apartment cleaning using the latest technology and eco-friendly products to remove stains, dirt, and allergens.</div>
+          <div class="service-price"><span class="from">from</span><span class="amount">$68</span><span class="unit">/ room</span></div>
+          <a href="#pricing" class="service-link">See full pricing <span>→</span></a>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-img">
+          <div class="hero-img-placeholder">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <p>Upholstery cleaning photo</p>
+          </div>
+        </div>
+        <div class="service-body">
+          <div class="service-name">Upholstery Cleaning</div>
+          <div class="service-desc">Sofas, chairs, cushions, and mattresses cleaned safely and thoroughly. We remove dirt, stains, and allergens from all types of furniture.</div>
+          <div class="service-price"><span class="from">from</span><span class="amount">$10</span><span class="unit">/ cushion</span></div>
+          <a href="#pricing" class="service-link">See full pricing <span>→</span></a>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-img">
+          <div class="hero-img-placeholder">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <p>House cleaning photo</p>
+          </div>
+        </div>
+        <div class="service-body">
+          <div class="service-name">House Cleaning</div>
+          <div class="service-desc">Regular cleanings, deep cleans, and move-in/move-out turnovers. We handle kitchens, bathrooms, bedrooms, living spaces — the whole home.</div>
+          <div class="service-price"><span class="from"></span><span class="amount">Free</span><span class="unit">assessment</span></div>
+          <a href="#pricing" class="service-link">See full pricing <span>→</span></a>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-img">
+          <div class="hero-img-placeholder">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <p>Tile & grout photo</p>
+          </div>
+        </div>
+        <div class="service-body">
+          <div class="service-name">Tile & Grout</div>
+          <div class="service-desc">Deep-clean tile surfaces and grout lines to remove stubborn grime, mold, and stains. Bathrooms, kitchens, entryways — like new again.</div>
+          <div class="service-price"><span class="from">from</span><span class="amount">$2</span><span class="unit">/ sq ft</span></div>
+          <a href="#pricing" class="service-link">See full pricing <span>→</span></a>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-img">
+          <div class="hero-img-placeholder">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <p>Rug cleaning photo</p>
+          </div>
+        </div>
+        <div class="service-body">
+          <div class="service-name">Rug Cleaning & Repairs</div>
+          <div class="service-desc">Oriental, Persian, and wool rugs cleaned with care. We remove dirt, stains, and allergens, leaving your rug vibrant and fresh. Pick-up and drop-off available.</div>
+          <div class="service-price"><span class="from">from</span><span class="amount">$1.25</span><span class="unit">/ sq ft</span></div>
+          <a href="#pricing" class="service-link">See full pricing <span>→</span></a>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-img">
+          <div class="hero-img-placeholder">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <p>Commercial cleaning photo</p>
+          </div>
+        </div>
+        <div class="service-body">
+          <div class="service-name">Commercial Cleaning</div>
+          <div class="service-desc">Offices, retail spaces, and commercial properties kept spotless. Customized schedules to fit your business needs — keep your workspace looking its best.</div>
+          <div class="service-price"><span class="from"></span><span class="amount">Free</span><span class="unit">assessment</span></div>
+          <a href="#pricing" class="service-link">See full pricing <span>→</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section pricing-section" id="pricing">
+  <div class="section-inner centered">
+    <div class="section-tag">Transparent Pricing</div>
+    <h2 class="section-title">Know the cost <em>upfront</em></h2>
+    <p class="section-sub">No surprises. All prices are estimates — final pricing confirmed after a free assessment based on size, condition, and scope.</p>
+
+    <div class="pricing-grid">
+
+      <!-- CARPET + HARD SURFACE -->
+      <div class="pricing-card featured">
+        <div class="pricing-header">
+          <div class="pricing-featured-tag">Most Requested</div>
+          <h3>Carpet Cleaning</h3>
+          <p>Residential, commercial & apartments</p>
+        </div>
+        <div class="pricing-rows">
+          <div class="pricing-row">
+            <div class="pricing-row-left"><div class="pricing-row-name">Standard bedroom – large room</div><div class="pricing-row-desc">Typically ranges from 10' x 10' to 14' x 14'</div></div>
+            <div class="pricing-row-price">$68 – $152</div>
+          </div>
+          <div class="pricing-row">
+            <div class="pricing-row-left"><div class="pricing-row-name">Dining room</div><div class="pricing-row-desc">Common sizes are 10' x 12' (small) to 14' x 18' (large)</div></div>
+            <div class="pricing-row-price">$81 – $171</div>
+          </div>
+          <div class="pricing-row">
+            <div class="pricing-row-left"><div class="pricing-row-name">Stairs / landing</div><div class="pricing-row-desc">Standard 12 to 14 steps and 2 landings</div></div>
+            <div class="pricing-row-price">$129</div>
+          </div>
+          <div class="pricing-row">
+            <div class="pricing-row-left"><div class="pricing-row-name">Commercial cleaning</div><div class="pricing-row-desc">Medical facilities, offices, retail. 10% off first service.</div></div>
+            <div class="pricing-row-price">$.48 / SF</div>
+          </div>
+        </div>
+        <div class="pricing-promo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          Book maintenance cleaning within one year and enjoy 25% off your total.
+        </div>
+      </div>
+
+      <!-- UPHOLSTERY -->
+      <div class="pricing-card">
+        <div class="pricing-header">
+          <h3>Upholstery</h3>
+          <p>Sofas, chairs, cushions & outdoor furniture</p>
+        </div>
+        <div class="pricing-rows">
+          <div class="pricing-row">
+            <div class="pricing-row-left"><div class="pricing-row-name">Outdoor cushions</div></div>
+            <div class="pricing-row-price">$10 – $50</div>
+          </div>
+          <div class="pricing-row">
+            <div class="pricing-row-left"><div class="pricing-row-name">Sofas</div><div class="pricing-row-desc">All shapes, sizes, and materials</div></div>
+            <div class="pricing-row-price">$110 – $155 / LFT</div>
+          </div>
+          <div class="pricing-row">
+            <div class="pricing-row-left"><div class="pricing-row-name">Dining chairs</div></div>
+            <div class="pricing-row-price">$10 – $35</div>
+          </div>
+          <div class="pricing-row">
+            <div class="pricing-row-left"><div class="pricing-row-name">Reupholstery</div><div class="pricing-row-desc">Removing old fabric, re-padding, springs, fresh finish</div></div>
+            <div class="pricing-row-price free">Free Assessment</div>
+          </div>
+          <div class="pricing-row">
+            <div class="pricing-row-left"><div class="pricing-row-name">Outdoor umbrellas</div><div class="pricing-row-desc">Canopy fabrics, off-site cleaning only</div></div>
+            <div class="pricing-row-price">$75 – $200</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- HOUSE CLEANING -->
+      <div class="pricing-card">
+        <div class="pricing-header">
+          <h3>House Cleaning</h3>
+          <p>Regular, deep, move-in/out & commercial</p>
+        </div>
+        <div class="pricing-rows">
+          <div class="pricing-row">
+            <div class="pricing-row-left"><div class="pricing-row-name">Move in & out cleaning</div><div class="pricing-row-desc">Full home turnover — appliances, cabinets, fixtures, walls</div></div>
+            <div class="pricing-row-price free">Free Assessment</div>
+          </div>
+          <div class="pricing-row">
+            <div class="pricing-row-left"><div class="pricing-row-name">Deep cleaning</div><div class="pricing-row-desc">Behind appliances, inside cabinets, window tracks, baseboards</div></div>
+            <div class="pricing-row-price free">Free Assessment</div>
+          </div>
+          <div class="pricing-row">
+            <div class="pricing-row-left"><div class="pricing-row-name">Regular cleanings</div><div class="pricing-row-desc">Dusting, mopping, bathrooms, kitchens, living rooms</div></div>
+            <div class="pricing-row-price free">Free Assessment</div>
+          </div>
+          <div class="pricing-row">
+            <div class="pricing-row-left"><div class="pricing-row-name">Rental / Airbnb turnovers</div><div class="pricing-row-desc">Investment properties, rental turnovers, property management</div></div>
+            <div class="pricing-row-price free">Free Assessment</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- HARD SURFACE + RUGS -->
+      <div class="pricing-card">
+        <div class="pricing-header">
+          <h3>Hard Surface & Rugs</h3>
+          <p>Tile, grout, hardwood floors & area rugs</p>
+        </div>
+        <div class="pricing-rows">
+          <div class="pricing-row">
+            <div class="pricing-row-left"><div class="pricing-row-name">Tile & grout cleaning</div><div class="pricing-row-desc">Ceramic, porcelain, natural stone. Sealing optional.</div></div>
+            <div class="pricing-row-price">$2 – $4 / SF</div>
+          </div>
+          <div class="pricing-row">
+            <div class="pricing-row-left"><div class="pricing-row-name">Hardwood floor</div><div class="pricing-row-desc">pH balanced, wood-safe solution. Refinishing available.</div></div>
+            <div class="pricing-row-price">$2 / SF</div>
+          </div>
+          <div class="pricing-row">
+            <div class="pricing-row-left"><div class="pricing-row-name">Rug cleaning (on-site)</div></div>
+            <div class="pricing-row-price">$1.25 – $2.25 / SF</div>
+          </div>
+          <div class="pricing-row">
+            <div class="pricing-row-left"><div class="pricing-row-name">Rug pick-up & drop-off</div><div class="pricing-row-desc">Silk, viscose, rayon rugs included</div></div>
+            <div class="pricing-row-price">$4 – $8 / SF</div>
+          </div>
+          <div class="pricing-row">
+            <div class="pricing-row-left"><div class="pricing-row-name">Rug repairs</div><div class="pricing-row-desc">Must be assessed on-site for accurate pricing</div></div>
+            <div class="pricing-row-price free">Free Assessment</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p style="color:var(--text-3);font-size:13px;margin-top:24px;font-weight:300;text-align:center">All prices are estimates. Final pricing confirmed upon inspection based on size, condition, and specific needs.</p>
+  </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section class="section" id="why">
+  <div class="section-inner centered">
+    <div class="section-tag">Why Home Pros</div>
+    <h2 class="section-title">We clean. We don't <em>judge.</em></h2>
+    <p class="section-sub">Whether it's a spotless touch-up or a space that needs serious love, we show up with the same care, same quality, and zero judgment.</p>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Free Assessments</h3>
+        <p>Every job starts with a complimentary, no-obligation walkthrough so you know exactly what to expect.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <h3>On Time, Every Time</h3>
+        <p>We respect your schedule. We arrive when we say we will and finish when we say we will.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <h3>Eco-Friendly Products</h3>
+        <p>Safe for your family, pets, and the planet. We use green-certified products on every job.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4-4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <h3>Locally Owned</h3>
+        <p>Maria and the Home Pros team live and work in the Bay Area. Your neighbors, not a franchise.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT MARIA -->
+<section class="section about-section" id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-img">
+        <div class="about-img-placeholder">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <p>Maria's headshot or in-action photo</p>
+        </div>
+      </div>
+      <div class="about-content">
+        <div class="section-tag">Meet the Owner</div>
+        <h2>Maria Nunez — a woman on a mission to <em>refresh every home.</em></h2>
+        <p>Maria isn't just cleaning carpets — she's restoring comfort, cleanliness, and pride to every space she touches. As the heart and hands behind Home Pros, Maria brings a personalized touch to every job, driven by a deep commitment to doing things right the first time.</p>
+        <p>With a keen eye for detail and a passion for serving her community, she treats every home as if it were her own. Whether you're dealing with tough stains, lingering odors, or just looking to breathe new life into your floors, Maria offers solutions built on trust, integrity, and top-tier service.</p>
+        <p style="font-weight:500;color:var(--text);font-style:italic">Because to her, it's more than cleaning — it's caring.</p>
+        <div class="about-values">
+          <div class="about-value">
+            <div class="about-value-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span>Free assessments</span>
+          </div>
+          <div class="about-value">
+            <div class="about-value-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span>Knowledgeable & reliable</span>
+          </div>
+          <div class="about-value">
+            <div class="about-value-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span>Trusted by the community</span>
+          </div>
+          <div class="about-value">
+            <div class="about-value-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span>Nexus Networking founder</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="cta-banner">
+  <div class="cta-banner-inner">
+    <h2>Ready to see the difference?</h2>
+    <p>Every cleaning starts with a free, no-obligation assessment. We'll walk through your space, give you an honest quote, and schedule at your convenience.</p>
+    <a href="#contact" class="btn btn-dark">Get Your Free Assessment →</a>
+  </div>
+</section>
+
+<!-- REFERRAL PARTNERS -->
+<section class="section partners-section" id="partners">
+  <div class="section-inner">
+    <div class="section-tag">Referral Partners</div>
+    <h2 class="section-title">Need more than <em>cleaning?</em></h2>
+    <p class="section-sub">Over the years, we've built strong relationships with local experts in complementary fields. These are the professionals we trust and personally recommend.</p>
+    <div class="partners-list">
+      <div class="partner-pill"><div class="partner-pill-dot"></div><span>Painter</span></div>
+      <div class="partner-pill"><div class="partner-pill-dot"></div><span>Roofer</span></div>
+      <div class="partner-pill"><div class="partner-pill-dot"></div><span>ADU Contractor</span></div>
+      <div class="partner-pill"><div class="partner-pill-dot"></div><span>Solar</span></div>
+      <div class="partner-pill"><div class="partner-pill-dot"></div><span>Window Cleaner</span></div>
+      <div class="partner-pill"><div class="partner-pill-dot"></div><span>Chiropractor</span></div>
+      <div class="partner-pill"><div class="partner-pill-dot"></div><span>Plumber</span></div>
+      <div class="partner-pill"><div class="partner-pill-dot"></div><span>Handyman</span></div>
+      <div class="partner-pill"><div class="partner-pill-dot" style="background:rgba(255,255,255,0.2)"></div><span>And more...</span></div>
+    </div>
+    <p class="partners-note">All referral partners are part of the <a href="#">Nexus Trusted Trade Partner</a> network — verified, vetted professionals serving the Bay Area. Ask us for a referral to any of the trades listed above.</p>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section contact-section" id="contact">
+  <div class="section-inner">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="section-tag">Get in Touch</div>
+        <h3>Better yet, see us <em>in person.</em></h3>
+        <p>We stay in constant communication with our customers until the job is done. To get a free quote, or if you have questions or special requests, just drop us a line.</p>
+        <div class="contact-details">
+          <div class="contact-item">
+            <div class="contact-item-icon">
+              <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            </div>
+            <div>
+              <div class="contact-item-label">Phone</div>
+              <div class="contact-item-value"><a href="tel:6504008468">(650) 400-8468</a></div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">
+              <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+              <div class="contact-item-label">Email</div>
+              <div class="contact-item-value"><a href="mailto:info@homepros.casa">info@homepros.casa</a></div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            </div>
+            <div>
+              <div class="contact-item-label">Hours</div>
+              <div class="contact-item-value">Mon – Sat, 7:00 AM – 4:00 PM</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">
+              <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+              <div class="contact-item-label">Service Area</div>
+              <div class="contact-item-value">Bay Area, Peninsula, San Jose & surrounding cities</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form">
+        <h3>Get a Free Quote</h3>
+        <p class="form-sub">Fill out the form and we'll get back to you within 24 hours.</p>
+        <form action="#" method="POST">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">First name</label>
+              <input type="text" class="form-input" placeholder="Your first name" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Last name</label>
+              <input type="text" class="form-input" placeholder="Your last name" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Email</label>
+              <input type="email" class="form-input" placeholder="you@email.com" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Phone</label>
+              <input type="tel" class="form-input" placeholder="(___) ___-____" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group full">
+              <label class="form-label">Service needed</label>
+              <select class="form-input" required>
+                <option value="" disabled selected>Select a service</option>
+                <option>Carpet Cleaning</option>
+                <option>Upholstery Cleaning</option>
+                <option>House Cleaning</option>
+                <option>Tile & Grout</option>
+                <option>Rug Cleaning & Repairs</option>
+                <option>Hardwood Floor Cleaning</option>
+                <option>Move In / Move Out Cleaning</option>
+                <option>Commercial Cleaning</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group full">
+              <label class="form-label">Tell us about your project</label>
+              <textarea class="form-input" placeholder="Number of rooms, type of surface, any stains or concerns, preferred schedule..."></textarea>
+            </div>
+          </div>
+          <button type="submit" class="form-submit">Request Free Assessment</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="nav-logo">
+        <div class="nav-logo-bar"></div>
+        <div class="nav-logo-text">Home Pros</div>
+      </div>
+      <p>Professional carpet, upholstery, and house cleaning for Bay Area homeowners and businesses. Locally owned by Maria Nunez.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <a href="#services">Carpet Cleaning</a>
+      <a href="#services">Upholstery</a>
+      <a href="#services">House Cleaning</a>
+      <a href="#services">Tile & Grout</a>
+      <a href="#services">Rug Cleaning</a>
+      <a href="#services">Commercial</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="#about">About Maria</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#partners">Referral Partners</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <a href="tel:6504008468">(650) 400-8468</a>
+      <a href="mailto:info@homepros.casa">info@homepros.casa</a>
+      <a href="#">Facebook</a>
+      <a href="#">Instagram</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 Home Pros. All rights reserved.</p>
+    <a href="https://growthwithkaizen.com" target="_blank" rel="noopener">Website by Kaizen Agency</a>
+  </div>
+</footer>
+
+</body>
+</html>
