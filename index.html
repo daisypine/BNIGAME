@@ -111,6 +111,24 @@ transition:transform .12s ease,box-shadow .12s ease}
 .prize-band .pb-lab{font-weight:800;font-size:15px;color:#9a7212;letter-spacing:.02em}
 .prize-band p{margin-top:6px;font-size:14px;line-height:1.55;color:#333}
 @media(max-width:640px){.finish-grid{grid-template-columns:1fr}}
+
+.goaltrack{background:#0f0f0f;color:#fff;padding:26px 20px}
+.gt-inner{max-width:760px;margin:0 auto}
+.gt-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px}
+.gt-lab{font-weight:800;letter-spacing:.14em;font-size:12px;text-transform:uppercase;color:#C8961E}
+.gt-time{font-size:12px;color:rgba(255,255,255,.6);font-weight:600}
+.gt-row{display:flex;align-items:baseline;gap:12px;margin-top:8px;flex-wrap:wrap}
+.gt-big{font-family:'Anton',sans-serif;font-size:clamp(40px,8vw,64px);line-height:.95;color:#fff}
+.gt-of{font-size:14px;color:rgba(255,255,255,.65)}
+.gt-bar{position:relative;height:26px;background:rgba(255,255,255,.12);border-radius:20px;margin-top:14px;overflow:hidden}
+.gt-fill{position:absolute;left:0;top:0;height:100%;background:linear-gradient(90deg,#2E7D32,#C8961E);border-radius:20px}
+.gt-pct{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-weight:800;font-size:13px;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.4)}
+.gt-week{margin-top:18px;border-top:1px solid rgba(255,255,255,.14);padding-top:14px}
+.gt-wk-lab{font-weight:800;font-size:13px;color:#fff;margin-bottom:8px}
+.gt-wk-stats{display:flex;gap:22px;flex-wrap:wrap}
+.gt-wk-stats span{font-size:13px;color:rgba(255,255,255,.7)}
+.gt-wk-stats b{font-family:'Anton',sans-serif;font-size:20px;color:#fff;margin-right:5px;font-weight:400;letter-spacing:.01em}
+@media(max-width:560px){.gt-wk-stats{gap:14px}}
 </style></head><body>
 <div class="hero">
 <span class="badge">BNI Premiere · In-Person · CA Santa Clara</span>
@@ -123,6 +141,17 @@ transition:transform .12s ease,box-shadow .12s ease}
 <div class="lab">The Stakes</div>
 <div class="big">Winner takes the prize · Loser buys breakfast</div>
 <div class="stakes">Show up, make connections, close business — bonuses can flip the game around.</div>
+</div>
+<div class="goaltrack">
+<div class="gt-inner">
+<div class="gt-head"><span class="gt-lab">Chapter Goal · This Calendar Year</span><span class="gt-time">~3 weeks to Oct 1</span></div>
+<div class="gt-row"><span class="gt-big">$4.98M</span><span class="gt-of">closed of $6,000,000 goal</span></div>
+<div class="gt-bar"><div class="gt-fill" style="width:83%"></div><span class="gt-pct">83%</span></div>
+<div class="gt-week">
+<div class="gt-wk-lab">📈 Last week (Sep 3–9)</div>
+<div class="gt-wk-stats"><span><b>$205K</b> closed</span><span><b>32</b> referrals</span><span><b>11</b> closes</span><span><b>5</b> visitors</span></div>
+</div>
+</div>
 </div>
 <div class="wrap">
 <section class="sec"><div class="sec-lab">Live</div><div class="sec-h"><h2>Team Standings</h2><span class="note" id="ln"></span></div><div id="standings"></div></section>
