@@ -1,246 +1,162 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>BNI Power Spheres — Game Scoreboard</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Power Spheres — Champions!</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--red:#C8102E;--red2:#9E0C23;--gold:#F2B705;--ink:#141414;--paper:#fff;--mut:#6b7280;--line:#e7e7ea;--bg:#f4f5f7}
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);color:var(--ink);font-family:'Archivo','Helvetica Neue',Arial,sans-serif;-webkit-font-smoothing:antialiased}
-.disp{font-family:'Anton';font-weight:400;letter-spacing:.01em;text-transform:uppercase}
-.hero{background:var(--red);color:#fff;text-align:center;padding:34px 20px 30px;position:relative;overflow:hidden}
-.hero::after{content:"";position:absolute;right:-120px;top:-120px;width:360px;height:360px;border-radius:50%;background:rgba(255,255,255,.06)}
-.badge{display:inline-block;background:#000;color:#fff;font-weight:700;font-size:11px;letter-spacing:.22em;padding:7px 16px;border-radius:30px;text-transform:uppercase}
-.hero h1{font-family:'Anton';font-size:clamp(46px,10vw,104px);line-height:.86;margin:14px 0 6px;text-transform:uppercase}
-.hero .sub{font-weight:600;letter-spacing:.04em;opacity:.95;font-size:clamp(14px,2.4vw,20px)}
-.daterange{display:inline-block;margin-top:16px;background:var(--red2);padding:7px 18px;border-radius:30px;font-weight:700;letter-spacing:.04em}
-.northstar{background:var(--gold);color:#241c00;text-align:center;padding:22px 20px}
-.northstar .lab{font-weight:800;letter-spacing:.2em;font-size:12px;text-transform:uppercase;opacity:.7}
-.northstar .big{font-family:'Anton';font-size:clamp(26px,5vw,52px);text-transform:uppercase;margin-top:2px;line-height:1}
-.northstar .stakes{margin-top:10px;font-weight:600;font-size:14px}
-.wrap{max-width:1060px;margin:0 auto;padding:40px 20px 80px}
-.sec{margin-bottom:46px}
-.sec-lab{color:var(--red);font-weight:800;letter-spacing:.22em;font-size:12px;text-transform:uppercase}
-.sec-h{display:flex;align-items:center;gap:12px;border-bottom:3px solid var(--ink);padding-bottom:10px;margin:4px 0 22px}
-.sec-h h2{font-family:'Anton';font-size:30px;text-transform:uppercase}
-.sec-h .note{margin-left:auto;color:var(--mut);font-size:13px;font-weight:600}
-.team{background:var(--paper);border:1px solid var(--line);border-left:8px solid var(--c);border-radius:14px;padding:18px 22px;margin-bottom:14px;display:grid;grid-template-columns:64px 1fr auto;gap:18px;align-items:center;box-shadow:0 1px 0 rgba(0,0,0,.03);opacity:0;transform:translateY(12px);animation:rise .5s forwards}
-.place{font-family:'Anton';font-size:40px;text-align:center;color:var(--c)}
-.tn{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
-.tn .nm{font-family:'Anton';font-size:30px;text-transform:uppercase;line-height:1}
-.tn .tag{color:var(--mut);font-weight:600;font-size:13px}
-.cap{color:var(--mut);font-size:13px;font-weight:600;margin-top:6px}.cap b{color:var(--ink)}
-.bar{height:9px;border-radius:6px;background:#eef0f3;margin-top:12px;overflow:hidden}
-.bar i{display:block;height:100%;width:0;background:var(--c);border-radius:6px;transition:width 1.1s cubic-bezier(.2,.8,.2,1)}
-.pts{text-align:right}.pts .big{font-family:'Anton';font-size:46px;line-height:.85}
-.pts .sp{color:var(--mut);font-size:12px;font-weight:600;margin-top:4px}
-.lead .place{color:var(--gold)}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
-.card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px 18px;border-top:4px solid var(--ink);opacity:0;transform:translateY(12px);animation:rise .5s forwards}
-.card .ic{font-size:22px}.card .ct{font-weight:800;font-size:14px;margin-top:8px;letter-spacing:.01em}
-.card .ld{font-family:'Anton';font-size:24px;margin-top:8px}.card .tm{color:var(--mut);font-size:12.5px;font-weight:600;min-height:17px}
-.card .w{margin-top:11px;font-size:11px;font-weight:800;letter-spacing:.08em;color:var(--red);text-transform:uppercase}
-.rosters{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
-.ros{background:var(--paper);border:1px solid var(--line);border-radius:12px;overflow:hidden}
-.ros h3{font-family:'Anton';font-size:20px;text-transform:uppercase;padding:12px 16px;color:#fff;display:flex;justify-content:space-between;align-items:baseline}
-.ros h3 span{font-size:11px;font-weight:600;opacity:.85;font-family:'Archivo'}
-.ros ul{list-style:none}.ros li{display:flex;justify-content:space-between;gap:10px;padding:7px 16px;font-size:13.5px;border-top:1px solid #f0f1f3}
-.ros li .pr{color:var(--mut);font-size:11.5px;text-align:right}.ros li.cap{background:#fafafa}.ros li .nm b{font-weight:800}
-.foot{margin-top:46px;color:var(--mut);font-size:12.5px;text-align:center;line-height:1.8;border-top:1px solid var(--line);padding-top:22px}
-@keyframes rise{to{opacity:1;transform:none}}
-@media(max-width:560px){.team{grid-template-columns:46px 1fr}.pts{grid-column:1/-1;text-align:left;display:flex;gap:18px;align-items:baseline}}
-.score-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));gap:10px}
-.score{background:var(--paper);border:1px solid var(--line);border-left:5px solid var(--gold);border-radius:12px;padding:13px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px}
-.score.neg{border-left-color:var(--red)}
-.score .a{font-weight:700;font-size:13.5px;line-height:1.2}
-.score .a small{display:block;color:var(--mut);font-weight:600;font-size:11px;margin-top:3px}
-.score .v{font-family:'Anton';font-size:30px;color:var(--ink);white-space:nowrap}
-.score.neg .v{color:var(--red)}
-.bonusband{margin-top:16px;background:var(--ink);color:#fff;border-radius:14px;padding:22px 24px}
-.bonusband .bt{font-family:'Anton';font-size:23px;text-transform:uppercase}
-.bonusband p{color:#dadada;font-size:14px;margin-top:7px;font-weight:500;line-height:1.5}
-.bonusband b{color:var(--gold)}
-.bonusband .cats{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-.bonusband .cats span{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);padding:6px 13px;border-radius:30px;font-size:12.5px;font-weight:600}
-.stand-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.stand-card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
-.stand-card.up{border-top:4px solid var(--gold)}.stand-card.down{border-top:4px solid var(--red)}
-.stand-card h4{font-family:'Anton';font-size:20px;text-transform:uppercase;margin-bottom:8px}
-.stand-card ul{list-style:none}
-.stand-card li{display:flex;align-items:center;gap:11px;padding:9px 0;border-top:1px solid #f0f1f3;font-size:14px}
-.stand-card li:first-child{border-top:none}
-.stand-card .chip{width:11px;height:11px;border-radius:50%;flex:none}
-.stand-card .nm{font-weight:800}.stand-card .why{color:var(--mut);font-size:12px}
-.stand-card .pv{margin-left:auto;font-family:'Anton';font-size:21px}
-.stand-card.up .pv{color:#1a7a1a}.stand-card.down .pv{color:var(--red)}
-@media(max-width:560px){.stand-grid{grid-template-columns:1fr}}
-.bon-card{background:var(--paper);border:1px solid var(--line);border-radius:14px;overflow:hidden}
-.bon-note{padding:14px 18px;color:var(--mut);font-size:13px;border-bottom:1px solid var(--line)}
-.bon-row{display:flex;align-items:center;gap:12px;padding:12px 18px;border-top:1px solid #f0f1f3;font-size:14px}
-.bon-row:first-child{border-top:none}
-.bon-row .chip{width:11px;height:11px;border-radius:50%;flex:none}
-.bon-row .cat{font-weight:800;min-width:132px}
-.bon-row .win{font-weight:700}
-.bon-row .det{color:var(--mut);font-size:12px}
-.bon-row .pv{margin-left:auto;font-family:'Anton';font-size:20px;color:#1a7a1a}
-.bon-row .pv.zero{color:var(--mut)}
-@media(max-width:560px){.bon-row{flex-wrap:wrap}.bon-row .cat{min-width:0}}
-.rosterbtn{display:inline-flex;align-items:center;gap:9px;margin-top:16px;background:#fff;color:var(--red);
-font-weight:800;font-size:15px;text-decoration:none;padding:12px 22px;border-radius:999px;box-shadow:0 4px 14px rgba(0,0,0,.18);
-transition:transform .12s ease,box-shadow .12s ease}
-.rosterbtn:hover{transform:translateY(-1px);box-shadow:0 7px 20px rgba(0,0,0,.25)}
-.rosterbtn .arw{font-family:'Anton';font-size:17px}
-.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.stat-card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
-.stat-card h4{font-family:'Anton';font-size:17px;text-transform:uppercase;margin-bottom:10px;letter-spacing:.02em}
-.stat-card ol{list-style:none;counter-reset:s}
-.stat-card li{display:flex;align-items:center;gap:10px;padding:7px 0;border-top:1px solid #f0f1f3;font-size:14px;counter-increment:s}
-.stat-card li:first-child{border-top:none}
-.stat-card li::before{content:counter(s);font-family:'Anton';font-size:13px;color:var(--mut);width:16px}
-.stat-card .chip{width:10px;height:10px;border-radius:50%;flex:none}
-.stat-card .nm{font-weight:700}
-.stat-card .val{margin-left:auto;font-family:'Anton';font-size:18px}
-@media(max-width:640px){.stats-grid{grid-template-columns:1fr}}
+body{font-family:'DM Sans',sans-serif;color:#141414;background:#faf7ef}
+.hero{position:relative;background:linear-gradient(160deg,#1a1400,#3a2c00 55%,#C8961E);color:#fff;text-align:center;padding:60px 20px 54px;overflow:hidden}
+.hero .conf{position:absolute;inset:0;pointer-events:none;opacity:.5}
+.hero .conf i{position:absolute;width:9px;height:14px;border-radius:2px;animation:fall linear infinite}
+@keyframes fall{0%{transform:translateY(-40px) rotate(0)}100%{transform:translateY(760px) rotate(360deg)}}
+.trophy{font-size:60px;line-height:1;filter:drop-shadow(0 4px 10px rgba(0,0,0,.35))}
+.hero .lab{margin-top:10px;font-weight:800;letter-spacing:.34em;font-size:13px;text-transform:uppercase;color:#ffe9ad}
+.hero h1{font-family:'Anton';font-size:clamp(38px,9vw,82px);line-height:.9;margin-top:8px;text-transform:uppercase;letter-spacing:.01em}
+.hero .champ{color:#fff}
+.hero .score{margin-top:16px;display:inline-flex;align-items:baseline;gap:10px;background:rgba(0,0,0,.28);padding:10px 22px;border-radius:40px}
+.hero .score b{font-family:'Anton';font-size:30px}
+.hero .score span{font-size:13px;letter-spacing:.05em;opacity:.8;text-transform:uppercase}
+.hero .sub{margin-top:18px;font-size:15px;color:rgba(255,255,255,.82);max-width:520px;margin-left:auto;margin-right:auto;line-height:1.5}
+.wrap{max-width:820px;margin:0 auto;padding:40px 20px 64px}
+.sec-lab{color:#C8102E;font-weight:800;letter-spacing:.16em;font-size:12px;text-transform:uppercase}
+.sec-h{font-family:'Anton';font-size:28px;text-transform:uppercase;margin:5px 0 18px;letter-spacing:.01em}
+.section{margin-bottom:40px}
+/* action cards */
+.act{border-radius:18px;padding:26px 26px;margin-bottom:18px;position:relative;overflow:hidden}
+.act.win{background:linear-gradient(135deg,#fff8e6,#fff);border:2px solid #C8961E}
+.act.lose{background:linear-gradient(135deg,#eef3f9,#fff);border:2px solid #1F4E79}
+.act .a-ico{font-size:34px}
+.act h3{font-family:'Anton';font-size:24px;text-transform:uppercase;margin:8px 0 6px;letter-spacing:.01em}
+.act.win h3{color:#9a7212}
+.act.lose h3{color:#1F4E79}
+.act p{font-size:15px;line-height:1.6;color:#3a3a3a}
+.act .tag{display:inline-block;margin-top:12px;font-weight:800;font-size:12px;letter-spacing:.08em;text-transform:uppercase;padding:7px 15px;border-radius:30px}
+.act.win .tag{background:#C8961E;color:#fff}
+.act.lose .tag{background:#1F4E79;color:#fff}
+/* podium */
+.pod-row{display:flex;align-items:center;gap:12px;padding:11px 0;border-top:1px solid #ececec}
+.pod-row:first-child{border-top:none}
+.pod-medal{font-size:22px;width:26px;text-align:center}
+.pod-name{font-weight:800;font-size:15px;width:135px}
+.pod-bar{flex:1;height:12px;background:#eee;border-radius:8px;overflow:hidden}
+.pod-bar i{display:block;height:100%;background:var(--tc);border-radius:8px}
+.pod-pts{font-family:'Anton';font-size:19px;width:56px;text-align:right}
+/* recognition */
+.rec{display:flex;align-items:center;gap:12px;padding:11px 0;border-top:1px solid #ececec}
+.rec:first-child{border-top:none}
+.rec-rank{font-family:'Anton';font-size:16px;color:#b8b8b8;width:20px}
+.rec-dot{width:10px;height:10px;border-radius:50%;flex:none}
+.rec-body{flex:1;display:flex;flex-direction:column}
+.rec-name{font-weight:800;font-size:15px}
+.rec-sub{font-size:12px;color:#777}
+.rec-pts{font-family:'Anton';font-size:20px}
+.mvp{background:#141414;color:#fff;border-radius:18px;padding:24px 26px;margin-bottom:22px;display:flex;align-items:center;gap:18px}
+.mvp .m-ico{font-size:44px}
+.mvp .m-lab{color:#C8961E;font-weight:800;letter-spacing:.16em;font-size:11px;text-transform:uppercase}
+.mvp .m-name{font-family:'Anton';font-size:30px;line-height:1;margin:3px 0}
+.mvp .m-sub{font-size:13px;color:rgba(255,255,255,.7)}
+.mvp .m-pts{margin-left:auto;text-align:right}
+.mvp .m-pts b{font-family:'Anton';font-size:34px;color:#C8961E}
+.mvp .m-pts span{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.6)}
+/* gold roster */
+.gm-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.gm{background:#fff;border:1.5px solid #eadfbe;border-radius:12px;padding:12px 15px;display:flex;align-items:center;justify-content:space-between}
+.gm.cap{background:linear-gradient(135deg,#fff6df,#fff);border-color:#C8961E}
+.gm-name{font-weight:700;font-size:14px}
+.gm-pts{font-family:'Anton';font-size:17px;color:#9a7212}
+.cap-tag{font-size:11px;font-weight:800;color:#9a7212;letter-spacing:.04em}
+.foot{background:#141414;color:rgba(255,255,255,.6);text-align:center;padding:26px 20px;font-size:13px}
+.foot b{color:#fff}
+.foot .dates{margin-top:8px;font-size:12px}
+@media(max-width:560px){.gm-grid{grid-template-columns:1fr}.pod-name{width:100px}.mvp{flex-wrap:wrap}}
 
-.finish-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:16px}
-.finish-card{border:2px solid var(--line,#e2e5ea);border-radius:14px;padding:18px 16px;text-align:center;background:#fff}
-.finish-card .fc-date{font-family:'Anton',sans-serif;font-size:30px;color:var(--red);letter-spacing:.02em;line-height:1}
-.finish-card .fc-lab{font-weight:800;font-size:15px;margin-top:8px}
-.finish-card .fc-sub{color:#6B7280;font-size:12px;margin-top:5px;line-height:1.4}
-.prize-band{border:2px solid #C8961E;border-radius:14px;padding:16px 20px;background:linear-gradient(180deg,#fffdf6,#fff)}
-.prize-band .pb-lab{font-weight:800;font-size:15px;color:#9a7212;letter-spacing:.02em}
-.prize-band p{margin-top:6px;font-size:14px;line-height:1.55;color:#333}
-@media(max-width:640px){.finish-grid{grid-template-columns:1fr}}
-
-.goaltrack{background:#f7f8fa;color:#141414;padding:26px 20px;border-bottom:1px solid #e2e5ea}
-.gt-inner{max-width:760px;margin:0 auto}
-.gt-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px}
-.gt-lab{font-weight:800;letter-spacing:.14em;font-size:12px;text-transform:uppercase;color:#C8961E}
-.gt-time{font-size:12px;color:#6B7280;font-weight:600}
-.gt-row{display:flex;align-items:baseline;gap:12px;margin-top:8px;flex-wrap:wrap}
-.gt-big{font-family:'Anton',sans-serif;font-size:clamp(40px,8vw,64px);line-height:.95;color:#141414}
-.gt-of{font-size:14px;color:#6B7280}
-.gt-bar{position:relative;height:26px;background:#e6e8ec;border-radius:20px;margin-top:14px;overflow:hidden}
-.gt-fill{position:absolute;left:0;top:0;height:100%;background:linear-gradient(90deg,#2E7D32,#C8961E);border-radius:20px}
-.gt-pct{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-weight:800;font-size:13px;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.4)}
-.gt-week{margin-top:18px;border-top:1px solid #e2e5ea;padding-top:14px}
-.gt-wk-lab{font-weight:800;font-size:13px;color:#141414;margin-bottom:8px}
-.gt-wk-stats{display:flex;gap:22px;flex-wrap:wrap}
-.gt-wk-stats span{font-size:13px;color:#6B7280}
-.gt-wk-stats b{font-family:'Anton',sans-serif;font-size:20px;color:#141414;margin-right:5px;font-weight:400;letter-spacing:.01em}
-@media(max-width:560px){.gt-wk-stats{gap:14px}}
+.topnav{position:sticky;top:0;z-index:50;background:rgba(20,16,0,.96);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:space-between;padding:12px 20px;flex-wrap:wrap;gap:8px}
+.nav-brand{color:#C8961E;font-weight:800;font-size:15px;letter-spacing:.03em}
+.nav-links{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.nav-links a{color:rgba(255,255,255,.8);text-decoration:none;font-size:13px;font-weight:700;letter-spacing:.02em}
+.nav-links a:hover{color:#fff}
+.nav-links a:last-child{background:#C8961E;color:#141414;padding:7px 14px;border-radius:30px}
+.nav-links a:last-child:hover{background:#e0aa2a;color:#141414}
+.bd-intro{font-size:14px;line-height:1.6;color:#3a3a3a;margin-bottom:16px}
+.bd-wrap{overflow-x:auto}
+.bd{width:100%;border-collapse:collapse;font-size:14px;min-width:520px}
+.bd th{text-align:right;font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:#888;padding:8px 10px;border-bottom:2px solid #141414}
+.bd th:first-child{text-align:left}
+.bd td{text-align:right;padding:11px 10px;border-bottom:1px solid #ececec}
+.bd .bd-team{text-align:left;font-weight:800;border-left:4px solid var(--tc);padding-left:12px}
+.bd .bd-tot{font-family:'Anton';font-size:18px}
+.bd-note{margin-top:14px;font-size:13px;line-height:1.6;color:#666;background:#fff;border-left:3px solid #C8961E;padding:12px 16px;border-radius:0 8px 8px 0}
+html{scroll-behavior:smooth}
 </style></head><body>
-<div class="hero">
-<span class="badge">BNI Premiere · In-Person · CA Santa Clara</span>
-<h1>Power Spheres<br>Summer Game</h1>
-<div class="sub">4 Teams · Chapter Showdown</div>
-<div class="daterange" id="dr">—</div>
-<a class="rosterbtn" id="rosterBtn" href="#" target="_blank" rel="noopener">📇 Looking for our full roster members <span class="arw">→</span></a>
+<nav class="topnav">
+<span class="nav-brand">🏆 Power Spheres</span>
+<div class="nav-links">
+<a href="#standings">Standings</a>
+<a href="#breakdown">Team Breakdown</a>
+<a href="https://bnipremierchapter.com/members" target="_blank" rel="noopener">📇 Chapter Roster →</a>
 </div>
-<div class="northstar">
-<div class="lab">The Stakes</div>
-<div class="big">Winner takes the prize · Loser buys breakfast</div>
-<div class="stakes">Show up, make connections, close business — bonuses can flip the game around.</div>
-</div>
-<div class="goaltrack">
-<div class="gt-inner">
-<div class="gt-head"><span class="gt-lab">Chapter Goal · This Calendar Year</span><span class="gt-time">~3 weeks to Oct 1</span></div>
-<div class="gt-row"><span class="gt-big">$4.98M</span><span class="gt-of">closed of $6,000,000 goal</span></div>
-<div class="gt-bar"><div class="gt-fill" style="width:83%"></div><span class="gt-pct">83%</span></div>
-<div class="gt-week">
-<div class="gt-wk-lab">📈 Last week (Sep 3–9)</div>
-<div class="gt-wk-stats"><span><b>$205K</b> closed</span><span><b>32</b> referrals</span><span><b>11</b> closes</span><span><b>5</b> visitors</span></div>
-</div>
-</div>
-</div>
+</nav>
+<header class="hero">
+<div class="conf" id="conf"></div>
+<div class="trophy">🏆</div>
+<div class="lab">Power Spheres Summer Game · Champions</div>
+<h1>Congratulations<br><span class="champ">Gold Medal!</span></h1>
+<div class="score"><b>1,590</b><span>points · Chapter Champions</span></div>
+<p class="sub">From June to September, you showed up, passed referrals, brought visitors, and closed business like nobody else. Captain Maria Nunez and the whole Gold Medal squad — this one's yours. 🎉</p>
+</header>
 <div class="wrap">
-<section class="sec"><div class="sec-lab">Live</div><div class="sec-h"><h2>Team Standings</h2><span class="note" id="ln"></span></div><div id="standings"></div></section>
-<section class="sec"><div class="sec-lab">August Bonuses · Locked</div><div class="sec-h"><h2>Leaderboard</h2><span class="note">August bonuses — +20 to each category winner</span></div><div class="grid" id="leaders"></div></section>
-<section class="sec"><div class="sec-lab">The Rules</div><div class="sec-h"><h2>How Scoring Works</h2><span class="note">Every point comes from the weekly PALMS report</span></div>
-<div class="score-grid">
-<div class="score neg"><div class="a">Absence, no sub<small>the only penalty</small></div><div class="v">&minus;15</div></div>
-<div class="score"><div class="a">Referral given<small>RGI + RGO</small></div><div class="v">+10</div></div>
-<div class="score"><div class="a">Visitor brought<small>app-registered</small></div><div class="v">+10</div></div>
-<div class="score"><div class="a">TYFCB<small>any close that week</small></div><div class="v">+10</div></div>
+
+<div class="section">
+<div class="act win">
+<div class="a-ico">🍽️</div>
+<h3>Winning Team — Claim Your Prize!</h3>
+<p>Gold Medal, it's time to celebrate together. <b>Pick a date for a team lunch or dinner</b> and spend your prize on a meal with the whole squad — you earned it. Coordinate with Maria and get it on the calendar!</p>
+<span class="tag">Set your date this week</span>
 </div>
-<div class="bonusband"><div class="bt">Bonus Points &mdash; where it gets won</div>
-<p>The standout in each category earns a bonus for their <b>whole team</b>: <b>+20 every month</b> plus a <b>+50 grand bonus</b> at the finish. Bonuses are bigger than any single act, so a consistent leader can flip the board.</p>
-<div class="cats"><span>📅 Best Attendance</span><span>🔥 Most Referrals</span><span>💰 Most TYFCB</span><span>👥 Most Visitors</span></div>
-</div></section>
-<section class="sec"><div class="sec-lab">The Lineups</div><div class="sec-h"><h2>Rosters</h2><span class="note" id="rc"></span></div><div class="rosters" id="rosters"></div></section>
-<section class="sec"><div class="sec-lab">The Finish Line</div><div class="sec-h"><h2>How It Ends</h2><span class="note">Key dates &amp; the prize</span></div>
-<div class="finish-grid">
-<div class="finish-card"><div class="fc-date">SEP 16</div><div class="fc-lab">Game ends</div><div class="fc-sub">Final PALMS pull &mdash; last chance to score</div></div>
-<div class="finish-card"><div class="fc-date">SEP 23</div><div class="fc-lab">Winner announced</div><div class="fc-sub">Standings go final &amp; the champion is crowned</div></div>
-<div class="finish-card"><div class="fc-date">SEP 30</div><div class="fc-lab">Losing team buys breakfast</div><div class="fc-sub">The whole chapter eats on them</div></div>
+<div class="act lose">
+<div class="a-ico">🥐</div>
+<h3>Blue Bones — Breakfast Is On You</h3>
+<p>Tough game, but a deal's a deal! As the fourth-place team, <b>Blue Bones brings breakfast for the whole chapter next week.</b> Coordinate with Captain Jeannette and let's eat well. 😄</p>
+<span class="tag">Breakfast next meeting</span>
 </div>
-<div class="prize-band"><div class="pb-lab">🏆 The Prize &mdash; Chapter Vote</div>
-<p>The chapter voted, and the majority chose to <b>put the winnings back into the pot</b> &mdash; funding future chapter events and upgrades. A win for everyone.</p>
-</div></section>
-<section class="sec"><div class="sec-lab">The Movers</div><div class="sec-h"><h2>Who's Driving It</h2><span class="note">Season to date</span></div>
-<div class="stats-grid">
-<div class="stat-card"><h4>🔥 Most Referrals (Sept wk1)</h4><ol id="stEvents"></ol></div>
-<div class="stat-card"><h4>🔥 Most Referrals</h4><ol id="stRefs"></ol></div>
-<div class="stat-card"><h4>💰 Most Closes</h4><ol id="stClos"></ol></div>
-</div></section>
-<section class="sec"><div class="sec-lab">Standouts</div><div class="sec-h"><h2>Standouts</h2><span class="note">Who moved the needle</span></div>
-<div class="stand-grid">
-<div class="stand-card up"><h4>🔥 Carried Their Team</h4><ul id="topPts"></ul></div>
-<div class="stand-card down"><h4>📉 Absence Watch</h4><ul id="negPts"></ul></div>
-</div></section>
 </div>
+
+<div class="section" id="standings">
+<div class="sec-lab">Final Standings</div><div class="sec-h">How It Finished</div>
+<div class="pod-row" style="--tc:#C8961E"><span class="pod-medal">🥇</span><span class="pod-name">Gold Medal</span><span class="pod-bar"><i style="width:100%"></i></span><span class="pod-pts">1,590</span></div><div class="pod-row" style="--tc:#C8102E"><span class="pod-medal">🥈</span><span class="pod-name">Red Rocks</span><span class="pod-bar"><i style="width:69%"></i></span><span class="pod-pts">1,105</span></div><div class="pod-row" style="--tc:#2E7D32"><span class="pod-medal">🥉</span><span class="pod-name">Green Goddess</span><span class="pod-bar"><i style="width:51%"></i></span><span class="pod-pts">820</span></div><div class="pod-row" style="--tc:#1F4E79"><span class="pod-medal">🏅</span><span class="pod-name">Blue Bones</span><span class="pod-bar"><i style="width:36%"></i></span><span class="pod-pts">580</span></div>
+</div>
+
+<div class="section" id="breakdown">
+<div class="sec-lab">The Numbers</div><div class="sec-h">Points Recap &amp; Team Breakdown</div>
+<p class="bd-intro">Every point came from four things — a referral given (+10), a visitor brought (+10), TYFCB reported (+10), and a missed meeting with no sub (&minus;15) — plus <b>+20 monthly bonuses</b> for leading a category. Here's how the four teams stacked up across the whole game:</p>
+<div class="bd-wrap"><table class="bd">
+<tr><th>Team</th><th>Refs</th><th>Closes</th><th>Vis</th><th>Missed</th><th>Activity</th><th>Bonus</th><th>Total</th></tr>
+<tr style="--tc:#C8961E"><td class="bd-team">🥇 Gold Medal</td><td>115</td><td>39</td><td>11</td><td>12</td><td>1,470</td><td>+120</td><td class="bd-tot">1,590</td></tr>
+<tr style="--tc:#C8102E"><td class="bd-team">🥈 Red Rocks</td><td>69</td><td>36</td><td>13</td><td>9</td><td>1,045</td><td>+60</td><td class="bd-tot">1,105</td></tr>
+<tr style="--tc:#2E7D32"><td class="bd-team">🥉 Green Goddess</td><td>63</td><td>27</td><td>8</td><td>12</td><td>800</td><td>+20</td><td class="bd-tot">820</td></tr>
+<tr style="--tc:#1F4E79"><td class="bd-team">🏅 Blue Bones</td><td>30</td><td>25</td><td>18</td><td>14</td><td>520</td><td>+60</td><td class="bd-tot">580</td></tr>
+</table></div>
+<div class="bd-note">Referrals were the game's biggest engine — Gold's 115 referrals and 39 closes powered the win. Blue led on visitors (18) but lost the most ground to missed meetings (14 = &minus;210 points). Monthly bonuses stayed close: Gold +120, Red +60, Blue +60, Green +20.</div>
+</div>
+
+<div class="section">
+<div class="sec-lab">Recognition</div><div class="sec-h">Game MVP</div>
+<div class="mvp"><div class="m-ico">👑</div><div><div class="m-lab">Most Valuable Player</div><div class="m-name">Maria Nunez</div><div class="m-sub">Gold Medal · 30 referrals, 4 closes, 4 visitors</div></div><div class="m-pts"><b>380</b><span>points</span></div></div>
+<div class="sec-lab" style="margin-top:6px">Top 6 Point-Earners</div><div class="sec-h" style="font-size:22px">Who Drove the Game</div>
+<div class="rec"><span class="rec-rank">1</span><span class="rec-dot" style="background:#C8961E"></span><div class="rec-body"><span class="rec-name">Maria Nunez</span><span class="rec-sub">Gold Medal · 30 referrals, 4 closes, 4 visitors</span></div><span class="rec-pts">380</span></div><div class="rec"><span class="rec-rank">2</span><span class="rec-dot" style="background:#C8102E"></span><div class="rec-body"><span class="rec-name">Colin Clancy</span><span class="rec-sub">Red Rocks · 21 referrals, 3 closes, 2 visitors</span></div><span class="rec-pts">260</span></div><div class="rec"><span class="rec-rank">3</span><span class="rec-dot" style="background:#C8961E"></span><div class="rec-body"><span class="rec-name">Sean McCarthy</span><span class="rec-sub">Gold Medal · 14 referrals, 4 closes, 1 visitors</span></div><span class="rec-pts">190</span></div><div class="rec"><span class="rec-rank">4</span><span class="rec-dot" style="background:#C8102E"></span><div class="rec-body"><span class="rec-name">Bethany Black</span><span class="rec-sub">Red Rocks · 11 referrals, 3 closes, 4 visitors</span></div><span class="rec-pts">180</span></div><div class="rec"><span class="rec-rank">5</span><span class="rec-dot" style="background:#C8961E"></span><div class="rec-body"><span class="rec-name">Phil Lonardo</span><span class="rec-sub">Gold Medal · 11 referrals, 3 closes, 1 visitors</span></div><span class="rec-pts">150</span></div><div class="rec"><span class="rec-rank">6</span><span class="rec-dot" style="background:#C8961E"></span><div class="rec-body"><span class="rec-name">Roxanne Salazar</span><span class="rec-sub">Gold Medal · 12 referrals, 3 closes, 1 visitors</span></div><span class="rec-pts">145</span></div>
+</div>
+
+<div class="section">
+<div class="sec-lab">The Champions</div><div class="sec-h">Gold Medal Roster</div>
+<div class="gm-grid"><div class="gm cap"><span class="gm-name">Maria Nunez</span><span class=cap-tag>★ Captain</span></div><div class="gm"><span class="gm-name">Sean McCarthy</span><span class=gm-pts>190</span></div><div class="gm"><span class="gm-name">Phil Lonardo</span><span class=gm-pts>150</span></div><div class="gm"><span class="gm-name">Roxanne Salazar</span><span class=gm-pts>145</span></div><div class="gm"><span class="gm-name">Denise Artache</span><span class=gm-pts>110</span></div><div class="gm"><span class="gm-name">John Jorgensen</span><span class=gm-pts>85</span></div><div class="gm"><span class="gm-name">Shannon Sevor</span><span class=gm-pts>75</span></div><div class="gm"><span class="gm-name">Jason Smith</span><span class=gm-pts>70</span></div><div class="gm"><span class="gm-name">Marie Zandian</span><span class=gm-pts>65</span></div><div class="gm"><span class="gm-name">Clifford Shaw</span><span class=gm-pts>50</span></div><div class="gm"><span class="gm-name">Shawna Rodriguez</span><span class=gm-pts>50</span></div><div class="gm"><span class="gm-name">Ralph Gomez</span><span class=gm-pts>40</span></div><div class="gm"><span class="gm-name">Orlando Nevarez</span><span class=gm-pts>5</span></div><div class="gm"><span class="gm-name">Rene Martinez</span><span class=gm-pts>5</span></div></div>
+</div>
+
+</div>
+<footer class="foot">
+<b>BNI Premiere (In-Person)</b> · Power Spheres Summer Game 2026
+<div class="dates">Game ended Sept 16 · Winner announced Sept 23 · Prize: a team meal for the champions 🥂</div>
+</footer>
 <script>
-const D={"updated": "September 9, 2026", "week": "Through Sept 9 · one week of play left · game ends Sept 16", "endDate": "2026-09-15", "teams": [{"code": "Red", "name": "Red Rocks", "tag": "Builders & Bankers", "color": "#C8102E", "captain": "Colin Clancy", "members": 14, "roster": [{"name": "Colin Clancy", "prof": "Residential Real Estate", "contrib": 0, "cap": true}, {"name": "Joseph Barghouthi", "prof": "Solar", "contrib": 0, "cap": false}, {"name": "Bethany Black", "prof": "Group Benefits", "contrib": 0, "cap": false}, {"name": "Mike Caulkins", "prof": "Financial Advisor", "contrib": 0, "cap": false}, {"name": "Edward Ciccarelli", "prof": "General Contractor", "contrib": 0, "cap": false}, {"name": "Hubert Gotuaco", "prof": "Merchant Services", "contrib": 0, "cap": false}, {"name": "Felipe Miguel Mejia", "prof": "Plumbing", "contrib": 0, "cap": false}, {"name": "David Nasseri", "prof": "Auto Repair", "contrib": 0, "cap": false}, {"name": "Tom Pavicic", "prof": "Life & Disability Insurance", "contrib": 0, "cap": false}, {"name": "Luis Ramos", "prof": "Insulation", "contrib": 0, "cap": false}, {"name": "Mario Renteria", "prof": "Residential Roofing", "contrib": 0, "cap": false}, {"name": "Bryan Russell", "prof": "Residential Mortgages", "contrib": 0, "cap": false}, {"name": "Sailosi Taunaholo", "prof": "Electrician", "contrib": 0, "cap": false}, {"name": "John Wheeler", "prof": "Property & Casualty", "contrib": 0, "cap": false}], "activity": 1045, "bonus": 60}, {"code": "Gold", "name": "Gold Medal", "tag": "Home & Senior Pros", "color": "#C8961E", "captain": "Maria Nunez", "members": 14, "roster": [{"name": "Maria Nunez", "prof": "Carpet & Upholstery Cleaning", "contrib": 0, "cap": true}, {"name": "Denise Artache", "prof": "Painter & Decorator", "contrib": 0, "cap": false}, {"name": "Ralph Gomez", "prof": "Garage Doors", "contrib": 0, "cap": false}, {"name": "John Jorgensen", "prof": "Window Treatments", "contrib": 0, "cap": false}, {"name": "Phil Lonardo", "prof": "Professional Organizer", "contrib": 0, "cap": false}, {"name": "Rene Martinez", "prof": "HVAC", "contrib": 0, "cap": false}, {"name": "Sean McCarthy", "prof": "Handyman", "contrib": 0, "cap": false}, {"name": "Orlando Nevarez", "prof": "Moving Company", "contrib": 0, "cap": false}, {"name": "Shawna Rodriguez", "prof": "Aging Life Care", "contrib": 0, "cap": false}, {"name": "Roxanne Salazar", "prof": "Senior Living Placement", "contrib": 0, "cap": false}, {"name": "Shannon Sevor", "prof": "Personal Trainer", "contrib": 0, "cap": false}, {"name": "Clifford Shaw", "prof": "In-Home Care", "contrib": 0, "cap": false}, {"name": "Jason Smith", "prof": "Estate Sales", "contrib": 0, "cap": false}, {"name": "Marie Zandian", "prof": "Restoration", "contrib": 0, "cap": false}], "activity": 1470, "bonus": 120}, {"code": "Green", "name": "Green Goddess", "tag": "Marketing, Media & Growth", "color": "#2E7D32", "captain": "Elliot Foad", "members": 14, "roster": [{"name": "Elliot Foad", "prof": "Chiropractor", "contrib": 0, "cap": true}, {"name": "Marcus Araiza", "prof": "Commercial Photographer", "contrib": 0, "cap": false}, {"name": "Angela Cearns", "prof": "IT Consultants", "contrib": 0, "cap": false}, {"name": "Stephen Hartman", "prof": "Sales Training / Coach", "contrib": 0, "cap": false}, {"name": "John Jussen", "prof": "Marketing Consultant", "contrib": 0, "cap": false}, {"name": "Thi Kelley", "prof": "Funeral Planning", "contrib": 0, "cap": false}, {"name": "Enrique Ruiz de Luzuriaga", "prof": "Sign Company", "contrib": 0, "cap": false}, {"name": "Keith Nisby", "prof": "IT Consultants", "contrib": 0, "cap": false}, {"name": "Daisy Pineda", "prof": "Web Development", "contrib": 0, "cap": false}, {"name": "Elizabeth Popova", "prof": "Digital Marketing", "contrib": 0, "cap": false}, {"name": "Sonia Shah", "prof": "Baker", "contrib": 0, "cap": false}, {"name": "Jay Shergill", "prof": "Virtual Assistant", "contrib": 0, "cap": false}, {"name": "Aman Thakral", "prof": "CRM & ERP Software", "contrib": 0, "cap": false}, {"name": "Vijay Ubhayaker", "prof": "Printer", "contrib": 0, "cap": false}], "activity": 800, "bonus": 20}, {"code": "Blue", "name": "Blue Bones", "tag": "Law & Professional", "color": "#1F4E79", "captain": "Jeannette Marsala", "members": 14, "roster": [{"name": "Jeannette Marsala", "prof": "Estate Planning Law", "contrib": 0, "cap": true}, {"name": "Michael Balistreri", "prof": "Payroll Service", "contrib": 0, "cap": false}, {"name": "Melissa Buendia", "prof": "Banking Services", "contrib": 0, "cap": false}, {"name": "Angelo DeSando", "prof": "Commercial Insurance", "contrib": 0, "cap": false}, {"name": "Ramji Digumarthi", "prof": "Wills & Trusts", "contrib": 0, "cap": false}, {"name": "Jennifer Isensee", "prof": "Family Law", "contrib": 0, "cap": false}, {"name": "Casey Li", "prof": "Bookkeeping", "contrib": 0, "cap": false}, {"name": "Giti Majdy", "prof": "Business Broker", "contrib": 0, "cap": false}, {"name": "Lino Martire", "prof": "Real Estate Law", "contrib": 0, "cap": false}, {"name": "Michael McIlrath", "prof": "Reverse Mortgages", "contrib": 0, "cap": false}, {"name": "Robert Min", "prof": "Pensions", "contrib": 0, "cap": false}, {"name": "Francie Schildhauer", "prof": "Legal Service Plan", "contrib": 0, "cap": false}, {"name": "Linda Tang", "prof": "Pet Shop", "contrib": 0, "cap": false}, {"name": "Ken Wong", "prof": "Business Consultant", "contrib": 0, "cap": false}], "activity": 520, "bonus": 60}], "leaders": [{"cat": "Most Referrals", "leader": "Gold", "team": "41 in August · season leader", "icon": "🔥"}, {"cat": "Most TYFCB", "leader": "Red & Green", "team": "tied in August", "icon": "💰"}, {"cat": "Most Visitors", "leader": "Red", "team": "6 in August", "icon": "👥"}, {"cat": "Best Attendance", "leader": "Blue", "team": "steadiest in August", "icon": "📅"}], "standouts": {"top": [{"name": "Maria Nunez", "team": "Gold Medal", "why": "30 referrals · 4 closes · 4 visitors", "pts": 380, "color": "#C8961E"}, {"name": "Colin Clancy", "team": "Red Rocks", "why": "21 referrals · 3 closes · 2 visitors", "pts": 260, "color": "#C8102E"}, {"name": "Sean McCarthy", "team": "Gold Medal", "why": "14 referrals · 4 closes · 1 visitor", "pts": 190, "color": "#C8961E"}, {"name": "Bethany Black", "team": "Red Rocks", "why": "11 referrals · 3 closes · 4 visitors", "pts": 180, "color": "#C8102E"}, {"name": "Phil Lonardo", "team": "Gold Medal", "why": "11 referrals · 3 closes · 1 visitor", "pts": 150, "color": "#C8961E"}, {"name": "Roxanne Salazar", "team": "Gold Medal", "why": "12 referrals · 3 closes · 1 visitor", "pts": 145, "color": "#C8961E"}], "negative": [{"team": "Blue Bones", "color": "#1F4E79", "count": 14, "pts": -210}, {"team": "Gold Medal", "color": "#C8961E", "count": 12, "pts": -180}, {"team": "Green Goddess", "color": "#2E7D32", "count": 12, "pts": -180}, {"team": "Red Rocks", "color": "#C8102E", "count": 9, "pts": -135}]}, "bonuses": {"note": "August bonuses are locked. Each category winner earns +20 for their team.", "rows": [{"cat": "Most Referrals", "winner": "Gold Medal", "detail": "41 given (Green 28 · Red 22 · Blue 10)", "pts": 20, "color": "#C8961E"}, {"cat": "Most TYFCB", "winner": "Red & Green", "detail": "12 closes each — a tie", "pts": 20, "color": "#C8102E"}, {"cat": "Best Attendance", "winner": "Blue Bones", "detail": "2 absences, fewest in the chapter", "pts": 20, "color": "#1F4E79"}, {"cat": "Most Visitors", "winner": "Red Rocks", "detail": "6 brought (Gold 5 · Blue 4 · Green 3)", "pts": 20, "color": "#C8102E"}]}, "stats": {"events": [{"name": "Angela Cearns", "v": 4, "color": "#2E7D32"}, {"name": "Colin Clancy", "v": 3, "color": "#C8102E"}, {"name": "Angelo DeSando", "v": 3, "color": "#1F4E79"}, {"name": "Roxanne Salazar", "v": 2, "color": "#C8961E"}, {"name": "Phil Lonardo", "v": 2, "color": "#C8961E"}], "refs": [{"name": "Maria Nunez", "v": 30, "color": "#C8961E"}, {"name": "Colin Clancy", "v": 21, "color": "#C8102E"}, {"name": "Sean McCarthy", "v": 14, "color": "#C8961E"}, {"name": "Roxanne Salazar", "v": 12, "color": "#C8961E"}, {"name": "Bethany Black", "v": 11, "color": "#C8102E"}], "clos": [{"name": "Mike Caulkins", "v": 4, "color": "#C8102E"}, {"name": "Maria Nunez", "v": 4, "color": "#C8961E"}, {"name": "John Jussen", "v": 4, "color": "#2E7D32"}, {"name": "Sean McCarthy", "v": 4, "color": "#C8961E"}, {"name": "Ken Wong", "v": 4, "color": "#1F4E79"}]}, "roster_link": "https://bnipremierchapter.com/members", "leaderNote": "August locked — four categories in play"};
-const f=n=>n.toLocaleString();
-D.teams.forEach(t=>t.total=t.activity+t.bonus);
-const R=[...D.teams].sort((a,b)=>b.total-a.total);
-const mx=Math.max(1,...R.map(t=>t.total));
-const allzero=R.every(t=>t.total===0);
-const dd=Math.max(0,Math.ceil((new Date(D.endDate+'T09:00')-new Date())/864e5));
-document.getElementById('dr').textContent='Now → mid-September · '+dd+' days left';
-
-document.getElementById('ln').textContent=allzero?'Game starts soon':('Leader: '+R[0].name);
-const medals=['🥇','🥈','🥉','4th'];
-const S=document.getElementById('standings');
-R.forEach((t,i)=>{const lead=!allzero&&i===0;const e=document.createElement('div');
- e.className='team'+(lead?' lead':'');e.style.cssText+=`--c:${t.color};animation-delay:${i*80}ms`;
- e.innerHTML=`<div class="place">${medals[i]}</div>
- <div><div class="tn"><span class="nm">${t.name}</span><span class="tag">${t.tag}</span></div>
- <div class="cap">Captain <b>${t.captain}</b> · ${t.members} members</div>
- <div class="bar"><i data-w="${Math.round(t.total/mx*100)}"></i></div></div>
- <div class="pts"><div class="big">${f(t.total)}</div><div class="sp">${f(t.activity)} activity + ${f(t.bonus)} bonus</div></div>`;
- S.appendChild(e);});
-setTimeout(()=>document.querySelectorAll('.bar i').forEach(b=>b.style.width=b.dataset.w+'%'),220);
-const L=document.getElementById('leaders');
-D.leaders.forEach((c,i)=>{const e=document.createElement('div');e.className='card';e.style.animationDelay=(i*70)+'ms';
- e.innerHTML=`<div class="ic">${c.icon}</div><div class="ct">${c.cat}</div><div class="ld">${c.leader}</div>
- <div class="tm">${c.team||'No leader yet'}</div><div class="w">Worth +20 / mo</div>`;L.appendChild(e);});
-const RO=document.getElementById('rosters');let tot=0;
-D.teams.forEach(t=>{tot+=t.members;const rs=t.roster.slice().sort((a,b)=>(b.cap-a.cap)||(b.contrib-a.contrib));
- const e=document.createElement('div');e.className='ros';
- e.innerHTML=`<h3 style="background:${t.color}">${t.name}<span>${t.tag}</span></h3><ul>`+
- rs.map(m=>`<li class="${m.cap?'cap':''}"><span class="nm">${m.cap?'⭐ ':''}<b>${m.name}</b></span><span class="pr">${m.prof}</span></li>`).join('')+`</ul>`;
- RO.appendChild(e);});
-document.getElementById('rc').textContent=tot+' members · 4 teams';
-
-const TP=document.getElementById('topPts');
-(D.standouts.top||[]).forEach((p,i)=>{const li=document.createElement('li');
- li.innerHTML=`<span class="chip" style="background:${p.color}"></span><span><span class="nm">${p.name}</span><br><span class="why">${p.team} \u00b7 ${p.why}</span></span><span class="pv">+${p.pts}</span>`;TP.appendChild(li);});
-const NP=document.getElementById('negPts');
-(D.standouts.negative||[]).forEach(p=>{const li=document.createElement('li');
- li.innerHTML=`<span class="chip" style="background:${p.color}"></span><span><span class="nm">${p.team}</span><br><span class="why">${p.count} absence${p.count>1?'s':''} with no sub</span></span><span class="pv">${p.pts}</span>`;NP.appendChild(li);});
-
-const BR=document.getElementById('bonusRows');
-if(BR&&D.bonuses){document.getElementById('bonNote').textContent="LOCKED \u00b7 +20 per category to the winning team";
- document.getElementById('bonIntro').textContent=D.bonuses.note;
- D.bonuses.rows.forEach(b=>{const d=document.createElement('div');d.className='bon-row';
-  d.innerHTML=`<span class="chip" style="background:${b.color}"></span><span class="cat">${b.cat}</span><span><span class="win">${b.winner}</span><br><span class="det">${b.detail}</span></span><span class="pv ${b.pts?'':'zero'}">${b.pts?'+'+b.pts:'\u2014'}</span>`;
-  BR.appendChild(d);});}
-
-if(D.roster_link){var rb=document.getElementById('rosterBtn'); if(rb) rb.href=D.roster_link;}
-function fillStat(id,rows,unit){var el=document.getElementById(id); if(!el||!rows)return;
- rows.forEach(function(x){var li=document.createElement('li');
-  li.innerHTML='<span class="chip" style="background:'+x.color+'"></span><span class="nm">'+x.name+'</span><span class="val">'+x.v+'</span>';
-  el.appendChild(li);});}
-if(D.stats){fillStat('stEvents',D.stats.events);fillStat('stRefs',D.stats.refs);fillStat('stClos',D.stats.clos);}
-</script></body></html>
+var c=document.getElementById('conf'),cols=['#C8961E','#fff','#ffe08a','#e8c766'];
+for(var i=0;i<50;i++){var s=document.createElement('i');s.style.left=Math.random()*100+'%';s.style.background=cols[i%4];s.style.animationDuration=(3+Math.random()*3)+'s';s.style.animationDelay=(-Math.random()*5)+'s';c.appendChild(s);}
+</script>
+</body></html>
