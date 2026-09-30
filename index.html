@@ -1,189 +1,87 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Power Spheres — Champions!</title>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>BNI Premiere SJ — Member Directory</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'DM Sans',sans-serif;color:#141414;background:#faf7ef}
-.hero{position:relative;background:linear-gradient(160deg,#1a1400,#3a2c00 55%,#C8961E);color:#fff;text-align:center;padding:60px 20px 54px;overflow:hidden}
-.hero .conf{position:absolute;inset:0;pointer-events:none;opacity:.5}
-.hero .conf i{position:absolute;width:9px;height:14px;border-radius:2px;animation:fall linear infinite}
-@keyframes fall{0%{transform:translateY(-40px) rotate(0)}100%{transform:translateY(760px) rotate(360deg)}}
-.trophy{font-size:60px;line-height:1;filter:drop-shadow(0 4px 10px rgba(0,0,0,.35))}
-.hero .lab{margin-top:10px;font-weight:800;letter-spacing:.34em;font-size:13px;text-transform:uppercase;color:#ffe9ad}
-.hero h1{font-family:'Anton';font-size:clamp(38px,9vw,82px);line-height:.9;margin-top:8px;text-transform:uppercase;letter-spacing:.01em}
-.hero .champ{color:#fff}
-.hero .score{margin-top:16px;display:inline-flex;align-items:baseline;gap:10px;background:rgba(0,0,0,.28);padding:10px 22px;border-radius:40px}
-.hero .score b{font-family:'Anton';font-size:30px}
-.hero .score span{font-size:13px;letter-spacing:.05em;opacity:.8;text-transform:uppercase}
-.hero .sub{margin-top:18px;font-size:15px;color:rgba(255,255,255,.82);max-width:520px;margin-left:auto;margin-right:auto;line-height:1.5}
-.wrap{max-width:820px;margin:0 auto;padding:40px 20px 64px}
-.sec-lab{color:#C8102E;font-weight:800;letter-spacing:.16em;font-size:12px;text-transform:uppercase}
-.sec-h{font-family:'Anton';font-size:28px;text-transform:uppercase;margin:5px 0 18px;letter-spacing:.01em}
-.section{margin-bottom:40px}
-/* action cards */
-.act{border-radius:18px;padding:26px 26px;margin-bottom:18px;position:relative;overflow:hidden}
-.act.win{background:linear-gradient(135deg,#fff8e6,#fff);border:2px solid #C8961E}
-.act.lose{background:linear-gradient(135deg,#eef3f9,#fff);border:2px solid #1F4E79}
-.act .a-ico{font-size:34px}
-.act h3{font-family:'Anton';font-size:24px;text-transform:uppercase;margin:8px 0 6px;letter-spacing:.01em}
-.act.win h3{color:#9a7212}
-.act.lose h3{color:#1F4E79}
-.act p{font-size:15px;line-height:1.6;color:#3a3a3a}
-.act .tag{display:inline-block;margin-top:12px;font-weight:800;font-size:12px;letter-spacing:.08em;text-transform:uppercase;padding:7px 15px;border-radius:30px}
-.act.win .tag{background:#C8961E;color:#fff}
-.act.lose .tag{background:#1F4E79;color:#fff}
-/* podium */
-.pod-row{display:flex;align-items:center;gap:12px;padding:11px 0;border-top:1px solid #ececec}
-.pod-row:first-child{border-top:none}
-.pod-medal{font-size:22px;width:26px;text-align:center}
-.pod-name{font-weight:800;font-size:15px;width:135px}
-.pod-bar{flex:1;height:12px;background:#eee;border-radius:8px;overflow:hidden}
-.pod-bar i{display:block;height:100%;background:var(--tc);border-radius:8px}
-.pod-pts{font-family:'Anton';font-size:19px;width:56px;text-align:right}
-/* recognition */
-.rec{display:flex;align-items:center;gap:12px;padding:11px 0;border-top:1px solid #ececec}
-.rec:first-child{border-top:none}
-.rec-rank{font-family:'Anton';font-size:16px;color:#b8b8b8;width:20px}
-.rec-dot{width:10px;height:10px;border-radius:50%;flex:none}
-.rec-body{flex:1;display:flex;flex-direction:column}
-.rec-name{font-weight:800;font-size:15px}
-.rec-sub{font-size:12px;color:#777}
-.rec-pts{font-family:'Anton';font-size:20px}
-.mvp{background:#141414;color:#fff;border-radius:18px;padding:24px 26px;margin-bottom:22px;display:flex;align-items:center;gap:18px}
-.mvp .m-ico{font-size:44px}
-.mvp .m-lab{color:#C8961E;font-weight:800;letter-spacing:.16em;font-size:11px;text-transform:uppercase}
-.mvp .m-name{font-family:'Anton';font-size:30px;line-height:1;margin:3px 0}
-.mvp .m-sub{font-size:13px;color:rgba(255,255,255,.7)}
-.mvp .m-pts{margin-left:auto;text-align:right}
-.mvp .m-pts b{font-family:'Anton';font-size:34px;color:#C8961E}
-.mvp .m-pts span{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.6)}
-/* gold roster */
-.gm-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.gm{background:#fff;border:1.5px solid #eadfbe;border-radius:12px;padding:12px 15px;display:flex;align-items:center;justify-content:space-between}
-.gm.cap{background:linear-gradient(135deg,#fff6df,#fff);border-color:#C8961E}
-.gm-name{font-weight:700;font-size:14px}
-.gm-pts{font-family:'Anton';font-size:17px;color:#9a7212}
-.cap-tag{font-size:11px;font-weight:800;color:#9a7212;letter-spacing:.04em}
-.foot{background:#141414;color:rgba(255,255,255,.6);text-align:center;padding:26px 20px;font-size:13px}
-.foot b{color:#fff}
-.foot .dates{margin-top:8px;font-size:12px}
-@media(max-width:560px){.gm-grid{grid-template-columns:1fr}.pod-name{width:100px}.mvp{flex-wrap:wrap}}
-
-.topnav{position:sticky;top:0;z-index:50;background:rgba(20,16,0,.96);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:space-between;padding:12px 20px;flex-wrap:wrap;gap:8px}
-.nav-brand{color:#C8961E;font-weight:800;font-size:15px;letter-spacing:.03em}
-.nav-links{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
-.nav-links a{color:rgba(255,255,255,.8);text-decoration:none;font-size:13px;font-weight:700;letter-spacing:.02em}
-.nav-links a:hover{color:#fff}
-.nav-links a:last-child{background:#C8961E;color:#141414;padding:7px 14px;border-radius:30px}
-.nav-links a:last-child:hover{background:#e0aa2a;color:#141414}
-.bd-intro{font-size:14px;line-height:1.6;color:#3a3a3a;margin-bottom:16px}
-.bd-wrap{overflow-x:auto}
-.bd{width:100%;border-collapse:collapse;font-size:14px;min-width:520px}
-.bd th{text-align:right;font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:#888;padding:8px 10px;border-bottom:2px solid #141414}
-.bd th:first-child{text-align:left}
-.bd td{text-align:right;padding:11px 10px;border-bottom:1px solid #ececec}
-.bd .bd-team{text-align:left;font-weight:800;border-left:4px solid var(--tc);padding-left:12px}
-.bd .bd-tot{font-family:'Anton';font-size:18px}
-.bd-note{margin-top:14px;font-size:13px;line-height:1.6;color:#666;background:#fff;border-left:3px solid #C8961E;padding:12px 16px;border-radius:0 8px 8px 0}
-html{scroll-behavior:smooth}
-
-.goalband{background:linear-gradient(135deg,#2E7D32,#C8961E);color:#fff;text-align:center;padding:34px 20px}
-.gb-inner{max-width:640px;margin:0 auto}
-.gb-ico{font-size:40px}
-.gb-lab{font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:12px;opacity:.9;margin-top:6px}
-.gb-big{font-family:'Anton',sans-serif;font-size:clamp(30px,7vw,52px);line-height:1;margin-top:6px;text-transform:uppercase}
-.gb-num{font-family:'Anton',sans-serif;font-size:clamp(24px,5vw,36px);margin-top:14px}
-.gb-num span{display:block;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;opacity:.9;letter-spacing:.02em;margin-top:2px}
-.gb-sub{font-size:14px;line-height:1.55;opacity:.92;margin-top:12px}
-.act.next{background:linear-gradient(135deg,#f3eefb,#fff);border:2px solid #6b3fa0}
-.act.next h3{color:#5a3494}
-.act.next .tag{background:#6b3fa0;color:#fff}
+:root{--red:#CC0000;--red-dark:#990000;--black:#0f0f0f;--white:#fff;--gray:#f4f4f4;--mid:#e0e0e0;--text:#222;--light:#666}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--text);overflow-x:hidden}
+.hero{background:var(--black);color:var(--white);position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 70% 50%,rgba(204,0,0,.35),transparent 70%),radial-gradient(ellipse 40% 80% at 10% 80%,rgba(204,0,0,.15),transparent 60%)}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:40px 40px}
+.hero-content{position:relative;z-index:2;padding:34px 40px 30px;max-width:760px}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--red);color:#fff;font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;padding:6px 14px;border-radius:4px;margin-bottom:18px}
+.hero-badge::before{content:'';width:6px;height:6px;background:#fff;border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(38px,6vw,58px);letter-spacing:2px;line-height:.95;margin-bottom:10px}
+.hero h1 em{font-style:normal;color:var(--red)}
+.hero-sub{font-size:14px;color:rgba(255,255,255,.72);max-width:560px;line-height:1.55}
+.hero-cta{display:inline-block;margin-top:2px;color:#fff;font-weight:800;text-decoration:underline;white-space:nowrap}
+.hero-cta:hover{color:var(--red)}
+.hero-stats{position:absolute;right:40px;bottom:30px;z-index:2;display:flex;gap:30px}
+.stat{text-align:right}.stat-num{font-family:'Bebas Neue',sans-serif;font-size:38px;line-height:1}
+.stat-label{font-size:11px;color:rgba(255,255,255,.5);letter-spacing:1px;text-transform:uppercase}
+.controls{background:var(--white);border-bottom:2px solid var(--mid);padding:18px 40px;box-shadow:0 2px 20px rgba(0,0,0,.08);position:sticky;top:0;z-index:20}
+.controls-inner{max-width:1200px;margin:0 auto;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.search-wrap{position:relative;flex:1;min-width:200px}
+.search-wrap svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--light)}
+#search{width:100%;padding:11px 16px 11px 42px;border:2px solid var(--mid);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:14px;background:var(--gray);outline:none;transition:border-color .2s}
+#search:focus{border-color:var(--red);background:#fff}
+.filter-wrap{display:flex;gap:8px;flex-wrap:wrap}
+.filter-btn{padding:8px 14px;border:2px solid var(--mid);border-radius:6px;background:#fff;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;color:var(--light);cursor:pointer;transition:all .2s;white-space:nowrap}
+.filter-btn:hover{border-color:var(--red);color:var(--red)}.filter-btn.active{background:var(--red);border-color:var(--red);color:#fff}
+.count-badge{font-size:13px;color:var(--light);margin-left:auto;white-space:nowrap}.count-badge strong{color:var(--red);font-weight:700}
+.directory{max-width:1200px;margin:0 auto;padding:34px 40px 60px}
+.members-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+.member-card{background:#fff;border:2px solid var(--mid);border-radius:12px;padding:22px;display:flex;flex-direction:column;transition:all .22s ease;animation:fadeUp .4s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.member-card:hover{border-color:var(--red);box-shadow:0 8px 32px rgba(204,0,0,.12);transform:translateY(-2px)}
+.card-sphere{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--red);margin-bottom:10px}
+.card-name{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.5px;color:var(--black);line-height:1.1;margin-bottom:4px}
+.card-classification{font-size:13px;font-weight:600;margin-bottom:2px}
+.card-company{font-size:12px;color:var(--light);margin-bottom:16px;font-style:italic}
+.card-divider{height:1px;background:var(--mid);margin-bottom:14px}
+.card-contacts{display:flex;flex-direction:column;gap:7px;margin-bottom:16px;flex:1}
+.contact-row{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--light);text-decoration:none;transition:color .15s}
+.contact-row:hover{color:var(--red)}.contact-row svg{flex-shrink:0}.contact-row span{word-break:break-all}
+.card-actions{display:flex;gap:8px;margin-top:auto}
+.btn-save{flex:1;display:flex;align-items:center;justify-content:center;gap:7px;padding:10px 14px;background:var(--red);color:#fff;border:none;border-radius:7px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:background .2s}
+.btn-save:hover{background:var(--red-dark)}.btn-save.saved{background:#2a7a2a}
+.empty-state{grid-column:1/-1;text-align:center;padding:80px 20px;color:var(--light)}.empty-state h3{font-size:20px;color:var(--text);margin:16px 0 8px}
+.footer{background:#0a0a0a;color:rgba(255,255,255,.4);text-align:center;padding:24px 40px;font-size:12px}.footer strong{color:rgba(255,255,255,.7)}
+@media(max-width:768px){.hero-content{padding:34px 20px 76px}.hero-stats{right:20px;bottom:18px;gap:18px}.stat-num{font-size:26px}.controls{padding:14px 20px}.directory{padding:22px 20px 46px}.members-grid{grid-template-columns:1fr}}
 </style></head><body>
-<nav class="topnav">
-<span class="nav-brand">🏆 Power Spheres</span>
-<div class="nav-links">
-<a href="#standings">Standings</a>
-<a href="#breakdown">Team Breakdown</a>
-<a href="https://bnipremierchapter.com/members" target="_blank" rel="noopener">📇 Chapter Roster →</a>
-</div>
-</nav>
-<header class="hero">
-<div class="conf" id="conf"></div>
-<div class="trophy">🏆</div>
-<div class="lab">Power Spheres Summer Game · Champions</div>
-<h1>Congratulations<br><span class="champ">Gold Medal!</span></h1>
-<div class="score"><b>1,590</b><span>points · Chapter Champions</span></div>
-<p class="sub">From June to September, you showed up, passed referrals, brought visitors, and closed business like nobody else. Captain Maria Nunez and the whole Gold Medal squad — this one's yours. 🎉</p>
-</header>
-<div class="goalband">
-<div class="gb-inner">
-<div class="gb-ico">🎯</div>
-<div class="gb-lab">And that's not all — the whole chapter delivered</div>
-<div class="gb-big">$6M GOAL — REACHED! 🎉</div>
-<div class="gb-num">$6,043,084 <span>closed &amp; reported this chapter year</span></div>
-<div class="gb-sub">We crossed $6,000,000 with 9 days to spare before October 1st. Every referral, every close, every one of you got us here.</div>
-</div>
-</div>
-<div class="wrap">
-
-<div class="section">
-<div class="act win">
-<div class="a-ico">🍽️</div>
-<h3>Winning Team — Claim Your Prize!</h3>
-<p>Gold Medal, it's time to celebrate together. <b>Pick a date for a team lunch or dinner</b> and spend your prize on a meal with the whole squad — you earned it. Coordinate with Maria and get it on the calendar!</p>
-<span class="tag">Set your date this week</span>
-</div>
-<div class="act lose">
-<div class="a-ico">🥐</div>
-<h3>Blue Bones — Breakfast Is On You</h3>
-<p>Tough game, but a deal's a deal! As the fourth-place team, <b>Blue Bones brings breakfast for the whole chapter next week.</b> Coordinate with Captain Jeannette and let's eat well. 😄</p>
-<span class="tag">Breakfast next meeting</span>
-</div>
-<div class="act next">
-<div class="a-ico">🔄</div>
-<h3>What's Next — New Leadership Incoming</h3>
-<p>Change is in the air! A fresh leadership team is stepping up to guide the chapter into its next season. Big things ahead — <b>thank you to everyone taking the reins.</b> Here's to what's coming next! 🎉</p>
-<span class="tag">Exciting changes ahead</span>
-</div>
-</div>
-
-<div class="section" id="standings">
-<div class="sec-lab">Final Standings</div><div class="sec-h">How It Finished</div>
-<div class="pod-row" style="--tc:#C8961E"><span class="pod-medal">🥇</span><span class="pod-name">Gold Medal</span><span class="pod-bar"><i style="width:100%"></i></span><span class="pod-pts">1,590</span></div><div class="pod-row" style="--tc:#C8102E"><span class="pod-medal">🥈</span><span class="pod-name">Red Rocks</span><span class="pod-bar"><i style="width:69%"></i></span><span class="pod-pts">1,105</span></div><div class="pod-row" style="--tc:#2E7D32"><span class="pod-medal">🥉</span><span class="pod-name">Green Goddess</span><span class="pod-bar"><i style="width:51%"></i></span><span class="pod-pts">820</span></div><div class="pod-row" style="--tc:#1F4E79"><span class="pod-medal">🏅</span><span class="pod-name">Blue Bones</span><span class="pod-bar"><i style="width:36%"></i></span><span class="pod-pts">580</span></div>
-</div>
-
-<div class="section" id="breakdown">
-<div class="sec-lab">The Numbers</div><div class="sec-h">Points Recap &amp; Team Breakdown</div>
-<p class="bd-intro">Every point came from four things — a referral given (+10), a visitor brought (+10), TYFCB reported (+10), and a missed meeting with no sub (&minus;15) — plus <b>+20 monthly bonuses</b> for leading a category. Here's how the four teams stacked up across the whole game:</p>
-<div class="bd-wrap"><table class="bd">
-<tr><th>Team</th><th>Refs</th><th>Closes</th><th>Vis</th><th>Missed</th><th>Activity</th><th>Bonus</th><th>Total</th></tr>
-<tr style="--tc:#C8961E"><td class="bd-team">🥇 Gold Medal</td><td>115</td><td>39</td><td>11</td><td>12</td><td>1,470</td><td>+120</td><td class="bd-tot">1,590</td></tr>
-<tr style="--tc:#C8102E"><td class="bd-team">🥈 Red Rocks</td><td>69</td><td>36</td><td>13</td><td>9</td><td>1,045</td><td>+60</td><td class="bd-tot">1,105</td></tr>
-<tr style="--tc:#2E7D32"><td class="bd-team">🥉 Green Goddess</td><td>63</td><td>27</td><td>8</td><td>12</td><td>800</td><td>+20</td><td class="bd-tot">820</td></tr>
-<tr style="--tc:#1F4E79"><td class="bd-team">🏅 Blue Bones</td><td>30</td><td>25</td><td>18</td><td>14</td><td>520</td><td>+60</td><td class="bd-tot">580</td></tr>
-</table></div>
-<div class="bd-note">Referrals were the game's biggest engine — Gold's 115 referrals and 39 closes powered the win. Blue led on visitors (18) but lost the most ground to missed meetings (14 = &minus;210 points). Monthly bonuses stayed close: Gold +120, Red +60, Blue +60, Green +20.</div>
-</div>
-
-<div class="section">
-<div class="sec-lab">Recognition</div><div class="sec-h">Game MVP</div>
-<div class="mvp"><div class="m-ico">👑</div><div><div class="m-lab">Most Valuable Player</div><div class="m-name">Maria Nunez</div><div class="m-sub">Gold Medal · 30 referrals, 4 closes, 4 visitors</div></div><div class="m-pts"><b>380</b><span>points</span></div></div>
-<div class="sec-lab" style="margin-top:6px">Top 6 Point-Earners</div><div class="sec-h" style="font-size:22px">Who Drove the Game</div>
-<div class="rec"><span class="rec-rank">1</span><span class="rec-dot" style="background:#C8961E"></span><div class="rec-body"><span class="rec-name">Maria Nunez</span><span class="rec-sub">Gold Medal · 30 referrals, 4 closes, 4 visitors</span></div><span class="rec-pts">380</span></div><div class="rec"><span class="rec-rank">2</span><span class="rec-dot" style="background:#C8102E"></span><div class="rec-body"><span class="rec-name">Colin Clancy</span><span class="rec-sub">Red Rocks · 21 referrals, 3 closes, 2 visitors</span></div><span class="rec-pts">260</span></div><div class="rec"><span class="rec-rank">3</span><span class="rec-dot" style="background:#C8961E"></span><div class="rec-body"><span class="rec-name">Sean McCarthy</span><span class="rec-sub">Gold Medal · 14 referrals, 4 closes, 1 visitors</span></div><span class="rec-pts">190</span></div><div class="rec"><span class="rec-rank">4</span><span class="rec-dot" style="background:#C8102E"></span><div class="rec-body"><span class="rec-name">Bethany Black</span><span class="rec-sub">Red Rocks · 11 referrals, 3 closes, 4 visitors</span></div><span class="rec-pts">180</span></div><div class="rec"><span class="rec-rank">5</span><span class="rec-dot" style="background:#C8961E"></span><div class="rec-body"><span class="rec-name">Phil Lonardo</span><span class="rec-sub">Gold Medal · 11 referrals, 3 closes, 1 visitors</span></div><span class="rec-pts">150</span></div><div class="rec"><span class="rec-rank">6</span><span class="rec-dot" style="background:#C8961E"></span><div class="rec-body"><span class="rec-name">Roxanne Salazar</span><span class="rec-sub">Gold Medal · 12 referrals, 3 closes, 1 visitors</span></div><span class="rec-pts">145</span></div>
-</div>
-
-<div class="section">
-<div class="sec-lab">The Champions</div><div class="sec-h">Gold Medal Roster</div>
-<div class="gm-grid"><div class="gm cap"><span class="gm-name">Maria Nunez</span><span class=cap-tag>★ Captain</span></div><div class="gm"><span class="gm-name">Sean McCarthy</span><span class=gm-pts>190</span></div><div class="gm"><span class="gm-name">Phil Lonardo</span><span class=gm-pts>150</span></div><div class="gm"><span class="gm-name">Roxanne Salazar</span><span class=gm-pts>145</span></div><div class="gm"><span class="gm-name">Denise Artache</span><span class=gm-pts>110</span></div><div class="gm"><span class="gm-name">John Jorgensen</span><span class=gm-pts>85</span></div><div class="gm"><span class="gm-name">Shannon Sevor</span><span class=gm-pts>75</span></div><div class="gm"><span class="gm-name">Jason Smith</span><span class=gm-pts>70</span></div><div class="gm"><span class="gm-name">Marie Zandian</span><span class=gm-pts>65</span></div><div class="gm"><span class="gm-name">Clifford Shaw</span><span class=gm-pts>50</span></div><div class="gm"><span class="gm-name">Shawna Rodriguez</span><span class=gm-pts>50</span></div><div class="gm"><span class="gm-name">Ralph Gomez</span><span class=gm-pts>40</span></div><div class="gm"><span class="gm-name">Orlando Nevarez</span><span class=gm-pts>5</span></div><div class="gm"><span class="gm-name">Rene Martinez</span><span class=gm-pts>5</span></div></div>
-</div>
-
-</div>
-<footer class="foot">
-<b>BNI Premiere (In-Person)</b> · Power Spheres Summer Game 2026
-<div class="dates">Game ended Sept 16 · Winner announced Sept 23 · Prize: a team meal for the champions 🥂</div>
-</footer>
+<header class="hero"><div class="hero-bg"></div><div class="hero-grid"></div>
+<div class="hero-content"><div class="hero-badge">BNI Premiere &middot; San Jose</div>
+<h1>Member <em>Directory</em></h1>
+<p class="hero-sub">The Power Spheres game has wrapped &mdash; congrats to Gold Medal! New leadership and a new season are on the way. Curious about the chapter? <a class="hero-cta" href="https://bnisfbay.com/ca-santa-clara-premiere/en-US/visitorregistration?chapterId=2880" target="_blank" rel="noopener">Register as a visitor &rarr;</a></p></div>
+<div class="hero-stats"><div class="stat"><div class="stat-num" id="total-count">-</div><div class="stat-label">Members</div></div>
+<div class="stat"><div class="stat-num" id="sphere-count">-</div><div class="stat-label">Spheres</div></div></div></header>
+<div class="controls"><div class="controls-inner">
+<div class="search-wrap"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+<input type="text" id="search" placeholder="Search by name, classification, company..." autocomplete="off"></div>
+<div class="filter-wrap" id="filter-wrap"><button class="filter-btn active" data-sphere="all">All</button></div>
+<div class="count-badge">Showing <strong id="showing-count">0</strong> members</div></div></div>
+<main class="directory"><div class="members-grid" id="members-grid"></div></main>
+<footer class="footer"><strong>BNI Premiere - San Jose</strong> &nbsp;&middot;&nbsp; BNI SFBay Region &nbsp;&middot;&nbsp; Meeting every Thursday</footer>
 <script>
-var c=document.getElementById('conf'),cols=['#C8961E','#fff','#ffe08a','#e8c766'];
-for(var i=0;i<50;i++){var s=document.createElement('i');s.style.left=Math.random()*100+'%';s.style.background=cols[i%4];s.style.animationDuration=(3+Math.random()*3)+'s';s.style.animationDelay=(-Math.random()*5)+'s';c.appendChild(s);}
-</script>
-</body></html>
+var MEMBERS=[{"Name": "Aman Thakral", "Classification": "CRM & ERP Software", "Contact Sphere": "Technology", "Company": "Target Integration", "Phone": "628-219-4856", "Email": "aman.thakral@targetintegration.com", "Website": ""}, {"Name": "Angela Cearns", "Classification": "IT Consultants", "Contact Sphere": "Technology", "Company": "AsKevin Inc.", "Phone": "650-733-9898", "Email": "angela@askevin.com", "Website": ""}, {"Name": "Angelo DeSando", "Classification": "Commercial Insurance", "Contact Sphere": "Finance & Insurance", "Company": "DeSando Insurance Services, LLC", "Phone": "408-268-3333", "Email": "angelo@desandoins.com", "Website": ""}, {"Name": "Bethany Black", "Classification": "Group Benefits", "Contact Sphere": "Finance & Insurance", "Company": "JD Van Nest Insurance Services", "Phone": "408-725-8777", "Email": "bethany@jdvannest.com", "Website": ""}, {"Name": "Bryan Russell", "Classification": "Residential Mortgages", "Contact Sphere": "Finance & Insurance", "Company": "Flagstar Bank", "Phone": "408-655-5835", "Email": "brussell@fontisgroup.com", "Website": ""}, {"Name": "Casey Li", "Classification": "Bookkeeping", "Contact Sphere": "Legal & Accounting", "Company": "AAA American CPA Inc", "Phone": "626-412-0604", "Email": "casey.li@aaaamericancpa.com", "Website": ""}, {"Name": "Clifford Shaw", "Classification": "In-Home Care", "Contact Sphere": "Health & Wellness", "Company": "ComForCare Home Care Central San Jose", "Phone": "669-333-3141", "Email": "cshaw@comforcare.com", "Website": ""}, {"Name": "Colin Clancy", "Classification": "Residential Real Estate Agent", "Contact Sphere": "Real Estate Services", "Company": "Colin Clancy Realtor", "Phone": "408-590-0471", "Email": "colinclancy@kw.com", "Website": ""}, {"Name": "Daisy Pineda", "Classification": "Web Development", "Contact Sphere": "Advertising & Marketing", "Company": "Kaizen Agency", "Phone": "408-710-6718", "Email": "daisy@kaizenagency.org", "Website": "kaizenagency.com"}, {"Name": "David Nasseri", "Classification": "Auto/Car Repair", "Contact Sphere": "Trades & Automotive", "Company": "Nasseri Auto Tech Auto Service", "Phone": "408-244-4777", "Email": "nasseriautotech@yahoo.com", "Website": ""}, {"Name": "Denise Artache", "Classification": "Painter - Residential", "Contact Sphere": "Construction", "Company": "Sunwest Painting", "Phone": "408-623-1603", "Email": "denise@sunwestpainting.net", "Website": ""}, {"Name": "Edward Ciccarelli", "Classification": "Builder/General Contractor", "Contact Sphere": "Construction", "Company": "Apogee Construction, Inc", "Phone": "650-203-6465", "Email": "edward@apogeec.com", "Website": ""}, {"Name": "Elizabeth Popova", "Classification": "Digital Marketing", "Contact Sphere": "Advertising & Marketing", "Company": "Plush Communications LLC", "Phone": "424-343-4281", "Email": "lizzapopova@gmail.com", "Website": ""}, {"Name": "Elliot Foad", "Classification": "Chiropractor", "Contact Sphere": "Health & Wellness", "Company": "Positive Motion Chiropractic", "Phone": "408-358-5086", "Email": "dr.foad@positivemotionhealth.com", "Website": ""}, {"Name": "Felipe Miguel Mejia", "Classification": "Plumbing", "Contact Sphere": "Construction", "Company": "Silicon Pro Service Plumbing", "Phone": "408-545-8808", "Email": "fmiguelmejia@icloud.com", "Website": ""}, {"Name": "Francie Schildhauer", "Classification": "Legal Service Plan", "Contact Sphere": "Legal & Accounting", "Company": "LegalShield", "Phone": "408-849-7386", "Email": "lifeshealingjourney@hotmail.com", "Website": ""}, {"Name": "Giti Majdy", "Classification": "Business Broker", "Contact Sphere": "Consulting", "Company": "Transworld Business Advisors", "Phone": "408-666-1387", "Email": "g.majdy@tworld.com", "Website": ""}, {"Name": "Hubert Gotuaco", "Classification": "Credit Card/Merchant Services", "Contact Sphere": "Finance & Insurance", "Company": "CC Merchant Processing", "Phone": "408-687-2518", "Email": "hubert@goassoc.com", "Website": ""}, {"Name": "Jason Smith", "Classification": "Estate Sales", "Contact Sphere": "Real Estate Services", "Company": "Blue Moon Estate Sales", "Phone": "650-274-5003", "Email": "jsmith@bluemoonestatesales.com", "Website": ""}, {"Name": "Jay Shergill", "Classification": "Virtual Assistant", "Contact Sphere": "Professional Services", "Company": "Virtual Admins", "Phone": "408-797-4284", "Email": "jay@virtualadmins.org", "Website": ""}, {"Name": "Jeannette Marsala", "Classification": "Estate Planning Law", "Contact Sphere": "Legal & Accounting", "Company": "Marsala Law Firm, APC", "Phone": "669-800-0810", "Email": "jmarsala@marsalalawfirm.com", "Website": ""}, {"Name": "Jennifer Isensee", "Classification": "Family Law", "Contact Sphere": "Legal & Accounting", "Company": "Law Offices of Jennifer A. Isensee", "Phone": "408-247-7112", "Email": "jiffylaw@yahoo.com", "Website": ""}, {"Name": "John Jorgensen", "Classification": "Window Treatments", "Contact Sphere": "Construction", "Company": "Johnny Windows", "Phone": "209-914-5039", "Email": "johnnywindowssj@gmail.com", "Website": ""}, {"Name": "John Jussen", "Classification": "Marketing Consultant", "Contact Sphere": "Advertising & Marketing", "Company": "ITEX", "Phone": "408-504-8405", "Email": "john.jussen1@itex.net", "Website": ""}, {"Name": "John Wheeler", "Classification": "Property & Casualty Insurance", "Contact Sphere": "Finance & Insurance", "Company": "John Wheeler's State Farm Agency", "Phone": "408-378-3403", "Email": "john@wheelergrp.net", "Website": ""}, {"Name": "Joseph Barghouthi", "Classification": "Solar", "Contact Sphere": "Construction", "Company": "HEX Construction dba HOMEX", "Phone": "510-673-1395", "Email": "joseph@hexconstruction.io", "Website": ""}, {"Name": "Keith Nisby", "Classification": "IT Consultants", "Contact Sphere": "Technology", "Company": "N-Medtech IT Services", "Phone": "408-290-0980", "Email": "", "Website": ""}, {"Name": "Ken Wong", "Classification": "Business Consultant", "Contact Sphere": "Consulting", "Company": "sFoundation Inc.", "Phone": "408-394-8566", "Email": "ken.wong@sfoundation.io", "Website": ""}, {"Name": "Linda Tang", "Classification": "Pet Shop", "Contact Sphere": "Retail & Animals", "Company": "Contingenci by Good Human LLC", "Phone": "650-218-5676", "Email": "linda.t@contingenci.com", "Website": ""}, {"Name": "Lino Martire", "Classification": "Real Estate Law", "Contact Sphere": "Legal & Accounting", "Company": "Law Offices of Lino V. Martire", "Phone": "408-280-6898", "Email": "lino.martire@martirelaw.com", "Website": ""}, {"Name": "Marcus Araiza", "Classification": "Photographer - Commercial", "Contact Sphere": "Advertising & Marketing", "Company": "Atlas Studios Bay Area", "Phone": "408-966-5482", "Email": "marcus@atlasstudiosbayarea.com", "Website": ""}, {"Name": "Maria Nunez", "Classification": "Cleaning - Residential", "Contact Sphere": "Real Estate Services", "Company": "Home Pros", "Phone": "650-400-8468", "Email": "info@homepros.casa", "Website": ""}, {"Name": "Marie Zandian", "Classification": "Restoration", "Contact Sphere": "Construction", "Company": "Rainbow Restoration of San Jose", "Phone": "408-217-5500", "Email": "m.zandian@rainbowsanjose.com", "Website": ""}, {"Name": "Mario Renteria", "Classification": "Roofing - Residential", "Contact Sphere": "Construction", "Company": "Falcon Roofing & Repair 24/7", "Phone": "408-813-6830", "Email": "mario@falcon-roofing.com", "Website": ""}, {"Name": "Michael Balistreri", "Classification": "Payroll Service", "Contact Sphere": "Legal & Accounting", "Company": "Insperity", "Phone": "408-802-8743", "Email": "michael.balistreri@insperity.com", "Website": ""}, {"Name": "Michael McIlrath", "Classification": "Reverse Mortgages", "Contact Sphere": "Finance & Insurance", "Company": "iServe Residential Lending, LLC", "Phone": "415-717-9989", "Email": "mmcilrath@iservelending.com", "Website": ""}, {"Name": "Mike Caulkins", "Classification": "Financial Advisor", "Contact Sphere": "Finance & Insurance", "Company": "LPL Financial", "Phone": "408-622-4798", "Email": "michael.caulkins@lpl.com", "Website": ""}, {"Name": "Orlando Nevarez", "Classification": "Moving Company", "Contact Sphere": "Transport & Shipping", "Company": "Nevarez Moving Company", "Phone": "408-859-1106", "Email": "info@nevarezmovingco.com", "Website": ""}, {"Name": "Phil Lonardo", "Classification": "Professional Organizer", "Contact Sphere": "Consulting", "Company": "Organizing Pros", "Phone": "408-893-7289", "Email": "phil.lonardo@gmail.com", "Website": ""}, {"Name": "Ralph Gomez", "Classification": "Garage Doors", "Contact Sphere": "Construction", "Company": "America's Garage Doors", "Phone": "650-440-9903", "Email": "americasgds@gmail.com", "Website": ""}, {"Name": "Ramji Digumarthi", "Classification": "Wills/Trusts", "Contact Sphere": "Legal & Accounting", "Company": "White Plume Of Freedom Fiduciary Services", "Phone": "650-796-1039", "Email": "rdigumarthi@gmail.com", "Website": ""}, {"Name": "Robert Min", "Classification": "Pensions", "Contact Sphere": "Finance & Insurance", "Company": "Solutions Wealth Management", "Phone": "408-368-2773", "Email": "bob.min@lpl.com", "Website": ""}, {"Name": "Roxanne Salazar", "Classification": "Senior Living Placement Advisor", "Contact Sphere": "Health & Wellness", "Company": "HandnHand Senior Placement", "Phone": "408-368-0334", "Email": "roxanne@handnhandsp.com", "Website": ""}, {"Name": "Sailosi Taunaholo", "Classification": "Electrician", "Contact Sphere": "Construction", "Company": "MMT Electric", "Phone": "510-825-2513", "Email": "mmtelectric676@outlook.com", "Website": ""}, {"Name": "Sean McCarthy", "Classification": "Handyman", "Contact Sphere": "Construction", "Company": "Maintenance Pro, LLC", "Phone": "408-753-3677", "Email": "Info@maintenanceprotech.com", "Website": ""}, {"Name": "Shannon Sevor", "Classification": "Personal Trainer - Fitness", "Contact Sphere": "Health & Wellness", "Company": "GYMGUYZ Silicon Valley", "Phone": "408-740-5565", "Email": "shannon.sevor@gymguyz.com", "Website": ""}, {"Name": "Shawna Rodriguez", "Classification": "Aging Life Care Professional", "Contact Sphere": "Health & Wellness", "Company": "Bay Area Care Management, LLC", "Phone": "408-826-1894", "Email": "shawna@bacmgt.com", "Website": ""}, {"Name": "Sonia Shah", "Classification": "Baker", "Contact Sphere": "Food & Beverage", "Company": "CocoaCumin LLC", "Phone": "408-667-7411", "Email": "cocoacumin@gmail.com", "Website": ""}, {"Name": "Stephen Hartman", "Classification": "Sales Training/Coach", "Contact Sphere": "Training & Coaching", "Company": "Hartman Enterprises", "Phone": "408-209-7562", "Email": "sjhartman@mail.com", "Website": ""}, {"Name": "Thi Kelley", "Classification": "Funeral Planning/Services", "Contact Sphere": "Personal Services", "Company": "Dignity Memorial", "Phone": "408-549-6300", "Email": "", "Website": ""}, {"Name": "Tom Pavicic", "Classification": "Life and Disability Insurance", "Contact Sphere": "Finance & Insurance", "Company": "New York Life Insurance Company", "Phone": "669-300-8161", "Email": "tmpavicic@ft.newyorklife.com", "Website": ""}, {"Name": "Vijay Ubhayaker", "Classification": "Printer", "Contact Sphere": "Advertising & Marketing", "Company": "Minuteman Press San Jose", "Phone": "408-828-9110", "Email": "vijay@minutemansanjose.com", "Website": ""}];
+var all=MEMBERS.slice().sort(function(a,b){return a.Name.localeCompare(b.Name)});var activeFilter='all';
+function pd(p){return (p||'').replace(/[^0-9]/g,'')}
+function vc(m){var l=['BEGIN:VCARD','VERSION:3.0','FN:'+m.Name,'ORG:'+(m.Company||''),'TITLE:'+(m.Classification||'')];var d=pd(m.Phone);if(d)l.push('TEL;TYPE=WORK,VOICE:'+d);if(m.Email)l.push('EMAIL:'+m.Email);if(m.Website)l.push('URL:https://'+m.Website);l.push('END:VCARD');return l.join('\r\n')}
+function save(btn,idx){var m=all.filter(function(x){return x._idx===idx})[0];if(!m)return;var b=new Blob([vc(m)],{type:'text/vcard'});var u=URL.createObjectURL(b);var a=document.createElement('a');a.href=u;a.download=m.Name.replace(/\s+/g,'_')+'.vcf';a.click();URL.revokeObjectURL(u);btn.textContent='Saved!';btn.classList.add('saved');setTimeout(function(){btn.innerHTML='&#128190; Save Contact';btn.classList.remove('saved')},2500)}
+function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function card(m,i){var d=pd(m.Phone);var hw=m.Website&&m.Website.trim();var ws=hw?m.Website:'';var o='<div class="member-card" style="animation-delay:'+Math.min(i*35,380)+'ms">';
+o+='<div class="card-sphere">'+esc(m['Contact Sphere'])+'</div><div class="card-name">'+esc(m.Name)+'</div><div class="card-classification">'+esc(m.Classification)+'</div><div class="card-company">'+esc(m.Company)+'</div><div class="card-divider"></div><div class="card-contacts">';
+if(m.Phone)o+='<a class="contact-row" href="tel:'+d+'"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.38 2 2 0 0 1 3.57 1h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.54a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>'+esc(m.Phone)+'</span></a>';
+if(m.Email)o+='<a class="contact-row" href="mailto:'+esc(m.Email)+'"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span>'+esc(m.Email)+'</span></a>';
+o+='</div><div class="card-actions"><button class="btn-save" onclick="save(this,'+m._idx+')">&#128190; Save Contact</button></div></div>';return o}
+function render(){var q=document.getElementById('search').value.toLowerCase();var f=all.filter(function(m){var ms=activeFilter==='all'||(m['Contact Sphere']||'')===activeFilter;var mq=!q||(m.Name||'').toLowerCase().indexOf(q)>-1||(m.Classification||'').toLowerCase().indexOf(q)>-1||(m.Company||'').toLowerCase().indexOf(q)>-1||(m['Contact Sphere']||'').toLowerCase().indexOf(q)>-1;return ms&&mq});
+document.getElementById('showing-count').textContent=f.length;var g=document.getElementById('members-grid');g.innerHTML=f.length?f.map(function(m,i){return card(m,i)}).join(''):'<div class="empty-state"><h3>No members found</h3><p>Try a different search or filter.</p></div>'}
+function init(){all.forEach(function(m,i){m._idx=i});var sp=[];all.forEach(function(m){var s=m['Contact Sphere']||'';if(s&&sp.indexOf(s)===-1)sp.push(s)});sp.sort();
+document.getElementById('total-count').textContent=all.length;document.getElementById('sphere-count').textContent=sp.length;var w=document.getElementById('filter-wrap');
+sp.forEach(function(s){var b=document.createElement('button');b.className='filter-btn';b.dataset.sphere=s;b.textContent=s;b.onclick=function(){activeFilter=s;document.querySelectorAll('.filter-btn').forEach(function(x){x.classList.remove('active')});b.classList.add('active');render()};w.appendChild(b)});
+document.querySelector('[data-sphere="all"]').onclick=function(){activeFilter='all';document.querySelectorAll('.filter-btn').forEach(function(x){x.classList.remove('active')});document.querySelector('[data-sphere="all"]').classList.add('active');render()};
+document.getElementById('search').addEventListener('input',render);render()}
+init();
+</script></body></html>
