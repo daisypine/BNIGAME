@@ -67,13 +67,17 @@ a{color:inherit}
 @media(max-width:860px){.sp-info{grid-template-columns:1fr}}
 .next{margin-top:34px}
 .next h3{font-size:13px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
-.next-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.next-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
 .next-item{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:flex;gap:14px;align-items:flex-start}
 .cal{flex-shrink:0;width:52px;text-align:center;border-radius:10px;background:var(--red-soft);padding:7px 0}
 .cal-m{font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--red)}
 .cal-d{font-size:22px;font-weight:800;color:var(--ink);line-height:1.05}
-.next-names{font-size:14px;line-height:1.6;color:var(--text);padding-top:2px}
-.next-names span{display:block}
+.next-names{display:flex;flex-direction:column;gap:10px;padding-top:2px;min-width:0;flex:1}
+.np{display:flex;gap:10px;align-items:center;min-width:0}
+.np .avatar{width:36px;height:36px;font-size:12px}
+.np-name{font-size:14px;font-weight:700;color:var(--ink);line-height:1.25}
+.np-what{font-size:12.5px;line-height:1.35;color:var(--muted)}
+.np-what b{font-weight:600;color:var(--red)}
 
 /* avatars */
 .avatar{position:relative;flex-shrink:0;border-radius:50%;background:var(--red-soft);color:var(--red);font-weight:800;display:flex;align-items:center;justify-content:center;overflow:hidden;letter-spacing:.5px}
@@ -311,7 +315,7 @@ function initSpeakers(){var t=new Date();t.setHours(0,0,0,0);
   return '<div class="sp-card">'+avatar(m.Name)+'<div><div class="sp-tag">Speaker '+(i+1)+'</div><div class="sp-name">'+esc(m.Name)+'</div>'+(m.Classification?'<div class="sp-class">'+esc(m.Classification)+'</div>':'')+(m.Company?'<div class="sp-co">'+esc(m.Company)+'</div>':'')+'</div></div>'}).join('');
  var rest=up.slice(1,6);
  if(rest.length){document.getElementById('sp-list').innerHTML=rest.map(function(w){var x=spDate(w.date);
-  return '<div class="next-item"><div class="cal"><div class="cal-m">'+x.toLocaleDateString('en-US',{month:'short'})+'</div><div class="cal-d">'+x.getDate()+'</div></div><div class="next-names">'+w.names.map(function(n){return '<span>'+esc(spFind(n).Name)+'</span>'}).join('')+'</div></div>'}).join('')}
+  return '<div class="next-item"><div class="cal"><div class="cal-m">'+x.toLocaleDateString('en-US',{month:'short'})+'</div><div class="cal-d">'+x.getDate()+'</div></div><div class="next-names">'+w.names.map(function(n){var m=spFind(n);var what=(m.Classification?'<b>'+esc(m.Classification)+'</b>':'')+(m.Classification&&m.Company?' &middot; ':'')+(m.Company?esc(m.Company):'');return '<div class="np">'+avatar(m.Name)+'<div style="min-width:0"><div class="np-name">'+esc(m.Name)+'</div>'+(what?'<div class="np-what">'+what+'</div>':'')+'</div></div>'}).join('')+'</div></div>'}).join('')}
  else document.getElementById('sp-next').style.display='none';
  document.getElementById('speakers').hidden=false}
 
