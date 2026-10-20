@@ -145,9 +145,11 @@ h1 em,h2 em{font-style:normal;color:var(--red)}
 .cards9 .host b{font-size:22px}
 .top .brand{display:flex;align-items:center;gap:16px;text-decoration:none}
 .top .brand .site{font-size:20px;font-weight:700;color:var(--muted);padding-left:16px;border-left:2px solid var(--line);line-height:30px}
-.lead-grid{grid-template-columns:repeat(12,1fr)!important}
-.lead-grid .team:nth-child(-n+3){grid-column:span 4}
-.lead-grid .team:nth-child(n+4){grid-column:span 3}
+.lead-grid{grid-template-columns:repeat(60,1fr)!important;gap:18px 18px!important}
+.lead-grid .team:nth-child(-n+3){grid-column:span 20}
+.lead-grid .team:nth-child(n+4){grid-column:span 12;padding:18px 16px}
+.lead-grid .team:nth-child(n+4) .person b{font-size:16px}
+.lead-grid .team:nth-child(n+4) .person .av{width:42px;height:42px}
 .lead-grid .team:nth-child(n+4) .ppl{grid-template-columns:1fr!important}
 /* help + buttons */
 .nav-btn{position:fixed;top:14px;z-index:10;border:1px solid var(--line);background:#fff;color:var(--ink);font:inherit;font-size:15px;font-weight:700;padding:10px 16px;border-radius:999px;cursor:pointer;opacity:.0;transition:opacity .2s}
@@ -314,8 +316,8 @@ S.push({sec:0,html:K('02','Welcome visitors')+'<h1>Welcome, <em>visitors!</em></
 // 3 BNI by the numbers
 S.push({sec:0,html:K('03','BNI and our vision')+'<h2>One of the world’s largest <em>referral</em> networks.</h2><div class="stats"><div class="stat"><b>355K+</b><span>members</span></div><div class="stat"><b>11.8K+</b><span>chapters</span></div><div class="stat"><b>78</b><span>countries</span></div><div class="stat"><b>17.8M</b><span>referrals passed</span></div><div class="stat"><b>$26.9B</b><span>in business</span></div></div><div class="grow"></div><div class="givers"><div class="gg">Givers Gain</div><p>Each chapter has its own vision. Our vision speaker will share ours.</p></div>'});
 // 4 leadership
-var teams=[['President',[['Maria Nunez','']]],['Vice President',[['Bethany Black','']]],['Secretary / Treasurer',[['Daisy Pineda','']]],['Growth',[['Ken Wong',''],['Elliot Foad','']]],
- ['Membership Committee',[['John Wheeler',''],['John Jorgensen',''],['Marie Zandian',''],['Tom Pavicic',''],['Elizabeth Popova','']]],['Events',[['Roxanne Salazar',''],['Phil Lonardo','']]],
+var teams=[['President',[['Maria Nunez','']]],['Vice President',[['Bethany Black','']]],['Secretary / Treasurer',[['Daisy Pineda','']]],['Growth',[['Ken Wong',''],['Elliot Foad','']]],['Education',[['Bryan Russell',''],['Shannon Sevor','']]],
+ ['Membership',[['John Wheeler',''],['John Jorgensen',''],['Marie Zandian',''],['Tom Pavicic',''],['Elizabeth Popova','']]],['Events',[['Roxanne Salazar',''],['Phil Lonardo','']]],
  ['Mentorship',[['Denise Artache',''],['Shawna Rodriguez',''],['Sonia Shah',''],['Vijay Ubhayaker','']]]];
 S.push({sec:0,html:K('04','Our leadership team')+'<h2>Here to <em>help</em>. Reach out anytime.</h2><div class="team-grid lead-grid">'+teams.map(function(t){return '<div class="team"><h4>'+t[0]+'</h4><div class="ppl">'+t[1].map(function(p){return person(p[0],p[1])}).join('')+'</div></div>'}).join('')+'</div>'});
 // 5 education + card boxes
