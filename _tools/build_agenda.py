@@ -1,0 +1,452 @@
+import re, sys, json, base64, os
+TOOLS = os.path.dirname(os.path.abspath(__file__))
+SITE = os.environ.get("SITE", os.path.dirname(TOOLS))
+home = open(os.path.join(SITE,"index.html"), encoding="utf-8").read()
+members_js = re.search(r'var MEMBERS=\[.*?\];', home, re.S).group(0)
+speakers_js = re.search(r'var SPEAKERS=\[.*?\];', home, re.S).group(0)
+logo64 = base64.b64encode(open(sys.argv[1], "rb").read()).decode()
+out = sys.argv[2]
+MEETING = sys.argv[3] if len(sys.argv)>3 else ""
+ROOT = sys.argv[4] if len(sys.argv)>4 else "../"
+import io as _io, qrcode as _qr, qrcode.image.svg as _qrsvg
+_q=_qr.QRCode(border=0,box_size=10,error_correction=_qr.constants.ERROR_CORRECT_M);_q.add_data("https://bnipremierchapter.com/#directory");_q.make(fit=True)
+_b=_io.BytesIO();_q.make_image(image_factory=_qrsvg.SvgPathImage).save(_b)
+QR_SVG=_b.getvalue().decode().split('?>',1)[-1].strip()
+QR_SVG=re.sub(r'<svg ','<svg aria-hidden="true" ',QR_SVG,1)
+QR_SVG=re.sub(r' width="[^"]*" height="[^"]*"',' width="100%" height="100%"',QR_SVG,1)
+try:
+    CFG=json.load(open(os.path.join(TOOLS,'agenda_config.json'))).get(MEETING,{})
+except Exception:
+    CFG={}
+
+PHOTOS = {
+ "Maria Nunez":"6ac5dadb217e120001e0973f","Bethany Black":"55cce182f0f0e33b902c32e5","Daisy Pineda":"62cc60f5e4b0165f2a05c6b7",
+ "Colin Clancy":"5b983109663cad000142bc19","Jay Shergill":"6963230df4936d000136d262","Joseph Barghouthi":"65eb36b0868a6c0001577e8c",
+ "Thi Kelley":"6a98432d8ea062000177bb30","Elizabeth Popova":"6709a807059d970001bcefd9","John Jorgensen":"64deac0fe4b01b5a8c17cdff",
+ "John Wheeler":"66be7fb0e4b0869983281eb6","Marie Zandian":"641cc6bbe4b0c2b5512624fc","Tom Pavicic":"62f68c4de4b0165f2a0687c3",
+ "Bryan Russell":"68c1c11f01d9a400017199fd","Phil Lonardo":"694ebbd537f61500019e79b2","Roxanne Salazar":"6a2321929882230001c72b37",
+ "Denise Artache":"66fccf7be4b0147dce9c7397","Shawna Rodriguez":"6a979c5d549e85000145a8d9","Sonia Shah":"6a2b2ccff10c170001ace7c7",
+ "Elliot Foad":"6a6a17b3acc6a6000165e919","Ken Wong":"680135c08202c20001cfd670",
+}
+photos_js = "var PHOTOS=" + json.dumps({k: "https://bniconnectglobal.com/web/open/networkViewProfileImage/%s.jpg" % v for k, v in PHOTOS.items()}) + ";PHOTOS['Shannon Sevor']='" + ROOT + "photos/shannon-sevor.jpg';var MEETING='" + MEETING + "';var CFG=" + json.dumps(CFG) + ";var QR=" + json.dumps(QR_SVG) + ";var ROOT='" + ROOT + "';var LOCAL=" + __import__("json").dumps(sorted(f[:-4] for f in __import__("os").listdir(os.path.join(SITE,"photos")) if f.endswith(".jpg"))) + ";"
+
+HTML = r"""<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>BNI Premiere | Weekly Meeting</title>
+<link rel="icon" type="image/png" href="data:image/png;base64,__LOGO__">
+<style>
+:root{--red:#C4242A;--red-dark:#A11C21;--red-soft:#FBEDED;--white:#fff;--off:#F6F4F1;--line:#E6E1DC;--ink:#161616;--text:#3A3A3A;--muted:#7A7470}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;background:#fff}
+body{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased;overflow:hidden}
+/* stage: 16:9, scales to fill the screen */
+.stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:var(--off)}
+.deck{position:relative;width:1600px;height:900px;background:#fff;transform-origin:center center;box-shadow:0 0 0 1px var(--line);overflow:hidden}
+.slide{position:absolute;inset:0;padding:90px 110px 120px;display:none;flex-direction:column}
+.slide.on{display:flex;animation:in .35s ease}
+@keyframes in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+/* chrome */
+.top{position:absolute;left:110px;right:110px;top:38px;display:flex;justify-content:space-between;align-items:center;font-size:20px;color:var(--muted);font-weight:500;z-index:3}
+.top img{height:30px}
+.bar{position:absolute;left:0;right:0;bottom:0;height:64px;border-top:1px solid var(--line);display:flex;align-items:center;padding:0 110px;gap:8px;z-index:3;background:#fff}
+.bar .sec{flex:1;height:6px;border-radius:3px;background:var(--line);position:relative}
+.bar .sec.done{background:var(--red)}
+.bar .sec.cur{background:linear-gradient(90deg,var(--red) var(--p,50%),var(--line) var(--p,50%))}
+.bar .lbl{position:absolute;top:-26px;left:0;font-size:15px;font-weight:700;color:var(--muted);white-space:nowrap;letter-spacing:.3px}
+.bar .sec.cur .lbl,.bar .sec.done .lbl{color:var(--red)}
+.count{font-size:15px;color:var(--muted);margin-left:18px;font-variant-numeric:tabular-nums;white-space:nowrap}
+/* type */
+.kicker{display:flex;align-items:center;gap:14px;font-size:22px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--red);margin-bottom:22px}
+.kicker .num{display:inline-flex;align-items:center;justify-content:center;min-width:46px;height:46px;padding:0 10px;border-radius:23px;background:var(--red);color:#fff;letter-spacing:0;font-size:20px}
+.kicker .time{color:var(--muted);letter-spacing:1px}
+h1{font-size:96px;line-height:1;font-weight:700;letter-spacing:-3px}
+h2{font-size:72px;line-height:1.04;font-weight:700;letter-spacing:-2px}
+h1 em,h2 em{font-style:normal;color:var(--red)}
+.lead{font-size:34px;line-height:1.4;color:var(--text);margin-top:26px;max-width:1150px}
+.grow{flex:1}
+/* title */
+.title-slide{padding:0;flex-direction:row}
+.title-slide .left{flex:1.25;padding:120px 90px 120px 110px;display:flex;flex-direction:column;justify-content:center}
+.title-slide .right{flex:1;background:var(--red);color:#fff;display:flex;flex-direction:column;justify-content:center;padding:90px}
+.title-slide .logo{height:84px;align-self:flex-start;margin-bottom:56px}
+.title-slide .date{font-size:38px;font-weight:700;margin-top:30px;color:var(--red)}
+.title-slide .right .big{font-size:120px;font-weight:700;letter-spacing:-4px;line-height:.9}
+.title-slide .right .sm{font-size:30px;margin-top:20px;opacity:.9;line-height:1.45}
+.title-slide .right hr{border:0;border-top:2px solid rgba(255,255,255,.35);margin:40px 0}
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:22px;margin-top:56px}
+.stat{border-top:6px solid var(--red);padding-top:22px}
+.stat b{display:block;font-size:66px;letter-spacing:-2px;line-height:1}
+.stat span{display:block;font-size:22px;color:var(--muted);margin-top:10px;font-weight:500}
+.givers{margin-top:auto;display:flex;align-items:center;gap:40px;background:var(--off);border-radius:20px;padding:34px 44px}
+.givers .gg{font-size:64px;font-weight:700;color:var(--red);letter-spacing:-2px;white-space:nowrap}
+.givers p{font-size:28px;line-height:1.4;color:var(--text)}
+/* people */
+.av{position:relative;flex-shrink:0;border-radius:50%;background:var(--red-soft);color:var(--red);font-weight:700;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.av img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px 22px;margin-top:30px}
+.lead-grid .team .ppl{display:grid;grid-template-columns:1fr 1fr;gap:10px 14px}
+.lead-grid .person .av{width:48px;height:48px;font-size:16px}
+.lead-grid .person b{font-size:18px}
+.lead-grid .person small{font-size:14px}
+.team{background:var(--off);border-radius:18px;padding:20px 22px}
+.team h4{font-size:17px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:var(--red);margin-bottom:12px}
+.team .ppl{display:flex;flex-wrap:wrap;gap:14px 18px}
+.person{display:flex;align-items:center;gap:12px}
+.person .av{width:60px;height:60px;font-size:20px}
+.person b{display:block;font-size:21px;line-height:1.15}
+.person small{display:block;font-size:16px;color:var(--muted)}
+.prez{display:flex;align-items:center;gap:28px;margin-top:36px}
+.prez .av{width:150px;height:150px;font-size:46px}
+.prez b{font-size:44px;letter-spacing:-1px;display:block}
+.prez span{font-size:24px;color:var(--red);font-weight:700;text-transform:uppercase;letter-spacing:2px}
+/* intro rules */
+.rules{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:56px}
+.rule{border-radius:22px;padding:36px;background:var(--off)}
+.rule .sec{font-size:110px;font-weight:700;color:var(--red);letter-spacing:-4px;line-height:1}
+.rule .sec small{font-size:40px;letter-spacing:0}
+.rule h3{font-size:32px;margin-top:14px}
+.rule p{font-size:24px;color:var(--text);margin-top:10px;line-height:1.4}
+.say{display:flex;gap:18px;margin-top:40px;flex-wrap:wrap}
+.say span{font-size:28px;font-weight:700;padding:16px 28px;border-radius:999px;border:2px solid var(--ink)}
+.say span:nth-child(3){background:var(--red);border-color:var(--red);color:#fff}
+/* speakers */
+.sp-today{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:44px}
+.spk{text-align:center;background:var(--off);border-radius:24px;padding:40px 24px 34px;position:relative}
+.spk .n{position:absolute;top:18px;left:22px;font-size:20px;font-weight:700;color:var(--red)}
+.spk .av{width:190px;height:190px;font-size:60px;margin:0 auto 22px;border:6px solid #fff;box-shadow:0 0 0 2px var(--line)}
+.spk b{display:block;font-size:36px;letter-spacing:-.5px}
+.spk .cls{font-size:24px;color:var(--red);font-weight:700;margin-top:8px}
+.spk .co{font-size:21px;color:var(--muted);margin-top:4px}
+.next3{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:40px}
+.wk{border-radius:22px;border:2px solid var(--line);padding:30px 32px}
+.wk .when{display:flex;align-items:baseline;gap:14px;margin-bottom:20px}
+.wk .when b{font-size:54px;letter-spacing:-2px;color:var(--red)}
+.wk .when span{font-size:24px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--muted)}
+.wk .who{display:flex;flex-direction:column;gap:14px}
+.wk .who .person .av{width:58px;height:58px}
+/* timer */
+.timer-wrap{display:flex;align-items:center;gap:80px;margin-top:40px}
+.ring{position:relative;width:360px;height:360px;flex-shrink:0;cursor:pointer}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring .t{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ring .t b{font-size:130px;font-weight:700;letter-spacing:-4px;line-height:1;font-variant-numeric:tabular-nums}
+.ring .t span{font-size:20px;color:var(--muted);font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-top:6px}
+.ring.done .t b{color:var(--red)}
+.ihave{display:flex;flex-direction:column;gap:20px}
+.ihave div{font-size:52px;font-weight:700;display:flex;align-items:center;gap:20px}
+.ihave div i{font-style:normal;width:16px;height:16px;border-radius:50%;background:var(--red);flex-shrink:0}
+.hint{font-size:20px;color:var(--muted);margin-top:20px}
+/* statement / misc */
+.split{display:grid;grid-template-columns:1.2fr 1fr;gap:70px;margin-top:40px;align-items:start}
+.hosts{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.host{display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px}
+.host .av{width:150px;height:150px;font-size:44px}
+.host b{font-size:26px}
+.check{display:flex;flex-direction:column;gap:26px;margin-top:50px}
+.check div{display:flex;gap:24px;align-items:flex-start;font-size:38px;line-height:1.3}
+.check div i{font-style:normal;flex-shrink:0;width:52px;height:52px;border-radius:12px;background:var(--red);color:#fff;font-size:30px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:-2px}
+.prize-row{display:flex;gap:30px;margin-top:50px}
+.prize-row .spk{flex:1}
+.close-slide{background:var(--red);color:#fff}
+.close-slide .kicker{color:#fff}
+.close-slide .kicker .num{background:#fff;color:var(--red)}
+.close-slide h1{font-size:120px}
+.close-slide .lead{color:rgba(255,255,255,.9)}
+.close-slide .kicker .time{color:rgba(255,255,255,.75)}
+.close-slide .nextmtg{margin-top:auto;display:flex;gap:60px;font-size:30px;border-top:2px solid rgba(255,255,255,.35);padding-top:34px}
+.close-slide .nextmtg b{display:block;font-size:44px;margin-top:6px}
+/* faces + extras */
+.faces{display:flex;flex-wrap:wrap;gap:14px;margin-top:auto;align-items:center}
+.faces .av{width:76px;height:76px;font-size:24px;border:4px solid #fff;box-shadow:0 0 0 1px var(--line)}
+.faces-cap{font-size:18px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin:auto 0 14px}
+.hostrow{display:flex;gap:34px;margin-top:auto;align-items:flex-end}
+.hostrow .host .av{width:120px;height:120px;font-size:36px}
+.hostrow .host b{font-size:22px}
+.feature{display:flex;flex-direction:column;align-items:center;text-align:center;gap:16px;background:var(--off);border-radius:28px;padding:44px 40px}
+.feature .av{width:240px;height:240px;font-size:72px;border:8px solid #fff}
+.feature b{font-size:36px}
+.feature span{font-size:20px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--red)}
+.trophy{width:360px;height:360px;border-radius:50%;background:var(--red-soft);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.edu2{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.edu2 .feature{padding:36px 24px}
+.edu2 .feature .av{width:190px;height:190px;font-size:60px}
+.edu2 .feature b{font-size:30px}
+.cards9{display:grid;grid-template-columns:repeat(5,1fr);gap:26px 20px;margin-top:44px}
+.cards9 .host .av{width:112px;height:112px;font-size:34px}
+.cards9 .host b{font-size:22px}
+.top .brand{display:flex;align-items:center;gap:16px;text-decoration:none}
+.top .brand .site{font-size:20px;font-weight:700;color:var(--muted);padding-left:16px;border-left:2px solid var(--line);line-height:30px}
+.lead-grid{grid-template-columns:repeat(60,1fr)!important;gap:18px 18px!important}
+.lead-grid .team:nth-child(-n+3){grid-column:span 20}
+.lead-grid .team:nth-child(n+4){grid-column:span 12;padding:18px 16px}
+.lead-grid .team:nth-child(n+4) .person b{font-size:16px}
+.lead-grid .team:nth-child(n+4) .person .av{width:42px;height:42px}
+.lead-grid .team:nth-child(n+4) .ppl{grid-template-columns:1fr!important}
+.qrcard{display:flex;align-items:center;gap:24px;background:#fff;border:2px solid var(--line);border-radius:22px;padding:20px 26px 20px 20px}
+.qrcard .qr{width:170px;height:170px;flex-shrink:0}
+.qrcard .qr svg{display:block}
+.qrcard b{display:block;font-size:26px;letter-spacing:-.5px;line-height:1.15}
+.qrcard span{display:block;font-size:19px;color:var(--muted);margin-top:8px;line-height:1.4}
+.qrcard .url{color:var(--red);font-weight:700;font-size:19px;margin-top:10px}
+.qr-float{position:absolute;right:110px;top:150px;max-width:520px}
+.evlist{display:flex;flex-direction:column;gap:18px;margin-top:40px}
+.ev{display:flex;gap:28px;align-items:center;background:var(--off);border-radius:20px;padding:22px 28px}
+.ev .cal{flex-shrink:0;width:96px;text-align:center;background:#fff;border-radius:16px;padding:10px 0;box-shadow:0 0 0 2px var(--line)}
+.ev .cal small{display:block;font-size:16px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--red)}
+.ev .cal b{display:block;font-size:44px;line-height:1;letter-spacing:-1px}
+.ev .t{font-size:32px;font-weight:700;letter-spacing:-.5px}
+.ev .m{font-size:22px;color:var(--muted);margin-top:6px}
+.ev .who{margin-left:auto;display:flex;align-items:center;gap:12px;font-size:19px;color:var(--muted);text-align:right}
+.ev .who .av{width:56px;height:56px;font-size:18px}
+.rules4{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:34px}
+.r4{background:var(--off);border-radius:20px;padding:24px 28px}
+.r4 h3{font-size:28px;letter-spacing:-.5px}
+.r4 .what{font-size:24px;color:var(--red);font-weight:700;margin-top:8px;line-height:1.3}
+.r4 p{font-size:18px;color:var(--muted);margin-top:8px;line-height:1.45}
+.r4 ul{list-style:none;margin-top:8px;font-size:19px;line-height:1.5;color:var(--text)}
+/* help + buttons */
+.nav-btn{position:fixed;top:14px;z-index:10;border:1px solid var(--line);background:#fff;color:var(--ink);font:inherit;font-size:15px;font-weight:700;padding:10px 16px;border-radius:999px;cursor:pointer;opacity:.0;transition:opacity .2s}
+body:hover .nav-btn{opacity:.85}
+#prev{right:236px}#next{right:176px}#fs{right:18px}
+.back{position:fixed;top:22px;left:18px;z-index:10;font-size:14px;font-weight:700;color:var(--muted);text-decoration:none;opacity:0;transition:opacity .2s}
+body:hover .back{opacity:.9}
+/* ===== phone layout: slides stack into one scrolling page ===== */
+html.m,html.m body{height:auto;overflow:auto}
+html.m body{background:var(--off)}
+html.m .stage{position:static;display:block;background:var(--off)}
+html.m .deck{width:auto;height:auto;transform:none!important;box-shadow:none;background:transparent;overflow:visible;padding:0 12px 28px}
+html.m .bar,html.m .nav-btn,html.m .back{display:none!important}
+html.m .top{position:sticky;top:0;left:0;right:0;margin:0 -12px 12px;padding:12px 16px;background:rgba(255,255,255,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);font-size:13px;gap:10px}
+html.m .top img{height:22px}
+html.m .top span{text-align:right}
+html.m .slide{position:relative;inset:auto;display:flex!important;padding:26px 20px 28px;margin-bottom:12px;background:#fff;border-radius:18px;box-shadow:0 0 0 1px var(--line);animation:none}
+html.m .kicker{font-size:12px;letter-spacing:1.6px;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+html.m .kicker .num{min-width:28px;height:28px;font-size:12px;padding:0 7px}
+html.m h1{font-size:36px;letter-spacing:-1px;line-height:1.05}
+html.m h2{font-size:30px;letter-spacing:-.8px}
+html.m .close-slide h1{font-size:40px}
+html.m .lead{font-size:17px;margin-top:12px}
+html.m .title-slide{flex-direction:column;padding:0;overflow:hidden}
+html.m .title-slide .left{padding:28px 22px}
+html.m .title-slide .logo{height:46px;margin-bottom:24px}
+html.m .title-slide .date{font-size:20px;margin-top:14px}
+html.m .title-slide .right{padding:26px 22px}
+html.m .title-slide .right .big{font-size:48px;letter-spacing:-1.5px}
+html.m .title-slide .right .sm{font-size:16px;margin-top:10px}
+html.m .title-slide .right hr{margin:20px 0}
+html.m .stats{grid-template-columns:repeat(2,1fr);gap:16px;margin-top:22px}
+html.m .stat{border-top-width:4px;padding-top:10px}
+html.m .stat b{font-size:32px;letter-spacing:-1px}
+html.m .stat span{font-size:13px;margin-top:4px}
+html.m .givers{flex-direction:column;align-items:flex-start;gap:8px;padding:18px;margin-top:22px;border-radius:14px}
+html.m .givers .gg{font-size:30px}
+html.m .givers p{font-size:15px}
+html.m .team-grid,html.m .rules,html.m .sp-today,html.m .next3,html.m .split,html.m .hosts{grid-template-columns:1fr;gap:12px;margin-top:18px}
+html.m .lead-grid .team .ppl{grid-template-columns:1fr 1fr;gap:10px}
+html.m .team{padding:14px 14px;border-radius:14px}
+html.m .team h4{font-size:12px;margin-bottom:10px}
+html.m .person{gap:10px}
+html.m .person .av,html.m .lead-grid .person .av{width:40px;height:40px;font-size:14px}
+html.m .person b,html.m .lead-grid .person b{font-size:15px}
+html.m .person small,html.m .lead-grid .person small{font-size:12px}
+html.m .prez{gap:16px;margin-top:20px}
+html.m .prez .av{width:80px;height:80px;font-size:26px}
+html.m .prez b{font-size:24px}
+html.m .prez span{font-size:13px;letter-spacing:1.2px}
+html.m .rule{padding:18px;border-radius:14px}
+html.m .rule .sec{font-size:52px;letter-spacing:-2px}
+html.m .rule .sec small{font-size:20px}
+html.m .rule h3{font-size:19px;margin-top:6px}
+html.m .rule p{font-size:15px}
+html.m .say{gap:8px;margin-top:20px}
+html.m .say span{font-size:15px;padding:9px 16px}
+html.m .spk{padding:22px 16px 20px;border-radius:16px}
+html.m .spk .av{width:110px;height:110px;font-size:34px;margin-bottom:12px;border-width:4px}
+html.m .spk b{font-size:22px}
+html.m .spk .cls{font-size:15px}
+html.m .spk .co{font-size:14px}
+html.m .wk{padding:18px;border-radius:16px}
+html.m .wk .when{margin-bottom:12px}
+html.m .wk .when b{font-size:32px}
+html.m .wk .when span{font-size:14px}
+html.m .wk .who{gap:10px}
+html.m .wk .who .person .av{width:40px;height:40px}
+html.m .timer-wrap{flex-direction:column;gap:24px;margin-top:20px;align-items:center}
+html.m .ring{width:220px;height:220px}
+html.m .ring .t b{font-size:80px}
+html.m .ring .t span{font-size:13px}
+html.m .ihave{gap:12px;align-self:stretch}
+html.m .ihave div{font-size:20px;gap:12px}
+html.m .ihave div i{width:10px;height:10px}
+html.m .hint{font-size:14px}
+html.m .host .av,html.m .hostrow .host .av{width:84px;height:84px;font-size:26px}
+html.m .host b,html.m .hostrow .host b{font-size:16px}
+html.m .hostrow{flex-wrap:wrap;gap:18px;margin-top:22px;justify-content:center}
+html.m .check{gap:14px;margin-top:22px}
+html.m .check div{font-size:18px;gap:12px}
+html.m .check div i{width:30px;height:30px;font-size:16px;border-radius:8px}
+html.m .prize-row{flex-direction:column;gap:12px;margin-top:22px}
+html.m .faces{gap:8px;margin-top:22px}
+html.m .faces .av{width:46px;height:46px;font-size:15px;border-width:3px}
+html.m .faces-cap{font-size:12px;margin:22px 0 8px}
+html.m .feature{padding:22px 18px;border-radius:18px;gap:10px}
+html.m .feature .av{width:130px;height:130px;font-size:40px;border-width:5px}
+html.m .feature b{font-size:22px}
+html.m .feature span{font-size:13px}
+html.m .trophy{width:160px;height:160px;align-self:center}
+html.m .trophy svg{width:90px;height:90px}
+html.m .close-slide .nextmtg{flex-direction:column;gap:14px;font-size:15px;padding-top:18px;margin-top:24px}
+html.m .close-slide .nextmtg b{font-size:22px}
+html.m .grow{display:none}
+html.m .qr-float{position:static;max-width:none;margin-top:18px}
+html.m .qrcard{gap:14px;padding:14px;border-radius:16px}
+html.m .qrcard .qr{width:110px;height:110px}
+html.m .qrcard b{font-size:17px}
+html.m .qrcard span,html.m .qrcard .url{font-size:13px}
+html.m .evlist{gap:10px;margin-top:18px}
+html.m .ev{flex-wrap:wrap;gap:12px;padding:14px;border-radius:14px}
+html.m .ev .cal{width:60px;padding:6px 0;border-radius:10px}
+html.m .ev .cal small{font-size:11px}
+html.m .ev .cal b{font-size:26px}
+html.m .ev .t{font-size:18px}
+html.m .ev .m{font-size:14px}
+html.m .ev .who{margin-left:0;font-size:13px;text-align:left}
+html.m .ev .who .av{width:34px;height:34px;font-size:12px}
+html.m .rules4{grid-template-columns:1fr;gap:10px;margin-top:18px}
+html.m .r4{padding:14px;border-radius:14px}
+html.m .r4 h3{font-size:18px}
+html.m .r4 .what{font-size:16px}
+html.m .r4 p,html.m .r4 ul{font-size:13px}
+html.m .lead-grid{grid-template-columns:1fr!important}
+html.m .lead-grid .team{grid-column:auto!important}
+html.m .lead-grid .team .ppl{grid-template-columns:1fr 1fr!important}
+html.m .top .brand{gap:10px}
+html.m .top .brand .site{font-size:12px;padding-left:10px;line-height:22px}
+html.m .cards9{grid-template-columns:repeat(3,1fr);gap:14px 8px;margin-top:20px}
+html.m .cards9 .host .av{width:64px;height:64px;font-size:20px}
+html.m .cards9 .host b{font-size:13px}
+html.m .edu2{gap:10px}
+html.m .edu2 .feature .av{width:96px;height:96px;font-size:30px}
+html.m .edu2 .feature b{font-size:17px}
+html.m .slide.close-slide{background:var(--red);box-shadow:none}
+html.m .split[style]{grid-template-columns:1fr!important;margin-top:0!important}
+html.m .trophy{justify-self:center}
+html.m .hosts{grid-template-columns:1fr 1fr!important;gap:18px}
+html.m .givers .gg[style]{font-size:26px!important;white-space:normal}
+html.m .team .av[style]{width:46px!important;height:46px!important;font-size:15px!important}
+html.m .team .ppl+div[style]{font-size:14px!important;margin-top:8px!important}
+html.m .team-grid[style]{margin-top:18px!important}
+html.m [style*="margin-top:44px"],html.m [style*="margin-top:56px"]{margin-top:18px!important}
+</style></head><body>
+<div class="stage"><div class="deck" id="deck"></div></div>
+<button class="nav-btn" id="prev" aria-label="Previous">&larr;</button>
+<button class="nav-btn" id="next" aria-label="Next">&rarr;</button>
+<button class="nav-btn" id="fs">Full screen (F)</button>
+
+<script>
+var LOGO="data:image/png;base64,__LOGO__";
+__MEMBERS__
+__SPEAKERS__
+__PHOTOS__
+var VISIT="https://bnisfbay.com/ca-santa-clara-premiere/en-US/visitorregistration?chapterId=2880";
+function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+function initials(n){var p=(n||'').replace(/\(.*?\)/g,'').trim().split(/\s+/);return ((p[0]||'')[0]||'')+((p.length>1?p[p.length-1][0]:'')||'')}
+function find(n){var l=n.toLowerCase();var m=MEMBERS.filter(function(x){return x.Name.toLowerCase()===l})[0];
+ if(!m){var last=l.split(' ').pop();var c=MEMBERS.filter(function(x){return x.Name.toLowerCase().split(' ').pop()===last});if(c.length===1)m=c[0]}
+ return m||{Name:n,Classification:'',Company:''}}
+function _sl(n){return (n||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')}
+function photo(n){var f=find(n);var c=[n,f.Name,(f.Name||'').replace(/^Cliff /,'Clifford ')];for(var k=0;k<c.length;k++){if(LOCAL.indexOf(_sl(c[k]))>-1)return ROOT+'photos/'+_sl(c[k])+'.jpg'}if(PHOTOS[n])return PHOTOS[n];return PHOTOS[f.Name]||''}
+function av(n,cls){var p=photo(n);return '<div class="av'+(cls?' '+cls:'')+'">'+esc(initials(n).toUpperCase())+(p?'<img src="'+p+'" alt="" onerror="this.remove()">':'')+'</div>'}
+function person(n,sub){return '<div class="person">'+av(n)+'<div><b>'+esc(n)+'</b>'+(sub?'<small>'+esc(sub)+'</small>':'')+'</div></div>'}
+function sd(s){var p=s.split('-');return new Date(+p[0],+p[1]-1,+p[2])}
+var today=MEETING?sd(MEETING):new Date();today.setHours(0,0,0,0);
+var up=SPEAKERS.filter(function(w){return sd(w.date)>=today}).sort(function(a,b){return sd(a.date)-sd(b.date)});
+var cur=up[0]||{date:'',names:[]};var nextWeeks=up.slice(1,4);
+var mdate=cur.date?sd(cur.date):today;
+function fmt(d,o){return d.toLocaleDateString('en-US',o)}
+
+var SECTIONS=[['Opening',''],['Introductions',''],['Speakers',''],['Referrals',''],['Closing','']];
+function K(num,label){return '<div class="kicker">'+(num?'<span class="num">'+num+'</span>':'')+label+'</div>'}
+
+var S=[];
+function qrCard(){return '<div class="qrcard"><div class="qr">'+QR+'</div><div><b>Scan to meet our members</b><span>See every member, save their contact to your phone, and apply to join.</span><div class="url">bnipremierchapter.com</div></div></div>'}
+// 0 title
+S.push({sec:0,cls:'title-slide',html:'<div class="left"><img class="logo" src="'+LOGO+'" alt="BNI"><div class="kicker">Weekly meeting</div><h1>BNI <em>Premiere</em></h1><div class="date">'+fmt(mdate,{weekday:'long',month:'long',day:'numeric',year:'numeric'})+'</div></div><div class="right"><div class="big">7:00</div><div class="sm">Wednesdays &middot; In person<br>Bogey’s Pizza Co, San Jose</div><hr><div class="sm">Please take your seats<br>and silence your devices.</div></div>'});
+// 1 call to order
+S.push({sec:0,html:K('01','Call to order','7:15 AM')+'<h1>Welcome to <em>BNI Premiere</em>.</h1><p class="lead">Please take your seats and silence your devices.</p><div class="grow"></div><div class="givers"><div class="gg">Givers Gain</div><p>If I give business to the members of my chapter, business will come back to me.</p></div>'});
+// 2 visitors
+S.push({sec:0,html:K('02','Welcome visitors')+'<div class="qr-float">'+qrCard()+'</div><h1>Welcome, <em>visitors!</em></h1><p class="lead">We’re glad you’re here. Did we miss anyone?</p><div class="faces-cap">Your visitor hosts today</div><div class="hostrow" style="margin-top:0">'+['Colin Clancy','Jay Shergill','Joseph Barghouthi','Thi Kelley','Mike Caulkins','Jason Smith'].map(function(h){return '<div class="host">'+av(h)+'<b>'+esc(h)+'</b></div>'}).join('')+'</div>'});
+// 3 BNI by the numbers
+S.push({sec:0,html:K('03','BNI and our vision')+'<h2>One of the world’s largest <em>referral</em> networks.</h2><div class="stats"><div class="stat"><b>355K+</b><span>members</span></div><div class="stat"><b>11.8K+</b><span>chapters</span></div><div class="stat"><b>78</b><span>countries</span></div><div class="stat"><b>17.8M</b><span>referrals passed</span></div><div class="stat"><b>$26.9B</b><span>in business</span></div></div><div class="grow"></div><div class="givers"><div class="gg">Givers Gain</div><p>Each chapter has its own vision. Our vision speaker will share ours.</p></div>'});
+// 4 leadership
+var teams=[['President',[['Maria Nunez','']]],['Vice President',[['Bethany Black','']]],['Secretary / Treasurer',[['Daisy Pineda','']]],['Growth',[['Ken Wong',''],['Elliot Foad','']]],['Education',[['Bryan Russell',''],['Shannon Sevor','']]],
+ ['Membership',[['John Wheeler',''],['John Jorgensen',''],['Marie Zandian',''],['Tom Pavicic',''],['Elizabeth Popova','']]],['Events',[['Roxanne Salazar',''],['Phil Lonardo','']]],
+ ['Mentorship',[['Denise Artache',''],['Shawna Rodriguez',''],['Sonia Shah',''],['Vijay Ubhayaker','']]]];
+S.push({sec:0,html:K('04','Our leadership team')+'<h2>Here to <em>help</em>. Reach out anytime.</h2><div class="team-grid lead-grid">'+teams.map(function(t){return '<div class="team"><h4>'+t[0]+'</h4><div class="ppl">'+t[1].map(function(p){return person(p[0],p[1])}).join('')+'</div></div>'}).join('')+'</div>'});
+// 5 education + card boxes
+S.push({sec:0,html:K('05','Education moment')+'<div class="split" style="margin-top:0;align-items:center"><div><h1>Education <em>moment</em>.</h1><p class="lead">A few minutes to help every member get more out of BNI.</p></div><div class="edu2">'+['Bryan Russell','Shannon Sevor'].map(function(n){return '<div class="feature">'+av(n)+'<span>Education</span><b>'+esc(n)+'</b></div>'}).join('')+'</div></div><div class="grow"></div><div class="givers" style="background:var(--red-soft)"><div class="gg" style="font-size:44px">06 &nbsp;Business cards</div><p>Visitors: these boxes hold our members’ cards. Members: please refill yours.</p></div>'});
+// 6 intros
+S.push({sec:1,html:K('08','Member introductions')+'<h2>Who you are. What you do. <em>The referral you’re looking for.</em></h2><div class="rules"><div class="rule"><div class="sec">30<small>s</small></div><h3>Members</h3><p>Substitutes give the member’s presentation.</p></div><div class="rule"><div class="sec">10<small>s</small></div><h3>Inviting members</h3><p>Introduce your visitor.</p></div><div class="rule"><div class="sec">15<small>s</small></div><h3>Visitors</h3><p>15–20 seconds about your business.</p></div></div>'});
+// 7 reports
+var rep=[['09','Vice President','Bethany Black'],['10','Membership','John Wheeler'],['11','Growth','Ken Wong, Elliot Foad'],['12','Events','Roxanne Salazar, Phil Lonardo'],['13','Mentorship','Denise Artache, Vijay Ubhayaker, Sonia Shah, Shawna Rodriguez'],['14','Secretary / Treasurer','Daisy Pineda']];
+S.push({sec:1,html:K('09–14','Leadership reports')+'<h2>Each team supports a different part of our chapter.</h2><div class="team-grid" style="margin-top:44px">'+rep.map(function(r){return '<div class="team"><h4>'+r[0]+' &middot; '+r[1]+'</h4><div class="ppl">'+r[2].split(', ').map(function(n){return '<div title="'+esc(n)+'">'+av(n).replace('class="av"','class="av" style="width:86px;height:86px;font-size:26px"')+'</div>'}).join('')+'</div><div style="font-size:19px;color:var(--muted);margin-top:12px">'+esc(r[2])+'</div></div>'}).join('')+'</div>'});
+// 8b upcoming events (from BAND)
+if(CFG.events&&CFG.events.length){S.push({sec:1,html:K('12','Events')+'<h2>What’s <em>coming up</em>.</h2><div class="evlist">'+CFG.events.map(function(e){var d=sd(e.date);return '<div class="ev"><div class="cal"><small>'+fmt(d,{month:'short'})+'</small><b>'+d.getDate()+'</b></div><div><div class="t">'+esc(e.title)+'</div><div class="m">'+fmt(d,{weekday:'long'})+' &middot; '+esc(e.time)+(e.place?' &middot; '+esc(e.place):'')+'</div></div>'+(e.host?'<div class="who"><span>Hosted by<br><b style="color:var(--ink)">'+esc(e.host)+'</b></span>'+av(e.host)+'</div>':'')+'</div>'}).join('')+'</div><p class="hint" style="margin-top:24px">All chapter events are on our BAND calendar.</p>'})}
+// 9 today's speakers
+S.push({sec:2,html:K('15','Feature presentations')+'<h2>Please welcome <em>today’s speakers</em>.</h2><div class="sp-today">'+cur.names.map(function(n,i){var m=find(n);return '<div class="spk"><span class="n">0'+(i+1)+'</span>'+av(m.Name)+'<b>'+esc(m.Name)+'</b><div class="cls">'+esc(m.Classification)+'</div><div class="co">'+esc(m.Company)+'</div></div>'}).join('')+'</div>'});
+// 8 next three weeks
+S.push({sec:2,html:K('15','Speaker announcement')+'<h2>Our next <em>three weeks</em>.</h2><div class="next3">'+(nextWeeks.length?nextWeeks.map(function(w){var d=sd(w.date);return '<div class="wk"><div class="when"><b>'+fmt(d,{month:'short',day:'numeric'})+'</b><span>'+fmt(d,{weekday:'short'})+'</span></div><div class="who">'+w.names.map(function(n){var m=find(n);return person(m.Name,m.Classification)}).join('')+'</div></div>'}).join(''):'<p class="lead">Schedule coming soon.</p>')+'</div><p class="hint" style="margin-top:auto">Want to be a backup speaker? Sign up at bnipremierchapter.com</p>'});
+// 10 I have + timer
+S.push({sec:3,html:K('16','Referrals, testimonials &amp; TYFCB','8:15 AM')+'<h1>It’s time for <em>“I Have.”</em></h1><div class="timer-wrap" style="margin-top:60px"><div class="ihave"><div><i></i>A referral</div><div><i></i>A brief testimonial</div><div><i></i>Thank You for Closed Business</div><p class="hint">15 seconds each.</p></div></div>'});
+// 10b TYFCB reporting guide
+if(CFG.tyfcb){S.push({sec:3,html:K('16','Thank You for Closed Business')+'<h2>How to report <em>closed business</em>.</h2><p class="lead" style="margin-top:12px;font-size:26px">Keep it consistent and conservative &mdash; report based on the type of business you’re in.</p><div class="rules4"><div class="r4"><h3>Commission based</h3><div class="what">Report your gross commission</div><p>Insurance, mortgages, investments, realtors, payroll services</p></div><div class="r4"><h3>Service providers</h3><div class="what">Report the gross amount you charged</div><p>Web design, coaching, attorneys, CPAs, photographers, salons and spas</p></div><div class="r4"><h3>Product providers</h3><div class="what">Report the total cost to the client &mdash; product plus service</div><p>Plumbing, roofing, flooring, HVAC, printing, general contractors</p></div><div class="r4"><h3>Banking</h3><ul><li><b>Loans:</b> interest over the full term</li><li><b>Deposits:</b> 10% of the opening amount</li><li><b>Lines of credit:</b> 10% of the line</li><li><b>Other services:</b> flat $250</li></ul></div></div>'})}
+// 11 visitor feedback
+var wall=['Maria Nunez','Bethany Black','Daisy Pineda','Colin Clancy','Jay Shergill','Joseph Barghouthi','Thi Kelley','John Wheeler','John Jorgensen','Marie Zandian','Tom Pavicic','Elizabeth Popova','Bryan Russell','Shannon Sevor','Phil Lonardo','Roxanne Salazar','Denise Artache','Shawna Rodriguez','Sonia Shah','Elliot Foad','Ken Wong'];
+S.push({sec:3,html:K('17','Visitor feedback')+'<h1>Visitors, what did you <em>like about the meeting</em> today?</h1><div class="faces-cap">The members of BNI Premiere</div><div class="faces" style="margin-top:0">'+wall.map(function(n){return '<div title="'+esc(n)+'">'+av(n)+'</div>'}).join('')+'</div>'});
+// 12 visitor statement + hosts
+var hosts=['Colin Clancy','Joseph Barghouthi','Mike Caulkins'];
+S.push({sec:3,html:K('18','Visitor statement')+'<div class="split"><div><h2>Thank you for <em>joining us</em>.</h2><p class="lead">We hope today showed how our chapter can help you grow your business. Please gather your belongings and meet our visitor hosts at the front of the restaurant.</p><div style="margin-top:34px">'+qrCard()+'</div></div><div class="hosts">'+hosts.map(function(h){return '<div class="host">'+av(h)+'<b>'+esc(h)+'</b></div>'}).join('')+'</div></div>'});
+// 12b business card reminder (after visitors leave)
+S.push({sec:3,html:K('','Members reminder')+'<h2>Please <em>refill your business cards</em> in the box.</h2><p class="lead">Visitors have headed out &mdash; take a minute to restock your slot so visitors can always grab your card.</p><div class="cards9">'+['Lino Martire','Marcus Araiza','Joseph Barghouthi','Daisy Pineda','Sailosi Taunaholo','Edward Ciccarelli','Keith Nisby','Shawna Rodriguez','Jeannette Marsala'].map(function(n){return '<div class="host">'+av(n)+'<b>'+esc(n)+'</b></div>'}).join('')+'</div>'});
+// 13 door prize
+S.push({sec:4,html:K('19','Door prize drawing')+'<h1>Door <em>prize</em> drawing.</h1><p class="lead">Thank you to today’s speakers for this week’s prizes.</p><div class="prize-row">'+cur.names.map(function(n){var m=find(n);return '<div class="spk" style="padding:28px 20px">'+av(m.Name).replace('class="av"','class="av" style="width:120px;height:120px;font-size:38px"')+'<b style="font-size:28px">'+esc(m.Name)+'</b><div class="co">'+esc(m.Company)+'</div></div>'}).join('')+'</div>'});
+// 14 recognition
+S.push({sec:4,html:K('20','Trophy &amp; recognition')+'<div class="split" style="margin-top:20px;align-items:center;grid-template-columns:1.4fr 1fr"><div><h1>Member <em>recognition</em>.</h1><p class="lead">Celebrating the members who make Givers Gain real.</p></div><div class="trophy"><svg width="190" height="190" viewBox="0 0 24 24" fill="none" stroke="#C4242A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M17 5h2.5a1.5 1.5 0 0 1 1.5 1.5V7a4 4 0 0 1-4 4M7 5H4.5A1.5 1.5 0 0 0 3 6.5V7a4 4 0 0 0 4 4"/></svg></div></div>'});
+// 15 announcements
+S.push({sec:4,html:K('21','Announcements &amp; reminders')+'<h2>Before you head out.</h2><div class="check"><div><i>1</i>Register your substitutes and visitors in advance.</div><div><i>2</i>Follow up on referrals and schedule your one-to-ones.</div><div><i>3</i>Clean up your area before leaving.</div></div><p class="hint" style="margin-top:auto">Events and speaker dates are on the BAND calendar.</p>'});
+// 16 close
+var nxt=up[1];var nd=nxt?sd(nxt.date):null;
+S.push({sec:4,cls:'close-slide',html:K('22','Closing','8:30 AM')+'<h1>Thank you for practicing Givers Gain.</h1><p class="lead">Thank you for showing up for each other.</p><div class="nextmtg"><div>Next meeting<b>'+(nd?fmt(nd,{weekday:'long',month:'long',day:'numeric'}):'Next Wednesday')+', 7:00 AM</b></div>'+(nxt?'<div>Next week’s speakers<b>'+nxt.names.map(function(n){return esc(find(n).Name.split(' ')[0])}).join(', ')+'</b></div>':'')+'</div>'});
+
+var deck=document.getElementById('deck');
+deck.innerHTML='<div class="top"><a class="brand" href="'+ROOT+'"><img src="'+LOGO+'" alt="BNI"><span class="site">bnipremierchapter.com</span></a><span>'+fmt(mdate,{weekday:'long',month:'long',day:'numeric'})+'</span></div>'+S.map(function(s,i){return '<section class="slide '+(s.cls||'')+'" data-i="'+i+'">'+s.html+'</section>'}).join('')+'<div class="bar" id="bar">'+SECTIONS.map(function(s,i){return '<div class="sec" data-s="'+i+'"><span class="lbl">'+s[0]+(s[1]?' &middot; '+s[1]:'')+'</span></div>'}).join('')+'<span class="count" id="count"></span></div>';
+var slides=[].slice.call(deck.querySelectorAll('.slide'));var idx=0;
+try{var h=parseInt(location.hash.slice(1));if(h>0&&h<=slides.length)idx=h-1}catch(e){}
+function show(i){idx=Math.max(0,Math.min(slides.length-1,i));slides.forEach(function(s,j){s.classList.toggle('on',j===idx)});
+ var sec=S[idx].sec;var inSec=S.map(function(s,j){return [s.sec,j]}).filter(function(x){return x[0]===sec}).map(function(x){return x[1]});
+ var p=Math.round(100*(inSec.indexOf(idx)+1)/inSec.length);
+ [].forEach.call(document.querySelectorAll('.bar .sec'),function(b,j){b.className='sec'+(j<sec?' done':j===sec?' cur':'');if(j===sec)b.style.setProperty('--p',p+'%')});
+ var title=S[idx].cls==='title-slide'||S[idx].cls==='close-slide';
+ document.querySelector('.top').style.display=title?'none':'flex';document.getElementById('bar').style.display=title?'none':'flex';
+ document.getElementById('count').textContent=(idx+1)+' / '+slides.length;
+ history.replaceState(null,'','#'+(idx+1));resetTimer()}
+function fit(){var mob=window.innerWidth<820;document.documentElement.classList.toggle('m',mob);if(mob){deck.style.transform='none';return}var s=Math.min(window.innerWidth/1600,window.innerHeight/900);deck.style.transform='scale('+s+')'}
+window.addEventListener('resize',function(){fit();if(!tx)resetTimer()});fit();
+document.addEventListener('keydown',function(e){if(['ArrowRight','PageDown',' ','Enter'].indexOf(e.key)>-1){e.preventDefault();show(idx+1)}else if(['ArrowLeft','PageUp','Backspace'].indexOf(e.key)>-1){e.preventDefault();show(idx-1)}else if(e.key==='Home')show(0);else if(e.key==='End')show(slides.length-1);else if(e.key==='f'||e.key==='F')toggleFs();else if(e.key==='t'||e.key==='T')startTimer()});
+document.getElementById('prev').onclick=function(){show(idx-1)};document.getElementById('next').onclick=function(){show(idx+1)};
+function toggleFs(){if(!document.fullscreenElement)document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();else document.exitFullscreen()}
+document.getElementById('fs').onclick=toggleFs;
+var tx=null;function resetTimer(){clearInterval(tx);tx=null;var r=document.getElementById('ring');if(!r)return;r.classList.remove('done');document.getElementById('tnum').textContent='15';document.getElementById('tlbl').textContent=document.documentElement.classList.contains('m')?'Tap to start':'Press T to start';document.getElementById('arc').style.strokeDashoffset=0}
+function startTimer(){var r=document.getElementById('ring');if(!r||(!r.closest('.slide.on')&&!document.documentElement.classList.contains('m')))return;resetTimer();var end=Date.now()+15000;document.getElementById('tlbl').textContent='seconds';
+ tx=setInterval(function(){var left=Math.max(0,end-Date.now());document.getElementById('tnum').textContent=Math.ceil(left/1000);document.getElementById('arc').style.strokeDashoffset=339.3*(1-left/15000);
+  if(left<=0){clearInterval(tx);r.classList.add('done');document.getElementById('tlbl').textContent='Time!'}},100)}
+var _r=document.getElementById('ring');if(_r)_r.onclick=startTimer;
+show(idx);
+</script></body></html>
+"""
+h = (HTML.replace("__LOGO__", logo64).replace("__MEMBERS__", members_js)
+         .replace("__SPEAKERS__", speakers_js).replace("__ROOT__", ROOT).replace("__PHOTOS__", photos_js))
+import os; os.makedirs(os.path.dirname(out), exist_ok=True)
+open(out, "w", encoding="utf-8").write(h)
+print("written", len(h))

@@ -312,7 +312,7 @@ function spFind(n){var l=n.toLowerCase();var m=MEMBERS.filter(function(x){return
  return m||{Name:n,Classification:'',Company:''}}
 function spDate(s){var p=s.split('-');return new Date(+p[0],+p[1]-1,+p[2])}
 function initSpeakers(){var t=new Date();t.setHours(0,0,0,0);
- var up=SPEAKERS.filter(function(w){return spDate(w.date)>=t}).sort(function(a,b){return spDate(a.date)-spDate(b.date)});
+ var now=Date.now();var up=SPEAKERS.filter(function(w){return spDate(w.date).getTime()+8.5*3600e3>now}).sort(function(a,b){return spDate(a.date)-spDate(b.date)});
  if(!up.length)return;var cur=up[0],d=spDate(cur.date);
  document.getElementById('sp-date').textContent=(d.getTime()===t.getTime()?'Today, ':'')+d.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});
  document.getElementById('sp-grid').innerHTML=cur.names.map(function(n,i){var m=spFind(n);
