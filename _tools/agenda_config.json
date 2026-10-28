@@ -2,9 +2,46 @@
  "2026-10-28": {
   "tyfcb": true,
   "events": [
-   {"date": "2026-10-29", "title": "Oktoberfest Resource Fair & Festival", "time": "3:00 – 6:00 PM", "place": "", "host": "Roxanne Salazar"},
-   {"date": "2026-11-04", "title": "BNI Monthly B2B Sub-Committee", "time": "9:00 – 9:30 AM", "place": "1st Wednesday of every month", "host": "Ken Wong"},
-   {"date": "2026-11-11", "title": "BNI Senior Power Team Meeting", "time": "9:30 AM", "place": "Marsala Law Firm", "host": "Jeannette Marsala"}
+   {
+    "date": "2026-10-29",
+    "title": "Oktoberfest Resource Fair & Festival",
+    "time": "3:00 – 6:00 PM",
+    "place": "",
+    "host": "Roxanne Salazar"
+   },
+   {
+    "date": "2026-11-04",
+    "title": "BNI Monthly B2B Sub-Committee",
+    "time": "9:00 – 9:30 AM",
+    "place": "1st Wednesday of every month",
+    "host": "Ken Wong"
+   },
+   {
+    "date": "2026-11-11",
+    "title": "BNI Senior Power Team Meeting",
+    "time": "9:30 AM",
+    "place": "Marsala Law Firm",
+    "host": "Jeannette Marsala"
+   }
+  ]
+ },
+ "2026-11-04": {
+  "tyfcb": true,
+  "events": [
+   {
+    "date": "2026-11-04",
+    "title": "BNI Monthly B2B Sub-Committee",
+    "time": "9:00 – 9:30 AM",
+    "place": "1st Wednesday of every month",
+    "host": "Ken Wong"
+   },
+   {
+    "date": "2026-11-11",
+    "title": "BNI Senior Power Team Meeting",
+    "time": "9:30 AM",
+    "place": "Marsala Law Firm",
+    "host": "Jeannette Marsala"
+   }
   ]
  }
 }
