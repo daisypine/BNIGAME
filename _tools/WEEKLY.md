@@ -29,3 +29,8 @@ The homepage shows a meeting as "this week" until 8:30 AM on meeting day, then a
 3. Next week's agenda: read BAND events for the next ~3 weeks, add them to `agenda_config.json` under next meeting's date (keep `"tyfcb": true` only if asked), add the meeting to `agendas.json`, build the agenda and the agenda list.
 4. Flyers for next week's 3 speakers with `make_flyers.py`.
 5. Commit + push to `main` (`_tools/` changes too, so state carries over). Wait ~60 s and check the live pages.
+
+## Optional per-meeting slides (`agenda_config.json`)
+- `"induction": true` → "New member induction" slide after leadership reports (no names).
+- `"presentations": {"Name": "url or empty"}` → one slide per speaker after "today's speakers", with an "Open presentation" button when a URL is set.
+- `"education": [{"h","lead","steps":[{"img":"edu/1.jpg","t":"..."}]}]` → walkthrough slides after the Education slide; images live in `agenda/<slug>/edu/`.

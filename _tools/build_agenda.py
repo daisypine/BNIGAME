@@ -338,6 +338,19 @@ html.m .team .av[style]{width:46px!important;height:46px!important;font-size:15p
 html.m .team .ppl+div[style]{font-size:14px!important;margin-top:8px!important}
 html.m .team-grid[style]{margin-top:18px!important}
 html.m [style*="margin-top:44px"],html.m [style*="margin-top:56px"]{margin-top:18px!important}
+.phones{display:flex;gap:34px;margin-top:22px;align-items:flex-start;justify-content:center}
+.phone{flex:1;max-width:330px;text-align:center}
+.phone img{height:370px;width:auto;margin:0 auto;border-radius:22px;box-shadow:0 0 0 6px #161616,0 18px 40px rgba(0,0,0,.18);display:block}
+.phone .step{display:flex;gap:12px;align-items:flex-start;text-align:left;margin-top:22px;font-size:22px;line-height:1.3;color:var(--ink)}
+.phone .step i{font-style:normal;flex-shrink:0;width:36px;height:36px;border-radius:9px;background:var(--red);color:#fff;font-size:20px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.pres{display:flex;gap:60px;align-items:center;margin-top:40px}
+.pres .av{width:260px;height:260px;font-size:80px;border:8px solid #fff;box-shadow:0 0 0 2px var(--line);flex-shrink:0}
+.pres b{display:block;font-size:64px;letter-spacing:-1.5px;line-height:1.05}
+.pres .cls{font-size:30px;color:var(--red);font-weight:700;margin-top:12px}
+.pres .co{font-size:26px;color:var(--muted);margin-top:6px}
+.openbtn{display:inline-block;margin-top:34px;background:var(--red);color:#fff;text-decoration:none;font-size:30px;font-weight:700;padding:22px 40px;border-radius:16px}
+html.m .phones{flex-wrap:wrap;gap:18px}html.m .phone{flex:1 1 40%}html.m .phone img{height:auto;width:100%}html.m .phone .step{font-size:15px}
+html.m .pres{flex-direction:column;gap:20px;text-align:center}html.m .pres .av{width:140px;height:140px;font-size:44px}html.m .pres b{font-size:34px}html.m .openbtn{font-size:18px;padding:14px 22px}
 </style></head><body>
 <div class="stage"><div class="deck" id="deck"></div></div>
 <button class="nav-btn" id="prev" aria-label="Previous">&larr;</button>
@@ -386,17 +399,23 @@ var teams=[['President',[['Maria Nunez','']]],['Vice President',[['Bethany Black
 S.push({sec:0,html:K('04','Our leadership team')+'<h2>Here to <em>help</em>. Reach out anytime.</h2><div class="team-grid lead-grid">'+teams.map(function(t){return '<div class="team"><h4>'+t[0]+'</h4><div class="ppl">'+t[1].map(function(p){return person(p[0],p[1])}).join('')+'</div></div>'}).join('')+'</div>'});
 // 5 education + card boxes
 S.push({sec:0,html:K('05','Education moment')+'<div class="split" style="margin-top:0;align-items:center"><div><h1>Education <em>moment</em>.</h1><p class="lead">A few minutes to help every member get more out of BNI.</p></div><div class="edu2">'+['Bryan Russell','Shannon Sevor'].map(function(n){return '<div class="feature">'+av(n)+'<span>Education</span><b>'+esc(n)+'</b></div>'}).join('')+'</div></div><div class="grow"></div><div class="givers" style="background:var(--red-soft)"><div class="gg" style="font-size:44px">06 &nbsp;Business cards</div><p>Visitors: these boxes hold our members’ cards. Members: please refill yours.</p></div>'});
+// 5b education walkthrough slides (agenda_config "education")
+if(CFG.education){CFG.education.forEach(function(e){S.push({sec:0,html:K('05',e.kicker||'Education moment')+'<h2>'+e.h+'</h2>'+(e.lead?'<p class="lead" style="margin-top:10px;font-size:26px">'+e.lead+'</p>':'')+'<div class="phones">'+e.steps.map(function(t,i){return '<div class="phone"><img src="'+t.img+'" alt=""><div class="step"><i>'+(t.n||i+1)+'</i><span>'+t.t+'</span></div></div>'}).join('')+'</div>'})})}
 // 6 intros
 S.push({sec:1,html:K('08','Member introductions')+'<h2>Who you are. What you do. <em>The referral you’re looking for.</em></h2><div class="rules"><div class="rule"><div class="sec">30<small>s</small></div><h3>Members</h3><p>Substitutes give the member’s presentation.</p></div><div class="rule"><div class="sec">10<small>s</small></div><h3>Inviting members</h3><p>Introduce your visitor.</p></div><div class="rule"><div class="sec">15<small>s</small></div><h3>Visitors</h3><p>15–20 seconds about your business.</p></div></div>'});
 // 7 reports
 var rep=[['09','Vice President','Bethany Black'],['10','Membership','John Wheeler'],['11','Growth','Ken Wong, Elliot Foad'],['12','Events','Roxanne Salazar, Phil Lonardo'],['13','Mentorship','Denise Artache, Vijay Ubhayaker, Sonia Shah, Shawna Rodriguez'],['14','Secretary / Treasurer','Daisy Pineda']];
 S.push({sec:1,html:K('09–14','Leadership reports')+'<h2>Each team supports a different part of our chapter.</h2><div class="team-grid" style="margin-top:44px">'+rep.map(function(r){return '<div class="team"><h4>'+r[0]+' &middot; '+r[1]+'</h4><div class="ppl">'+r[2].split(', ').map(function(n){return '<div title="'+esc(n)+'">'+av(n).replace('class="av"','class="av" style="width:86px;height:86px;font-size:26px"')+'</div>'}).join('')+'</div><div style="font-size:19px;color:var(--muted);margin-top:12px">'+esc(r[2])+'</div></div>'}).join('')+'</div>'});
+// 8a new member induction (agenda_config "induction")
+if(CFG.induction){S.push({sec:1,html:K('10','New member induction')+'<h1>Welcome to <em>BNI Premiere</em>.</h1><p class="lead">Please join us in welcoming our newest members to the chapter.</p><div class="grow"></div><div class="givers"><div class="gg">Givers Gain</div><p>Presented by the Membership Committee.</p></div>'})}
 // 8b upcoming events (from BAND)
 if(CFG.events&&CFG.events.length){S.push({sec:1,html:K('12','Events')+'<h2>What’s <em>coming up</em>.</h2><div class="evlist">'+CFG.events.map(function(e){var d=sd(e.date);return '<div class="ev"><div class="cal"><small>'+fmt(d,{month:'short'})+'</small><b>'+d.getDate()+'</b></div><div><div class="t">'+esc(e.title)+'</div><div class="m">'+fmt(d,{weekday:'long'})+' &middot; '+esc(e.time)+(e.place?' &middot; '+esc(e.place):'')+'</div></div>'+(e.host?'<div class="who"><span>Hosted by<br><b style="color:var(--ink)">'+esc(e.host)+'</b></span>'+av(e.host)+'</div>':'')+'</div>'}).join('')+'</div><p class="hint" style="margin-top:24px">All chapter events are on our BAND calendar.</p>'})}
 // 8 next three weeks
 S.push({sec:2,html:K('15','Speaker announcement')+'<h2>Our next <em>three weeks</em>.</h2><div class="next3">'+(nextWeeks.length?nextWeeks.map(function(w){var d=sd(w.date);return '<div class="wk"><div class="when"><b>'+fmt(d,{month:'short',day:'numeric'})+'</b><span>'+fmt(d,{weekday:'short'})+'</span></div><div class="who">'+w.names.map(function(n){var m=find(n);return person(m.Name,m.Classification)}).join('')+'</div></div>'}).join(''):'<p class="lead">Schedule coming soon.</p>')+'</div><p class="hint" style="margin-top:auto">Want to be a backup speaker? Sign up at bnipremierchapter.com</p>'});
 // 9 today's speakers
 S.push({sec:2,html:K('15','Feature presentations')+'<h2>Please welcome <em>today’s speakers</em>.</h2><div class="sp-today">'+cur.names.map(function(n,i){var m=find(n);return '<div class="spk"><span class="n">0'+(i+1)+'</span>'+av(m.Name)+'<b>'+esc(m.Name)+'</b><div class="cls">'+esc(m.Classification)+'</div><div class="co">'+esc(m.Company)+'</div></div>'}).join('')+'</div>'});
+// 9b each speaker's presentation (agenda_config "presentations": {name: url or ""})
+if(CFG.presentations){cur.names.forEach(function(n,i){if(!(n in CFG.presentations))return;var m=find(n);var u=CFG.presentations[n];S.push({sec:2,html:K('15','Feature presentation '+(i+1)+' of '+cur.names.length)+'<div class="pres">'+av(m.Name)+'<div><b>'+esc(m.Name)+'</b><div class="cls">'+esc(m.Classification)+'</div><div class="co">'+esc(m.Company)+'</div>'+(u?'<a class="openbtn" href="'+esc(u)+'" target="_blank" rel="noopener">Open presentation &#8599;</a>':'')+'</div></div>'})})}
 // 11 visitor feedback
 var wall=['Maria Nunez','Bethany Black','Daisy Pineda','Colin Clancy','Jay Shergill','Joseph Barghouthi','Thi Kelley','John Wheeler','John Jorgensen','Marie Zandian','Tom Pavicic','Elizabeth Popova','Bryan Russell','Shannon Sevor','Phil Lonardo','Roxanne Salazar','Denise Artache','Shawna Rodriguez','Sonia Shah','Elliot Foad','Ken Wong'];
 S.push({sec:3,html:K('16','Visitor feedback')+'<h1>Visitors, what did you <em>like about the meeting</em> today?</h1><div class="faces-cap">The members of BNI Premiere</div><div class="faces" style="margin-top:0">'+wall.map(function(n){return '<div title="'+esc(n)+'">'+av(n)+'</div>'}).join('')+'</div>'});

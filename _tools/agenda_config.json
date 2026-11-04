@@ -42,6 +42,46 @@
     "place": "Marsala Law Firm",
     "host": "Jeannette Marsala"
    }
+  ],
+  "induction": true,
+  "presentations": {
+   "Marcus Araiza": "",
+   "Marie Zandian": "",
+   "Marco Cerda": "https://canva.link/rkg4amuuhxpvq3k"
+  },
+  "education": [
+   {
+    "h": "Help us grow on <em>Instagram</em>.",
+    "lead": "Step 1: find and follow our chapter account, <b>@bnipremiere_siliconvalley</b>.",
+    "steps": [
+     {
+      "img": "edu/1-search.jpg",
+      "t": "Tap the search icon and type <b>bnipremiere_siliconvalley</b>"
+     },
+     {
+      "img": "edu/2-follow.jpg",
+      "t": "Open our profile and tap <b>Follow</b>"
+     }
+    ]
+   },
+   {
+    "h": "Post a story and <em>tag BNI</em>.",
+    "lead": "Every story you tag puts our chapter in front of your followers.",
+    "steps": [
+     {
+      "img": "edu/3-your-story.jpg",
+      "t": "On your home screen, tap <b>Your story +</b> and take or pick a photo"
+     },
+     {
+      "img": "edu/4-tag.jpg",
+      "t": "Tap the sticker icon, choose <b>Mention</b>, type <b>@bnipremiere_siliconvalley</b>, then share to <b>Your stories</b>"
+     },
+     {
+      "img": "edu/5-share.jpg",
+      "t": "To share our page, tap <b>&middot;&middot;&middot;</b> on our profile, then <b>Share this profile</b> or <b>QR code</b>"
+     }
+    ]
+   }
   ]
  }
 }
