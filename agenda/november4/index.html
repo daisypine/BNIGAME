@@ -157,7 +157,7 @@ h1 em,h2 em{font-style:normal;color:var(--red)}
 .qrcard b{display:block;font-size:26px;letter-spacing:-.5px;line-height:1.15}
 .qrcard span{display:block;font-size:19px;color:var(--muted);margin-top:8px;line-height:1.4}
 .qrcard .url{color:var(--red);font-weight:700;font-size:19px;margin-top:10px}
-.qr-float{position:absolute;right:110px;top:330px;max-width:520px}
+.qr-float{position:relative;align-self:flex-end;margin-top:24px;max-width:520px}
 .evlist{display:flex;flex-direction:column;gap:18px;margin-top:40px}
 .ev{display:flex;gap:28px;align-items:center;background:var(--off);border-radius:20px;padding:22px 28px}
 .ev .cal{flex-shrink:0;width:96px;text-align:center;background:#fff;border-radius:16px;padding:10px 0;box-shadow:0 0 0 2px var(--line)}
@@ -386,7 +386,7 @@ S.push({sec:0,cls:'title-slide',html:'<div class="left"><img class="logo" src="'
 // 1 call to order
 S.push({sec:0,html:K('01','Call to order','7:15 AM')+'<h1>Welcome to <em>BNI Premiere</em>.</h1><p class="lead">Please take your seats and silence your devices.</p><div class="grow"></div><div class="givers"><div class="gg">Givers Gain</div><p>If I give business to the members of my chapter, business will come back to me.</p></div>'});
 // 2 visitors
-S.push({sec:0,html:K('02','Welcome visitors')+'<div class="qr-float">'+qrCard()+'</div><h1>Welcome, <em>visitors!</em></h1><p class="lead">We’re glad you’re here. Did we miss anyone?</p><div class="faces-cap">Your visitor hosts today</div><div class="hostrow" style="margin-top:0">'+['Colin Clancy','Jay Shergill','Joseph Barghouthi','Thi Kelley','Mike Caulkins','Jason Smith'].map(function(h){return '<div class="host">'+av(h)+'<b>'+esc(h)+'</b></div>'}).join('')+'</div>'});
+S.push({sec:0,html:K('02','Welcome visitors')+'<h1>Welcome, <em>visitors!</em></h1><p class="lead">We’re glad you’re here. Did we miss anyone?</p><div class="qr-float">'+qrCard()+'</div><div class="faces-cap">Your visitor hosts today</div><div class="hostrow" style="margin-top:0">'+['Colin Clancy','Jay Shergill','Joseph Barghouthi','Thi Kelley','Mike Caulkins','Jason Smith'].map(function(h){return '<div class="host">'+av(h)+'<b>'+esc(h)+'</b></div>'}).join('')+'</div>'});
 // 3 BNI by the numbers
 S.push({sec:0,html:K('03','BNI and our vision')+'<h2>One of the world’s largest <em>referral</em> networks.</h2><div class="stats"><div class="stat"><b>355K+</b><span>members</span></div><div class="stat"><b>11.8K+</b><span>chapters</span></div><div class="stat"><b>78</b><span>countries</span></div><div class="stat"><b>17.8M</b><span>referrals passed</span></div><div class="stat"><b>$26.9B</b><span>in business</span></div></div><div class="grow"></div><div class="givers"><div class="gg">Givers Gain</div><p>Each chapter has its own vision. Our vision speaker will share ours.</p></div>'});
 // 4 leadership
