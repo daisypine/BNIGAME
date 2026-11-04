@@ -605,5 +605,31 @@
     "Breakfast: Wednesday, Dec 16"
    ]
   }
+ },
+ "2026-11-11": {
+  "tyfcb": true,
+  "events": [
+   {
+    "date": "2026-11-11",
+    "title": "Founders Education Series: Standing in the Middle of Referrals",
+    "time": "8:00 – 9:00 AM",
+    "place": "",
+    "host": "Roxanne Salazar"
+   },
+   {
+    "date": "2026-11-11",
+    "title": "BNI Senior Power Team Meeting",
+    "time": "9:30 AM",
+    "place": "Marsala Law Firm",
+    "host": "Jeannette Marsala"
+   },
+   {
+    "date": "2026-11-17",
+    "title": "Estate Planning Seminar",
+    "time": "10:30 AM – 12:00 PM",
+    "place": "Marsala Law Firm",
+    "host": "Jeannette Marsala"
+   }
+  ]
  }
 }
