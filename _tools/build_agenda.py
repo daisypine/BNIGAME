@@ -357,6 +357,18 @@ html.m .pres{flex-direction:column;gap:20px;text-align:center}html.m .pres .av{w
 .evlist.two .t{font-size:22px;line-height:1.2}.evlist.two .m{font-size:16px;margin-top:4px}
 .evlist.two .who span{display:none}.evlist.two .who .av{width:46px;height:46px;font-size:15px}
 html.m .evlist.two{grid-template-columns:1fr}
+.top5{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;margin-top:34px}
+.top5 .t5{background:var(--off);border-radius:20px;padding:22px 14px;text-align:center;position:relative}
+.top5 .t5 .rk{position:absolute;top:12px;left:16px;font-size:20px;font-weight:700;color:var(--red)}
+.top5 .t5 .av{width:96px;height:96px;font-size:30px;margin:0 auto 12px;border:5px solid #fff}
+.top5 .t5 b{display:block;font-size:22px;line-height:1.2}.top5 .t5 span{display:block;font-size:17px;color:var(--muted);margin-top:4px}
+.ranks{display:grid;grid-template-columns:repeat(3,1fr);gap:0 26px;margin-top:16px;grid-auto-flow:column;grid-template-rows:repeat(16,auto)}
+.rk-row{display:flex;align-items:center;gap:12px;font-size:17px;padding:3px 12px;border-radius:9px;border-bottom:1px solid var(--line)}
+.rk-row i{font-style:normal;width:26px;color:var(--muted);font-size:15px;font-weight:700}
+.rk-row span{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.rk-row em{font-style:normal;font-weight:700;font-size:17px}
+.rk-row.bf{background:var(--red-soft);border-bottom-color:transparent}.rk-row.bf em{color:var(--red)}
+.bfkey{display:inline-block;background:var(--red-soft);color:var(--red);font-weight:700;border-radius:8px;padding:2px 10px}
+html.m .top5{grid-template-columns:1fr 1fr}html.m .ranks{grid-template-columns:1fr;grid-template-rows:none;grid-auto-flow:row}html.m .rk-row{font-size:15px}
 </style></head><body>
 <div class="stage"><div class="deck" id="deck"></div></div>
 <button class="nav-btn" id="prev" aria-label="Previous">&larr;</button>
@@ -412,6 +424,13 @@ S.push({sec:1,html:K('08','Member introductions')+'<h2>Who you are. What you do.
 // 7 reports
 var rep=[['09','Vice President','Bethany Black'],['10','Membership','John Wheeler'],['11','Growth','Ken Wong, Elliot Foad'],['12','Events','Roxanne Salazar, Phil Lonardo'],['13','Mentorship','Denise Artache, Vijay Ubhayaker, Sonia Shah, Shawna Rodriguez'],['14','Secretary / Treasurer','Daisy Pineda']];
 S.push({sec:1,html:K('09–14','Leadership reports')+'<h2>Each team supports a different part of our chapter.</h2><div class="team-grid" style="margin-top:44px">'+rep.map(function(r){return '<div class="team"><h4>'+r[0]+' &middot; '+r[1]+'</h4><div class="ppl">'+r[2].split(', ').map(function(n){return '<div title="'+esc(n)+'">'+av(n).replace('class="av"','class="av" style="width:86px;height:86px;font-size:26px"')+'</div>'}).join('')+'</div><div style="font-size:19px;color:var(--muted);margin-top:12px">'+esc(r[2])+'</div></div>'}).join('')+'</div>'});
+// 8a0 growth committee PALMS report (agenda_config "growth")
+if(CFG.growth){(function(){var G=CFG.growth,R=G.rows,sum=function(f){return R.reduce(function(a,r){return a+f(r)},0)};
+var tot=[[sum(function(r){return r.rgi+r.rgo}),'referrals passed'],[sum(function(r){return r.o}),'one-to-ones'],[sum(function(r){return r.v}),'visitors'],['$'+(sum(function(r){return r.tyfcb})/1000).toFixed(1)+'K','thank you for closed business']];
+var top=R.slice().sort(function(a,b){return b.s-a.s}).slice(0,5);
+S.push({sec:1,html:K('11','Growth committee')+'<h2>October <em>by the numbers</em>.</h2><p class="lead" style="margin-top:8px;font-size:24px">PALMS summary &middot; '+esc(G.period)+'</p><div class="stats" style="margin-top:26px">'+tot.map(function(t){return '<div class="stat"><b>'+t[0]+'</b><span>'+t[1]+'</span></div>'}).join('')+'</div><div class="faces-cap" style="margin-top:30px">Top 5 this month</div><div class="top5" style="margin-top:8px">'+top.map(function(r,i){return '<div class="t5"><span class="rk">'+(i+1)+'</span>'+av(r.n)+'<b>'+esc(r.n)+'</b><span>Score '+r.s.toFixed(2)+'</span></div>'}).join('')+'</div>'});
+var all=R.slice().sort(function(a,b){return b.s-a.s});
+S.push({sec:1,html:K('11','Growth committee &middot; Breakfast challenge')+'<h2>Who’s cooking <em>breakfast</em>?</h2><p class="lead" style="margin-top:8px;font-size:22px">Highlighted = <span class="bfkey">tentative breakfast crew</span>, cooking for the chapter on Dec 16. Still time to climb!</p><div class="ranks">'+all.map(function(r,i){return '<div class="rk-row'+(r.b?' bf':'')+'"><i>'+(i+1)+'</i><span>'+esc(r.n)+'</span><em>'+r.s.toFixed(2)+'</em></div>'}).join('')+'</div><p class="hint" style="margin-top:16px">'+G.notes.map(esc).join(' &middot; ')+'</p>'})})()}
 // 8a new member induction (agenda_config "induction")
 if(CFG.induction){S.push({sec:1,html:K('10','New member induction')+'<h1>Welcome to <em>BNI Premiere</em>.</h1><p class="lead">Please join us in welcoming our newest members to the chapter.</p><div class="grow"></div><div class="givers"><div class="gg">Givers Gain</div><p>Presented by the Membership Committee.</p></div>'})}
 // 8b upcoming events (from BAND)

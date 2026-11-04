@@ -124,6 +124,486 @@
      }
     ]
    }
-  ]
+  ],
+  "growth": {
+   "period": "Oct 1 – Oct 31, 2026",
+   "rows": [
+    {
+     "n": "John Jussen",
+     "rgi": 0,
+     "rgo": 2,
+     "v": 0,
+     "o": 17,
+     "tyfcb": 21700,
+     "s": 6.44,
+     "b": false
+    },
+    {
+     "n": "Hubert Gotuaco",
+     "rgi": 0,
+     "rgo": 6,
+     "v": 0,
+     "o": 13,
+     "tyfcb": 5000,
+     "s": 5.56,
+     "b": false
+    },
+    {
+     "n": "Ken Wong",
+     "rgi": 1,
+     "rgo": 0,
+     "v": 1,
+     "o": 14,
+     "tyfcb": 2110,
+     "s": 5.44,
+     "b": false
+    },
+    {
+     "n": "Maria Nunez",
+     "rgi": 11,
+     "rgo": 2,
+     "v": 0,
+     "o": 10,
+     "tyfcb": 1583,
+     "s": 5.33,
+     "b": false
+    },
+    {
+     "n": "Bryan Russell",
+     "rgi": 1,
+     "rgo": 2,
+     "v": 0,
+     "o": 8,
+     "tyfcb": 300,
+     "s": 3.44,
+     "b": false
+    },
+    {
+     "n": "Shannon Sevor",
+     "rgi": 2,
+     "rgo": 1,
+     "v": 0,
+     "o": 8,
+     "tyfcb": 1250,
+     "s": 3.44,
+     "b": false
+    },
+    {
+     "n": "John Wheeler",
+     "rgi": 0,
+     "rgo": 5,
+     "v": 1,
+     "o": 7,
+     "tyfcb": 0,
+     "s": 3.44,
+     "b": false
+    },
+    {
+     "n": "Bethany Black",
+     "rgi": 0,
+     "rgo": 1,
+     "v": 1,
+     "o": 8,
+     "tyfcb": 0,
+     "s": 3.33,
+     "b": false
+    },
+    {
+     "n": "Edward Ciccarelli",
+     "rgi": 1,
+     "rgo": 1,
+     "v": 0,
+     "o": 8,
+     "tyfcb": 50,
+     "s": 3.33,
+     "b": false
+    },
+    {
+     "n": "Orlando Nevarez",
+     "rgi": 2,
+     "rgo": 1,
+     "v": 0,
+     "o": 7,
+     "tyfcb": 0,
+     "s": 3.11,
+     "b": false
+    },
+    {
+     "n": "Roxanne Salazar",
+     "rgi": 0,
+     "rgo": 8,
+     "v": 0,
+     "o": 5,
+     "tyfcb": 20158,
+     "s": 3.11,
+     "b": false
+    },
+    {
+     "n": "Michael McIlrath",
+     "rgi": 1,
+     "rgo": 0,
+     "v": 0,
+     "o": 7,
+     "tyfcb": 5900,
+     "s": 3,
+     "b": false
+    },
+    {
+     "n": "Jason Smith",
+     "rgi": 0,
+     "rgo": 1,
+     "v": 0,
+     "o": 7,
+     "tyfcb": 0,
+     "s": 2.89,
+     "b": false
+    },
+    {
+     "n": "Mike Caulkins",
+     "rgi": 0,
+     "rgo": 0,
+     "v": 0,
+     "o": 7,
+     "tyfcb": 244,
+     "s": 2.78,
+     "b": false
+    },
+    {
+     "n": "Elliot Foad",
+     "rgi": 0,
+     "rgo": 0,
+     "v": 0,
+     "o": 7,
+     "tyfcb": 100,
+     "s": 2.78,
+     "b": false
+    },
+    {
+     "n": "Robert Min",
+     "rgi": 0,
+     "rgo": 0,
+     "v": 0,
+     "o": 7,
+     "tyfcb": 50,
+     "s": 2.78,
+     "b": false
+    },
+    {
+     "n": "Daisy Pineda",
+     "rgi": 0,
+     "rgo": 0,
+     "v": 0,
+     "o": 7,
+     "tyfcb": 50,
+     "s": 2.78,
+     "b": false
+    },
+    {
+     "n": "Colin Clancy",
+     "rgi": 0,
+     "rgo": 1,
+     "v": 0,
+     "o": 6,
+     "tyfcb": 3685,
+     "s": 2.67,
+     "b": false
+    },
+    {
+     "n": "Thi Kelley",
+     "rgi": 1,
+     "rgo": 0,
+     "v": 0,
+     "o": 6,
+     "tyfcb": 0,
+     "s": 2.56,
+     "b": false
+    },
+    {
+     "n": "Tom Pavicic",
+     "rgi": 0,
+     "rgo": 0,
+     "v": 0,
+     "o": 5,
+     "tyfcb": 0,
+     "s": 2.11,
+     "b": false
+    },
+    {
+     "n": "Elizabeth Popova",
+     "rgi": 0,
+     "rgo": 1,
+     "v": 0,
+     "o": 6,
+     "tyfcb": 1468,
+     "s": 2.11,
+     "b": false
+    },
+    {
+     "n": "Mario Renteria",
+     "rgi": 1,
+     "rgo": 1,
+     "v": 0,
+     "o": 4,
+     "tyfcb": 2000,
+     "s": 2.11,
+     "b": false
+    },
+    {
+     "n": "Keith Nisby",
+     "rgi": 0,
+     "rgo": 0,
+     "v": 0,
+     "o": 6,
+     "tyfcb": 0,
+     "s": 2,
+     "b": false
+    },
+    {
+     "n": "David Nasseri",
+     "rgi": 0,
+     "rgo": 1,
+     "v": 0,
+     "o": 4,
+     "tyfcb": 0,
+     "s": 1.89,
+     "b": false
+    },
+    {
+     "n": "Sonia Shah",
+     "rgi": 1,
+     "rgo": 0,
+     "v": 0,
+     "o": 3,
+     "tyfcb": 0,
+     "s": 1.56,
+     "b": false
+    },
+    {
+     "n": "Phil Lonardo",
+     "rgi": 0,
+     "rgo": 3,
+     "v": 0,
+     "o": 2,
+     "tyfcb": 0,
+     "s": 1.44,
+     "b": false
+    },
+    {
+     "n": "Sean McCarthy",
+     "rgi": 0,
+     "rgo": 1,
+     "v": 0,
+     "o": 3,
+     "tyfcb": 6400,
+     "s": 1.44,
+     "b": false
+    },
+    {
+     "n": "Clifford Shaw",
+     "rgi": 0,
+     "rgo": 0,
+     "v": 0,
+     "o": 3,
+     "tyfcb": 500,
+     "s": 1.44,
+     "b": false
+    },
+    {
+     "n": "Denise Artache",
+     "rgi": 0,
+     "rgo": 4,
+     "v": 0,
+     "o": 1,
+     "tyfcb": 2000,
+     "s": 1.33,
+     "b": false
+    },
+    {
+     "n": "Joseph Barghouthi",
+     "rgi": 0,
+     "rgo": 0,
+     "v": 0,
+     "o": 3,
+     "tyfcb": 50,
+     "s": 1.22,
+     "b": false
+    },
+    {
+     "n": "Ramji Digumarthi",
+     "rgi": 0,
+     "rgo": 1,
+     "v": 0,
+     "o": 2,
+     "tyfcb": 250,
+     "s": 1.22,
+     "b": false
+    },
+    {
+     "n": "Jeannette Marsala",
+     "rgi": 1,
+     "rgo": 1,
+     "v": 0,
+     "o": 2,
+     "tyfcb": 3505,
+     "s": 1.22,
+     "b": false
+    },
+    {
+     "n": "Felipe Miguel Mejia",
+     "rgi": 0,
+     "rgo": 1,
+     "v": 0,
+     "o": 2,
+     "tyfcb": 0,
+     "s": 1.22,
+     "b": false
+    },
+    {
+     "n": "Jay Shergill",
+     "rgi": 0,
+     "rgo": 0,
+     "v": 1,
+     "o": 2,
+     "tyfcb": 250,
+     "s": 1.22,
+     "b": false
+    },
+    {
+     "n": "John Jorgensen",
+     "rgi": 0,
+     "rgo": 3,
+     "v": 0,
+     "o": 1,
+     "tyfcb": 300,
+     "s": 1.11,
+     "b": true
+    },
+    {
+     "n": "Vijay Ubhayaker",
+     "rgi": 3,
+     "rgo": 2,
+     "v": 0,
+     "o": 0,
+     "tyfcb": 8295,
+     "s": 1.11,
+     "b": false
+    },
+    {
+     "n": "Ralph Gomez",
+     "rgi": 0,
+     "rgo": 0,
+     "v": 0,
+     "o": 3,
+     "tyfcb": 50,
+     "s": 1,
+     "b": true
+    },
+    {
+     "n": "Marie Zandian",
+     "rgi": 1,
+     "rgo": 0,
+     "v": 0,
+     "o": 2,
+     "tyfcb": 0,
+     "s": 1,
+     "b": true
+    },
+    {
+     "n": "Sailosi Taunaholo",
+     "rgi": 0,
+     "rgo": 0,
+     "v": 0,
+     "o": 1,
+     "tyfcb": 2000,
+     "s": 0.89,
+     "b": false
+    },
+    {
+     "n": "Marcus Araiza",
+     "rgi": 0,
+     "rgo": 1,
+     "v": 1,
+     "o": 1,
+     "tyfcb": 50,
+     "s": 0.78,
+     "b": true
+    },
+    {
+     "n": "Marco Cerda",
+     "rgi": 0,
+     "rgo": 0,
+     "v": 0,
+     "o": 1,
+     "tyfcb": 0,
+     "s": 0.78,
+     "b": false
+    },
+    {
+     "n": "Shawna Rodriguez",
+     "rgi": 1,
+     "rgo": 1,
+     "v": 1,
+     "o": 0,
+     "tyfcb": 913,
+     "s": 0.78,
+     "b": true
+    },
+    {
+     "n": "Aman Thakral",
+     "rgi": 0,
+     "rgo": 1,
+     "v": 2,
+     "o": 0,
+     "tyfcb": 0,
+     "s": 0.78,
+     "b": true
+    },
+    {
+     "n": "Lino Martire",
+     "rgi": 1,
+     "rgo": 1,
+     "v": 0,
+     "o": 0,
+     "tyfcb": 500,
+     "s": 0.67,
+     "b": true
+    },
+    {
+     "n": "Angelo DeSando",
+     "rgi": 0,
+     "rgo": 0,
+     "v": 0,
+     "o": 1,
+     "tyfcb": 550,
+     "s": 0.56,
+     "b": true
+    },
+    {
+     "n": "Stephen Hartman",
+     "rgi": 0,
+     "rgo": 0,
+     "v": 0,
+     "o": 0,
+     "tyfcb": 1410,
+     "s": 0.44,
+     "b": true
+    },
+    {
+     "n": "Jennifer Isensee",
+     "rgi": 1,
+     "rgo": 0,
+     "v": 0,
+     "o": 0,
+     "tyfcb": 175,
+     "s": 0.33,
+     "b": true
+    }
+   ],
+   "notes": [
+    "Next report Nov 18 (Oct 1 – Nov 15)",
+    "Final report Dec 2 sets the 10 breakfast cooks",
+    "Breakfast: Wednesday, Dec 16"
+   ]
+  }
  }
 }
