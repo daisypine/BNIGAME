@@ -189,7 +189,7 @@ h1 em,h2 em{font-style:normal;color:var(--red)}
 .qrcard b{display:block;font-size:26px;letter-spacing:-.5px;line-height:1.15}
 .qrcard span{display:block;font-size:19px;color:var(--muted);margin-top:8px;line-height:1.4}
 .qrcard .url{color:var(--red);font-weight:700;font-size:19px;margin-top:10px}
-.qr-float{position:absolute;right:110px;top:150px;max-width:520px}
+.qr-float{position:absolute;right:110px;top:330px;max-width:520px}
 .evlist{display:flex;flex-direction:column;gap:18px;margin-top:40px}
 .ev{display:flex;gap:28px;align-items:center;background:var(--off);border-radius:20px;padding:22px 28px}
 .ev .cal{flex-shrink:0;width:96px;text-align:center;background:#fff;border-radius:16px;padding:10px 0;box-shadow:0 0 0 2px var(--line)}
@@ -415,6 +415,8 @@ var teams=[['President',[['Maria Nunez','']]],['Vice President',[['Bethany Black
  ['Membership',[['John Wheeler',''],['John Jorgensen',''],['Marie Zandian',''],['Tom Pavicic',''],['Elizabeth Popova','']]],['Events',[['Roxanne Salazar',''],['Phil Lonardo','']]],
  ['Mentorship',[['Denise Artache',''],['Shawna Rodriguez',''],['Sonia Shah',''],['Vijay Ubhayaker','']]]];
 S.push({sec:0,html:K('04','Our leadership team')+'<h2>Here to <em>help</em>. Reach out anytime.</h2><div class="team-grid lead-grid">'+teams.map(function(t){return '<div class="team"><h4>'+t[0]+'</h4><div class="ppl">'+t[1].map(function(p){return person(p[0],p[1])}).join('')+'</div></div>'}).join('')+'</div>'});
+// 4b new member induction (right after leadership team) (agenda_config "induction")
+if(CFG.induction){S.push({sec:0,html:K('','New member induction')+'<h1>Welcome to <em>BNI Premiere</em>.</h1><p class="lead">Please join us in welcoming our newest members to the chapter.</p><div class="grow"></div><div class="givers"><div class="gg">Givers Gain</div><p>Presented by the Membership Committee.</p></div>'})}
 // 5 education + card boxes
 S.push({sec:0,html:K('05','Education moment')+'<div class="split" style="margin-top:0;align-items:center"><div><h1>Education <em>moment</em>.</h1><p class="lead">A few minutes to help every member get more out of BNI.</p></div><div class="edu2">'+['Bryan Russell','Shannon Sevor'].map(function(n){return '<div class="feature">'+av(n)+'<span>Education</span><b>'+esc(n)+'</b></div>'}).join('')+'</div></div><div class="grow"></div><div class="givers" style="background:var(--red-soft)"><div class="gg" style="font-size:44px">06 &nbsp;Business cards</div><p>Visitors: these boxes hold our members’ cards. Members: please refill yours.</p></div>'});
 // 5b education walkthrough slides (agenda_config "education")
@@ -431,8 +433,6 @@ var top=R.slice().sort(function(a,b){return b.s-a.s}).slice(0,5);
 S.push({sec:1,html:K('11','Growth committee')+'<h2>October <em>by the numbers</em>.</h2><p class="lead" style="margin-top:8px;font-size:24px">PALMS summary &middot; '+esc(G.period)+'</p><div class="stats" style="margin-top:26px">'+tot.map(function(t){return '<div class="stat"><b>'+t[0]+'</b><span>'+t[1]+'</span></div>'}).join('')+'</div><div class="faces-cap" style="margin-top:30px">Top 5 this month</div><div class="top5" style="margin-top:8px">'+top.map(function(r,i){return '<div class="t5"><span class="rk">'+(i+1)+'</span>'+av(r.n)+'<b>'+esc(r.n)+'</b><span>Score '+r.s.toFixed(2)+'</span></div>'}).join('')+'</div>'});
 var all=R.slice().sort(function(a,b){return b.s-a.s});
 S.push({sec:1,html:K('11','Growth committee &middot; Breakfast challenge')+'<h2>Who’s cooking <em>breakfast</em>?</h2><p class="lead" style="margin-top:8px;font-size:22px">Highlighted = <span class="bfkey">tentative breakfast crew</span>, cooking for the chapter on Dec 16. Still time to climb!</p><div class="ranks">'+all.map(function(r,i){return '<div class="rk-row'+(r.b?' bf':'')+'"><i>'+(i+1)+'</i><span>'+esc(r.n)+'</span><em>'+r.s.toFixed(2)+'</em></div>'}).join('')+'</div><p class="hint" style="margin-top:16px">'+G.notes.map(esc).join(' &middot; ')+'</p>'})})()}
-// 8a new member induction (agenda_config "induction")
-if(CFG.induction){S.push({sec:1,html:K('10','New member induction')+'<h1>Welcome to <em>BNI Premiere</em>.</h1><p class="lead">Please join us in welcoming our newest members to the chapter.</p><div class="grow"></div><div class="givers"><div class="gg">Givers Gain</div><p>Presented by the Membership Committee.</p></div>'})}
 // 8b upcoming events (from BAND)
 if(CFG.events&&CFG.events.length){S.push({sec:1,html:K('12','Events')+'<h2>What’s <em>coming up</em>.</h2><div class="evlist'+(CFG.events.length>4?' two':'')+'">'+CFG.events.map(function(e){var d=sd(e.date);return '<div class="ev"><div class="cal"><small>'+fmt(d,{month:'short'})+'</small><b>'+d.getDate()+'</b></div><div><div class="t">'+esc(e.title)+'</div><div class="m">'+fmt(d,{weekday:'long'})+' &middot; '+esc(e.time)+(e.place?' &middot; '+esc(e.place):'')+'</div></div>'+(e.host?'<div class="who"><span>Hosted by<br><b style="color:var(--ink)">'+esc(e.host)+'</b></span>'+av(e.host)+'</div>':'')+'</div>'}).join('')+'</div><p class="hint" style="margin-top:24px">All chapter events are on our BAND calendar.</p>'})}
 // 8 next three weeks
