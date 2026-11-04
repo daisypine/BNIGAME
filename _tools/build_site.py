@@ -4,7 +4,7 @@ src, logo, out = sys.argv[1], sys.argv[2], sys.argv[3]
 orig = open(src, encoding="utf-8").read()
 members_line = re.search(r'var MEMBERS=\[.*?\];', orig, re.S).group(0)
 import json as _json
-REMOVED_MEMBERS = {"Casey Li", "Francie Schildhauer", "Giti Majdy", "Michael Balistreri"}
+REMOVED_MEMBERS = {"Casey Li", "Francie Schildhauer", "Giti Majdy", "Michael Balistreri", "Angela Cearns"}
 _m = _json.loads(members_line[len("var MEMBERS="):-1])
 _m = [x for x in _m if x["Name"] not in REMOVED_MEMBERS]
 _m.append({"Name": "Marco Cerda", "Classification": "Insulation", "Contact Sphere": "Construction", "Company": "Insul-Techs Inc", "Phone": "707-287-5657", "Email": "", "Website": ""})
