@@ -351,6 +351,12 @@ html.m [style*="margin-top:44px"],html.m [style*="margin-top:56px"]{margin-top:1
 .openbtn{display:inline-block;margin-top:34px;background:var(--red);color:#fff;text-decoration:none;font-size:30px;font-weight:700;padding:22px 40px;border-radius:16px}
 html.m .phones{flex-wrap:wrap;gap:18px}html.m .phone{flex:1 1 40%}html.m .phone img{height:auto;width:100%}html.m .phone .step{font-size:15px}
 html.m .pres{flex-direction:column;gap:20px;text-align:center}html.m .pres .av{width:140px;height:140px;font-size:44px}html.m .pres b{font-size:34px}html.m .openbtn{font-size:18px;padding:14px 22px}
+.evlist.two{display:grid;grid-template-columns:1fr 1fr;gap:14px 18px;margin-top:30px}
+.evlist.two .ev{padding:14px 18px;gap:16px}
+.evlist.two .cal{width:72px;padding:6px 0}.evlist.two .cal small{font-size:13px}.evlist.two .cal b{font-size:32px}
+.evlist.two .t{font-size:22px;line-height:1.2}.evlist.two .m{font-size:16px;margin-top:4px}
+.evlist.two .who span{display:none}.evlist.two .who .av{width:46px;height:46px;font-size:15px}
+html.m .evlist.two{grid-template-columns:1fr}
 </style></head><body>
 <div class="stage"><div class="deck" id="deck"></div></div>
 <button class="nav-btn" id="prev" aria-label="Previous">&larr;</button>
@@ -409,7 +415,7 @@ S.push({sec:1,html:K('09–14','Leadership reports')+'<h2>Each team supports a d
 // 8a new member induction (agenda_config "induction")
 if(CFG.induction){S.push({sec:1,html:K('10','New member induction')+'<h1>Welcome to <em>BNI Premiere</em>.</h1><p class="lead">Please join us in welcoming our newest members to the chapter.</p><div class="grow"></div><div class="givers"><div class="gg">Givers Gain</div><p>Presented by the Membership Committee.</p></div>'})}
 // 8b upcoming events (from BAND)
-if(CFG.events&&CFG.events.length){S.push({sec:1,html:K('12','Events')+'<h2>What’s <em>coming up</em>.</h2><div class="evlist">'+CFG.events.map(function(e){var d=sd(e.date);return '<div class="ev"><div class="cal"><small>'+fmt(d,{month:'short'})+'</small><b>'+d.getDate()+'</b></div><div><div class="t">'+esc(e.title)+'</div><div class="m">'+fmt(d,{weekday:'long'})+' &middot; '+esc(e.time)+(e.place?' &middot; '+esc(e.place):'')+'</div></div>'+(e.host?'<div class="who"><span>Hosted by<br><b style="color:var(--ink)">'+esc(e.host)+'</b></span>'+av(e.host)+'</div>':'')+'</div>'}).join('')+'</div><p class="hint" style="margin-top:24px">All chapter events are on our BAND calendar.</p>'})}
+if(CFG.events&&CFG.events.length){S.push({sec:1,html:K('12','Events')+'<h2>What’s <em>coming up</em>.</h2><div class="evlist'+(CFG.events.length>4?' two':'')+'">'+CFG.events.map(function(e){var d=sd(e.date);return '<div class="ev"><div class="cal"><small>'+fmt(d,{month:'short'})+'</small><b>'+d.getDate()+'</b></div><div><div class="t">'+esc(e.title)+'</div><div class="m">'+fmt(d,{weekday:'long'})+' &middot; '+esc(e.time)+(e.place?' &middot; '+esc(e.place):'')+'</div></div>'+(e.host?'<div class="who"><span>Hosted by<br><b style="color:var(--ink)">'+esc(e.host)+'</b></span>'+av(e.host)+'</div>':'')+'</div>'}).join('')+'</div><p class="hint" style="margin-top:24px">All chapter events are on our BAND calendar.</p>'})}
 // 8 next three weeks
 S.push({sec:2,html:K('15','Speaker announcement')+'<h2>Our next <em>three weeks</em>.</h2><div class="next3">'+(nextWeeks.length?nextWeeks.map(function(w){var d=sd(w.date);return '<div class="wk"><div class="when"><b>'+fmt(d,{month:'short',day:'numeric'})+'</b><span>'+fmt(d,{weekday:'short'})+'</span></div><div class="who">'+w.names.map(function(n){var m=find(n);return person(m.Name,m.Classification)}).join('')+'</div></div>'}).join(''):'<p class="lead">Schedule coming soon.</p>')+'</div><p class="hint" style="margin-top:auto">Want to be a backup speaker? Sign up at bnipremierchapter.com</p>'});
 // 9 today's speakers
