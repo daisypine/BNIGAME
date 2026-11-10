@@ -4,10 +4,11 @@ src, logo, out = sys.argv[1], sys.argv[2], sys.argv[3]
 orig = open(src, encoding="utf-8").read()
 members_line = re.search(r'var MEMBERS=\[.*?\];', orig, re.S).group(0)
 import json as _json
-REMOVED_MEMBERS = {"Casey Li", "Francie Schildhauer", "Giti Majdy", "Michael Balistreri", "Angela Cearns", "Shawna Rodriguez"}
+REMOVED_MEMBERS = {"Casey Li", "Francie Schildhauer", "Giti Majdy", "Michael Balistreri", "Angela Cearns", "Shawna Rodriguez", "Linda Tang"}
 _m = _json.loads(members_line[len("var MEMBERS="):-1])
 _m = [x for x in _m if x["Name"] not in REMOVED_MEMBERS]
 _m.append({"Name": "Marco Cerda", "Classification": "Insulation", "Contact Sphere": "Construction", "Company": "Insul-Techs Inc", "Phone": "707-287-5657", "Email": "", "Website": ""})
+_m.append({"Name": "Alton Thompson", "Classification": "HVAC - Heating & Air", "Contact Sphere": "Construction", "Company": "Great Lengths", "Phone": "408-422-6400", "Email": "", "Website": ""})
 members_line = "var MEMBERS=" + _json.dumps(_m, ensure_ascii=False) + ";"
 logo64 = base64.b64encode(open(logo, "rb").read()).decode()
 VISIT = "https://bnisfbay.com/ca-santa-clara-premiere/en-US/visitorregistration?chapterId=2880"
