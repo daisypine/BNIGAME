@@ -706,5 +706,85 @@
    ],
    "note": "Read by our chapter president."
   }
+ },
+ "2026-11-18": {
+  "tyfcb": true,
+  "events": [
+   {
+    "date": "2026-11-20",
+    "title": "HubSpot Community Networking & Product Updates",
+    "time": "5:00 – 6:30 PM",
+    "place": "SV Convention & Visitors Bureau, Santa Clara",
+    "host": "Aman Thakral"
+   },
+   {
+    "date": "2026-11-21",
+    "cal": [
+     "Sat",
+     "TBD"
+    ],
+    "when": "Sat Nov 21 or Sat Dec 5 (date pending)",
+    "title": "Sacred Heart Volunteer & Donation Drive",
+    "time": "9:00 AM – 12:00 PM",
+    "place": "Bring donations to meetings through Dec 9",
+    "host": "Roxanne Salazar"
+   },
+   {
+    "date": "2026-11-25",
+    "title": "No chapter meeting (Thanksgiving week)",
+    "time": "",
+    "place": "Dark week",
+    "host": ""
+   },
+   {
+    "date": "2026-12-02",
+    "title": "BNI Monthly B2B Sub-Committee",
+    "time": "9:00 – 9:30 AM",
+    "place": "1st Wednesday of every month",
+    "host": "Ken Wong"
+   },
+   {
+    "date": "2026-12-05",
+    "title": "Estate Planning Seminar",
+    "time": "10:30 AM – 7:00 PM",
+    "place": "Marsala Law Firm",
+    "host": "Jeannette Marsala"
+   },
+   {
+    "date": "2026-12-06",
+    "title": "Toys for Tots Neighborhood Fundraiser",
+    "time": "5:30 – 8:00 PM",
+    "place": "1401 St Francis Dr, San Jose",
+    "host": "Roxanne Salazar"
+   },
+   {
+    "date": "2026-12-09",
+    "title": "BNI Senior Power Team Meeting",
+    "time": "9:30 AM",
+    "place": "Marsala Law Firm",
+    "host": "Jeannette Marsala"
+   },
+   {
+    "date": "2026-12-11",
+    "title": "Nexus Networking",
+    "time": "5:30 – 9:00 PM",
+    "place": "271 Kennedy",
+    "host": "Maria Nunez"
+   },
+   {
+    "date": "2026-12-23",
+    "title": "No chapter meeting (holiday break)",
+    "time": "",
+    "place": "Dark week",
+    "host": ""
+   },
+   {
+    "date": "2026-12-30",
+    "title": "No chapter meeting (holiday break)",
+    "time": "",
+    "place": "Dark week · back Jan 6",
+    "host": ""
+   }
+  ]
  }
 }

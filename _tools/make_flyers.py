@@ -1,6 +1,6 @@
 """Make the Instagram "Meet this week's speakers" flyers (story 1080x1920 + feed 1080x1350).
 
-Usage:  python3 make_flyers.py 2026-11-04 "Marcus Araiza" "Marie Zandian" "Marco Cerda"
+Usage:  python3 make_flyers.py 2026-11-04 "Marcus Araiza" "Marie Zandian" "Marco Cerda"   (2 names also OK)
 Writes: <site>/flyers/nov4-story.png and nov4-feed.png
 Names must match the member directory (index.html MEMBERS) - e.g. "Clifford Shaw", "Robert Min", "Ramji Digumarthi".
 Photos come from <site>/photos/<first-last>.jpg; members without one get a red initials circle.
@@ -12,7 +12,15 @@ SITE = os.environ.get("SITE", os.path.dirname(TOOLS))
 
 date = datetime.date.fromisoformat(sys.argv[1])
 names = sys.argv[2:5]
-assert len(names) == 3, "need exactly 3 speaker names"
+assert len(names) in (2, 3), "need 2 or 3 speaker names"
+
+
+def drop_third(t):
+    """Two-speaker week: remove the 3rd speaker card and use a 2-column grid."""
+    i = t.index("{{PHOTO3}}")
+    start = t.rindex("\n    <div", 0, i)
+    end = t.index("\n    </div>", t.index("{{BIZ3}}")) + len("\n    </div>")
+    return (t[:start] + t[end:]).replace("repeat(3, minmax(0, 1fr))", "repeat(2, minmax(0, 1fr))")
 
 home = open(os.path.join(SITE, "index.html"), encoding="utf-8").read()
 members = json.loads(re.search(r"var MEMBERS=(\[.*?\]);", home, re.S).group(1))
@@ -59,6 +67,8 @@ with sync_playwright() as pw:
     b = pw.chromium.launch()
     for kind, w, h in [("story", 1080, 1920), ("feed", 1080, 1350)]:
         t = open(os.path.join(TOOLS, "flyers", kind + ".html"), encoding="utf-8").read()
+        if len(names) == 2:
+            t = drop_third(t)
         for k, v in vals.items():
             t = t.replace("{{%s}}" % k, v)
         tmp = tempfile.NamedTemporaryFile("w", suffix=".html", delete=False, encoding="utf-8")
