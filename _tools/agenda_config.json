@@ -691,6 +691,20 @@
     "place": "Dark week · back Jan 6",
     "host": ""
    }
-  ]
+  ],
+  "tribute": {
+   "kicker": "Veterans Day &middot; November 11",
+   "h": "Thank you to <em>our veterans</em>.",
+   "lines": [
+    "Before we get going: today is Veterans Day.",
+    "We have members in this room who served our country, and we want to take a moment to say thank you.",
+    "If you’ve served and you’re comfortable, would you stand or raise your hand?",
+    {
+     "cue": "Pause for applause"
+    },
+    "Thank you for your service, and thank you for what you bring to this chapter every week."
+   ],
+   "note": "Read by our chapter president."
+  }
  }
 }
