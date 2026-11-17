@@ -35,3 +35,12 @@ The homepage shows a meeting as "this week" until 8:30 AM on meeting day, then a
 - `"presentations": {"Name": "url or empty"}` → one slide per speaker after "today's speakers", with an "Open presentation" button when a URL is set.
 - `"growth": {"period","rows":[{n,rgi,rgo,v,o,tyfcb,s,b}],"notes"}` → Growth Committee PALMS slides (totals + top 5, then full ranking with breakfast crew highlighted). Build rows from Ken's xlsx.
 - `"education": [{"h","lead","steps":[{"img":"edu/1.jpg","t":"..."}]}]` → walkthrough slides after the Education slide; images live in `agenda/<slug>/edu/`.
+
+## Speaker weeks held back until confirmed (as of 2026-11-16)
+Only confirmed weeks go in `SPEAKERS`, so nothing unconfirmed shows on the site or slides. These are in the sheet but NOT published yet. Add a week back to `SPEAKERS` once its speakers confirm:
+- 2026-12-09: Bethany Black, Michael McIlrath, Mario Renteria
+- 2026-12-16: Robert Min, Jay Shergill, Bryan Russell
+- 2027-01-06: John Jorgensen, Ramji Digumarthi, Ken Wong
+- 2027-02-03: Lino Martire (moved from 12/2 at his request; Jeannette Marsala took 12/2 and confirmed)
+
+When a slot opens up: ask the people already booked in the rotation to move up first, then fill the later spots from there.
