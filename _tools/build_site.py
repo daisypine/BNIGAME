@@ -288,7 +288,9 @@ var SPEAKERS=[
  {date:"2026-11-04",names:["Marcus Araiza","Marie Zandian","Marco Cerda"]},
  {date:"2026-11-11",names:["John Jussen","Phil Lonardo","Shannon Sevor"]},
  {date:"2026-11-18",names:["Clifford Shaw","Roxanne Salazar"]},
- {date:"2026-12-02",names:["Jeannette Marsala","Jennifer Isensee","John Wheeler"]}
+ {date:"2026-12-02",names:["Jeannette Marsala","Jennifer Isensee","John Wheeler"]},
+ {date:"2026-12-09",names:["Bethany Black","Michael McIlrath","Mario Renteria"]},
+ {date:"2026-12-16",names:["Robert Min","Jay Shergill","Bryan Russell"]}
 ];
 
 var all=MEMBERS.slice().sort(function(a,b){return a.Name.localeCompare(b.Name)});var activeFilter='all';
