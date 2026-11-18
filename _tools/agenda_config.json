@@ -1298,5 +1298,59 @@
     "Breakfast: Wednesday, Jan 13, 2027"
    ]
   }
+ },
+ "2026-12-02": {
+  "tyfcb": true,
+  "events": [
+   {
+    "date": "2026-12-02",
+    "title": "BNI Monthly B2B Sub-Committee",
+    "time": "9:00 \u2013 9:30 AM",
+    "place": "1st Wednesday of every month",
+    "host": "Ken Wong"
+   },
+   {
+    "date": "2026-12-05",
+    "title": "Estate Planning Seminar",
+    "time": "10:30 AM \u2013 7:00 PM",
+    "place": "Marsala Law Firm",
+    "host": "Jeannette Marsala"
+   },
+   {
+    "date": "2026-12-06",
+    "title": "Toys for Tots Neighborhood Fundraiser",
+    "time": "5:30 \u2013 8:00 PM",
+    "place": "1401 St Francis Dr, San Jose",
+    "host": "Roxanne Salazar"
+   },
+   {
+    "date": "2026-12-09",
+    "title": "BNI Senior Power Team Meeting",
+    "time": "9:30 AM",
+    "place": "Marsala Law Firm",
+    "host": "Jeannette Marsala"
+   },
+   {
+    "date": "2026-12-11",
+    "title": "Nexus Networking",
+    "time": "5:30 \u2013 9:00 PM",
+    "place": "271 Kennedy",
+    "host": "Maria Nunez"
+   },
+   {
+    "date": "2026-12-23",
+    "title": "No chapter meeting (holiday break)",
+    "time": "",
+    "place": "Dark week",
+    "host": ""
+   },
+   {
+    "date": "2026-12-30",
+    "title": "No chapter meeting (holiday break)",
+    "time": "",
+    "place": "Dark week \u00b7 back Jan 6",
+    "host": ""
+   }
+  ]
  }
 }
